@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PeterTest component renders the PeterTest correctly renders correctly 1`] = `
+Array [
+  <p
+    style={
+      Object {
+        "color": "red",
+      }
+    }
+  >
+    Look Peter the component works!
+  </p>,
+  <p
+    style={
+      Object {
+        "color": "red",
+      }
+    }
+  >
+    Look Peter the component works!
+  </p>,
+]
+`;
