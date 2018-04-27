@@ -2,10 +2,20 @@
 
 exports[`PeterTest component renders the PeterTest correctly renders correctly 1`] = `
 Array [
+  <h1
+    style={
+      Object {
+        "fontFamily": "sans-serif",
+      }
+    }
+  >
+    Component: PeterTest
+  </h1>,
   <p
     style={
       Object {
         "color": "red",
+        "fontFamily": "sans-serif",
       }
     }
   >
@@ -15,6 +25,7 @@ Array [
     style={
       Object {
         "color": "red",
+        "fontFamily": "sans-serif",
       }
     }
   >
