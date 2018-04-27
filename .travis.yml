@@ -1,8 +1,11 @@
 language: node_js
+
 node_js: stable
+
 cache:
   directories:
     - node_modules
+
 script:
 - npm test
 - cd dev/peter-test
@@ -11,7 +14,8 @@ script:
 - mv build ../../
 - cd ../../
 - rm -rf /public
-- mv build /public
+- mv build public
+
 deploy:
   provider: firebase
   token:
