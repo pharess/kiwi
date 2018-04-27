@@ -6,9 +6,6 @@ cache:
   directories:
     - node_modules
 
-install:
-  - npm i -g firebase-ci
-
 script:
   - npm test
   - cd dev/peter-test
@@ -18,10 +15,13 @@ script:
   - cd ../../
   - rm -rf public
   - mv build public
-  - firebase-ci createConfig
 
-after_success:
-  - firebase-ci deploy -s --token "1/JXHBei5fxyPTDqllFbALatBVa04QWIQZ-4NsxBtGY8FTWa0t2RiGvv6jXMc_OAZ2"
+deploy:
+  provider: firebase
+  project: "kiwi-staging"
+  skip_cleanup: true
+  token:
+    secure: $FIREBASE_TOKEN
 
 env:
   global:
