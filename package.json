@@ -10,7 +10,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "cd /dev/peter-test && npm run build",
+    "build": "react-scripts build",
     "test": "jest",
     "eject": "react-scripts eject"
   },
