@@ -1,4 +1,4 @@
-import React, { PureComponent, Fragment } from 'react';
+import React, { PureComponent, Fragment } from "react";
 
 export default class PeterTest extends PureComponent {
     constructor(props) {
@@ -6,7 +6,7 @@ export default class PeterTest extends PureComponent {
 
         this.state = {
             times: 1,
-            color: 'black'
+            color: "black"
         };
     }
 
@@ -24,9 +24,9 @@ export default class PeterTest extends PureComponent {
     render() {
         return (
             <Fragment>
-                <h1 style={{fontFamily: 'sans-serif'}}>Component: PeterTest</h1>
+                <h1 style={{fontFamily: "sans-serif"}}>Component: PeterTest</h1>
                 {[...Array(this.state.times)].map((_, index) =>
-                    <p key={index} style={{color: this.state.color, fontFamily: 'sans-serif'}}>Look Peter the component works!</p>
+                    <p key={index} style={{color: this.state.color, fontFamily: "sans-serif"}}>Look Peter the component works!</p>
                 )}
             </Fragment>
         );

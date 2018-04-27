@@ -1,5 +1,5 @@
 // Peter-Test Component
-Vue.component('peter-test', {
+Vue.component("peter-test", {
 	props: {
 		color: {
 			type: String,
@@ -15,12 +15,12 @@ Vue.component('peter-test', {
 		style: function() {
 			return {
 				color: this.color
-			}
+			};
 		}
 	},
 	data: function() {
 		return {
-			content: 'Look Peter the component works!'
+			content: "Look Peter the component works!"
 		}
 	},
 });
@@ -28,7 +28,7 @@ Vue.component('peter-test', {
 // Root Instance
 window.onload = function () {
 	var root = new Vue({
-		el: '#app',
+		el: "#app",
 		data: {}
 	})
 }

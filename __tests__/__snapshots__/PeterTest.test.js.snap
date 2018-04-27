@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`PeterTest component renders the PeterTest correctly renders correctly 1`] = `
+exports[`Renders the PeterTest correctly renders correctly 1`] = `
 Array [
   <h1
     style={
