@@ -8,9 +8,9 @@ script:
 - cd dev/peter-test
 - npm install
 - npm run build
-- cd /build
-- cp -r * ../../../public
-- cd ../../../
+- mv /build * ../../
+- rm -rf /public
+- mv /build /public
 deploy:
   provider: firebase
   token:
