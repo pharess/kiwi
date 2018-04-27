@@ -8,7 +8,8 @@ script:
 - cd dev/peter-test
 - npm install
 - npm run build
-- mv /build * ../../
+- mv build ../../
+- cd ../../
 - rm -rf /public
 - mv /build /public
 deploy:
