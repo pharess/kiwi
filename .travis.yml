@@ -14,14 +14,8 @@ script:
 - mv build ../../
 - cd ../../
 - rm -rf /public
-- mv build public
-
-deploy:
-  provider: firebase
-  token:
-    secure: 1/xHuJEjyV4wMV7FjtflMskq1jGh9iDfgdBElNF7o2o-I
-  project: kiwi-staging
-  message: Deploying to Staging environment.
+- mv build public 
+- firebase deploy --token "1/JXHBei5fxyPTDqllFbALatBVa04QWIQZ-4NsxBtGY8FTWa0t2RiGvv6jXMc_OAZ2"
 
 env:
   global:
