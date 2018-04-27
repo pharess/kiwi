@@ -16,7 +16,8 @@ script:
 - npm run build
 - mv build ../../
 - cd ../../
-- rm -rf /public
+- rm -rf public
+- ls
 - mv build public
 - cd public
 - ls 
