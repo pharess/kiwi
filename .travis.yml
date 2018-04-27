@@ -21,9 +21,7 @@ script:
 - mv build public
 - cd public
 - ls 
-- cd build
-- ls
-- cd ../../ 
+- cd ../ 
 - firebase deploy --token "1/JXHBei5fxyPTDqllFbALatBVa04QWIQZ-4NsxBtGY8FTWa0t2RiGvv6jXMc_OAZ2"
 
 env:
