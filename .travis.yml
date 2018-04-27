@@ -6,6 +6,7 @@ cache:
 script:
 - npm test
 - cd dev/peter-test
+- npm install
 - npm run build
 deploy:
   provider: firebase
