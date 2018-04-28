@@ -10,8 +10,10 @@ install:
   - npm install -g firebase-tools
 
 script:
+  # Run React
   - npm test
   - cd dev/peter-test
+  - cd react
   - npm install
   - npm run build
   - mv build ../../
