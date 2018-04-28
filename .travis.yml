@@ -15,8 +15,8 @@ script:
   # - npm test
   - npm install
   - npm run build
-  - mv build ../../
-  - cd ../../
+  - mv build ../../../
+  - cd ../../../
   - rm -rf public
   - mv build public
   - firebase deploy --token "$FIREBASE_TOKEN" -P "kiwi-staging-44102"
