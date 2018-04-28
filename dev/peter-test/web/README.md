@@ -1,15 +1,15 @@
 # Setup
-TODO: Provide some steps on how to run the module.
 
-1. Install these packages
-2. That is all? :D
+1. Download folder.
+2. Open index.html.
+2. Done.
 
 # PeterTest Component Specifications
 TODO: Information on how to update the color and number of times the component is produced
 
-1. Example step 1
-2. Example step 2
-3. Profit?
+1. Run index.html
+2. Fill in forms on screen to update color and number of iterations.
+3. Profit $$$
 
 # Testing
-Tests should be located in the `tests\` folder.
+No need.
