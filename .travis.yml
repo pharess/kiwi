@@ -18,6 +18,7 @@ script:
   - cd ../../
   - rm -rf public
   - mv build public
+  - firebase login
   - firebase deploy --token "$FIREBASE_TOKEN" -P "kiwi-staging-44102"
 
 env:
