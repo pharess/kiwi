@@ -9,3 +9,6 @@ In Peter-Test.html
 
 1. Define a color and number of times property for `peter-test` component. 
 
+# Testing
+Tests should be located in the `tests\` folder.
+

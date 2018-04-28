@@ -8,3 +8,6 @@
 # PeterTest Component Specifications
 1. Accepts a `color` property (defaults to Black if color is not defined). It can accept string colors (ex. "red"), hexcodes (ex. "#dddddd"), or rgb(a) (ex. rgb(50, 100, 200)). 
 2. It accepts a `times` property (defaults to 1 if times is not defined). It only accepts string input (ex. "1", "20", etc.). 
+
+# Testing
+Tests for this react component should be located in the `tests/` folder. 

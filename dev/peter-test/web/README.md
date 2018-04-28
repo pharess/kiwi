@@ -11,3 +11,5 @@ TODO: Information on how to update the color and number of times the component i
 2. Example step 2
 3. Profit?
 
+# Testing
+Tests should be located in the `tests\` folder.
