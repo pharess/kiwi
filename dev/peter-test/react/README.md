@@ -1,7 +1,7 @@
 # Setup
 1. If you haven't already, install Node.js (https://nodejs.org/en/). Pick the option that is recommended for most users.
 2. Clone the repo.
-3. Next, navigate to the peter-test folder (kiwi/Components/peter-test) using your terminal.
+3. Next, navigate to the peter-test folder (kiwi/dev/peter-test/react) using your terminal.
 4. Run `npm install` in the terminal.
 5. Type `npm start` to run the application.
 
@@ -10,4 +10,5 @@
 2. It accepts a `times` property (defaults to 1 if times is not defined). It only accepts string input (ex. "1", "20", etc.). 
 
 # Testing
-Tests for this react component should be located in the `tests/` folder. 
+1. Tests for this react component should be located in the `__tests__` folder (kiwi/__tests__). Navigate to the kiwi folder (kiwi/)
+2. Type `npm test`

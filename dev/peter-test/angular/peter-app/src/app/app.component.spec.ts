@@ -30,7 +30,7 @@ describe('AppComponent', () => {
 
     fixture.detectChanges();
   });
-  
+
   it('should create the app', async(() => {
     const app = fixture.debugElement.componentInstance;
     expect(app).toBeTruthy();
@@ -49,12 +49,23 @@ describe('AppComponent', () => {
     expect(component.updateTest).toBeTruthy();
   });
 
-  it('should initally render one line',() => {
+  it('should initally render one line', () => {
     expect(component.times).toEqual(1);
   });
 
   it('should initially render black', () => {
     expect(component.colorName).toBe('black');
+  });
+
+  it('should call updateTest when form is submitted', () => {
+    spyOn(component, 'updateTest');
+
+    let button = fixture.debugElement.nativeElement.querySelector('button');
+    button.click();
+    
+    fixture.whenStable().then(() => {
+      expect(component.updateTest).toHaveBeenCalled();
+    })
   });
 
 });

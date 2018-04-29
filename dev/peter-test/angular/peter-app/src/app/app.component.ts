@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { isNumber } from 'util';
 
 @Component({
   selector: 'app-root',
@@ -24,7 +23,7 @@ export class AppComponent implements OnInit {
 
   updateTest() {
     // Check for Invalid inputs
-    if( !Number(this.times) || this.times % 1 !== 0 || this.times < 1) return;
+    if( !Number(this.times) || this.times % 1 !== 0 || this.times < 1 ) return;
 
     this.output = [];
     for( let i = 0; i < this.times; i++) {

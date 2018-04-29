@@ -2,7 +2,7 @@ import React from "react";
 import expect from "expect";
 import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
-import PeterTest from "../dev/peter-test/src/PeterTest";
+import PeterTest from "../dev/peter-test/react/src/PeterTest";
 import { shallow } from "enzyme"; // shallow rendering instead of rendering
 import renderer from "react-test-renderer";
 
