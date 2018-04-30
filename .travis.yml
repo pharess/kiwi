@@ -22,9 +22,7 @@ script:
   # Run React
   - npm install
   - npm test
-  - cd dev/peter-test/react
-  - ls
-  - npm install
+  - cd dev/peter-test/react/src
   - npm run build
   - mv build ../../../
   - cd ../../../
