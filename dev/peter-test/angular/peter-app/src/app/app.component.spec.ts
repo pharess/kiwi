@@ -10,22 +10,22 @@ describe('AppComponent', () => {
 
 
   let component: AppComponent;
-  let fixture: ComponentFixture<AppComponent>;  // test env
+  let fixture: ComponentFixture<AppComponent>;  
   let debugElement: DebugElement;
   let htmlElement: HTMLElement;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [ FormsModule ],
-      declarations: [ AppComponent ] // isolated test of component itself
+      declarations: [ AppComponent ]
     })
-    .compileComponents(); // compiles template and css
+    .compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
-    debugElement = fixture.debugElement.query(By.css('form'));  // test rendered HTML
+    debugElement = fixture.debugElement.query(By.css('form'));
     htmlElement = debugElement.nativeElement;
 
     fixture.detectChanges();
@@ -65,7 +65,7 @@ describe('AppComponent', () => {
     
     fixture.whenStable().then(() => {
       expect(component.updateTest).toHaveBeenCalled();
-    })
+    });
   });
 
 });
