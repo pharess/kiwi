@@ -3,12 +3,13 @@ import expect from "expect";
 import Enzyme from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import PeterTest from "../dev/peter-test/react/src/PeterTest";
-import { shallow } from "enzyme"; // shallow rendering instead of rendering
+import { shallow } from "enzyme"; 
 import renderer from "react-test-renderer";
 
 Enzyme.configure({ adapter: new Adapter() });
 
 describe("Renders the PeterTest correctly", () => {
+    
   it("renders correctly", () => {
     const component = renderer.create(
         <PeterTest color="red" times="2"/>
