@@ -9,7 +9,7 @@ branches:
     
 branches:
   except:
-    - development
+    - dev
 
 cache:
   directories:
