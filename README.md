@@ -65,6 +65,7 @@ technology.
 
 ## Codacy
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/8569c562e69145308e896348639cf8b7)](https://app.codacy.com/app/kiwi/kiwi?utm_source=github.com&utm_medium=referral&utm_content=aabadill/kiwi&utm_campaign=badger)
+
 We use a static code analysis tool called Codacy in order to 
 keep our code consistent and as simple as possible.
 We use this in order to track the progress of our code quality
@@ -72,12 +73,14 @@ as the project progresses. This tool allows us to set goals
 we can determine within our team and with our client to ensure code quality. Since people have different measures of quality,
 we may dial it to our very own specificcations as to what quality means for us and our client. 
 Some of the metrics we can fine tune are:
-    Code Complexity
-    File Structure Complexity
-    Duplication of Code and Files
-    Code Test Coverage
-    Pull Requests, Commits, etc.
-    Security Vulnerablity Analysis
+
+    - Code Complexity
+    - File Structure Complexity
+    - Duplication of Code and Files
+    - Code Test Coverage
+    - Pull Requests, Commits, etc.
+    - Security Vulnerablity Analysis
+
 Once we have set the standards we are to follow, the dashboard this tool provides will allow our client to visualize the quality of work we are completing with a letter grade rating.
 
 Internally, we use this to track everyone's contribution and quality of work by viewing what issues are introduced by whom and how often. In this way, we are able to track bugs in our code to avoid future repetitions of the same mistakes,
@@ -133,13 +136,14 @@ We have also made our best effort to keep different technologies separate so tha
 
 The following file structure roughly represents how we have organized our repository:
 
-/Kiwi
+    /Kiwi
     - this is the topmost directory of our project
     - here you will find configuration files to most of the      tools we use throughout our repository including TravisCI
       Firebase, ESDocs, etc
 
     /_tests_
-    - here you will find our React tests, which include our      Enzyme and Jest tests
+    - here you will find our React tests, which include our
+      Enzyme and Jest tests
 
     /dev
     - folder containts components that are currently under
