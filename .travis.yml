@@ -23,7 +23,7 @@ script:
   - npm install
   - npm test
   - cd dev/peter-test/react
-  # - npm install
+  - npm install
   - npm run build
   - mv build ../../../
   - cd ../../../
