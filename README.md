@@ -138,7 +138,8 @@ The following file structure roughly represents how we have organized our reposi
 
     /Kiwi
     - this is the topmost directory of our project
-    - here you will find configuration files to most of the      tools we use throughout our repository including TravisCI
+    - here you will find configuration files to most of the
+      tools we use throughout our repository including TravisCI
       Firebase, ESDocs, etc
 
     /_tests_
