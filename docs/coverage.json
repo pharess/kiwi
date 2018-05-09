@@ -1,6 +1,6 @@
 {
-  "coverage": "40%",
-  "expectCount": 10,
+  "coverage": "80%",
+  "expectCount": 5,
   "actualCount": 4,
   "files": {
     "src/PeterTest.jsx": {
@@ -8,17 +8,6 @@
       "actualCount": 4,
       "undocumentLines": [
         6
-      ]
-    },
-    "src/registerServiceWorker.js": {
-      "expectCount": 5,
-      "actualCount": 0,
-      "undocumentLines": [
-        11,
-        21,
-        55,
-        84,
-        111
       ]
     }
   }
