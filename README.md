@@ -11,7 +11,7 @@ our final decision on the technologies we decided upon.
 ## Getting Started
 To get started, clone our repository. 
 
-``` 
+```
 TODO: Provide Steps how to run our different conveyor belts.
 ```
 ## Documentation Generation
