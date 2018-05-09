@@ -564,17 +564,282 @@
     "builtinExternal": true
   },
   {
+    "__docId__": 48,
+    "kind": "file",
+    "name": "src/index.js",
+    "content": "import React from \"react\";\r\nimport ReactDOM from \"react-dom\";\r\nimport PeterTest from \"./PeterTest.jsx\";\r\nimport registerServiceWorker from \"./registerServiceWorker\";\r\n\r\nReactDOM.render(<PeterTest color=\"blue\" times=\"3\"/>, document.getElementById(\"root\"));\r\nregisterServiceWorker();\r\n",
+    "static": true,
+    "longname": "F:/Users/kien/kiwi/dev/peter-test/react/src/index.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 49,
+    "kind": "file",
+    "name": "src/PeterTest.jsx",
+    "content": "import React, { PureComponent, Fragment } from \"react\";\r\n/**\r\n * This is PeterTest\r\n */\r\nexport default class PeterTest extends PureComponent {\r\n    constructor(props) {\r\n        super(props);\r\n\r\n        /**\r\n         * This is the state of the class\r\n         * @type {state}\r\n         * @private\r\n         */\r\n        this.state = {\r\n            times: 1,\r\n            color: \"black\"\r\n        };\r\n    }\r\n\r\n    /**\r\n     * I don't know what this does\r\n     * @param {props} nextProps \r\n     * @param {state} prevState \r\n     */\r\n    static getDerivedStateFromProps(nextProps, prevState) {\r\n        if (nextProps.times !== prevState.times || nextProps.color !== prevState.color) {\r\n            return {\r\n                times: (nextProps.times !== undefined) ? ((Number(nextProps.times) >= 1) ? Number(nextProps.times) : prevState.times) : prevState.times,\r\n                color: (nextProps.color !== undefined) ? nextProps.color : prevState.color\r\n            };\r\n        }\r\n\r\n        return null;\r\n    }\r\n\r\n    /**\r\n     * This is the render method\r\n     * @returns The peter test repreated and in the color\r\n     */\r\n    render() {\r\n        return (\r\n            <Fragment>\r\n                <h1 style={{fontFamily: \"sans-serif\"}}>Component: PeterTest</h1>\r\n                {[...Array(this.state.times)].map((_, index) =>\r\n                    <p key={index} style={{color: this.state.color, fontFamily: \"sans-serif\"}}>Look Peter the component works!</p>\r\n                )}\r\n            </Fragment>\r\n        );\r\n    }\r\n};\r\n",
+    "static": true,
+    "longname": "F:/Users/kien/kiwi/dev/peter-test/react/src/PeterTest.jsx",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 50,
+    "kind": "class",
+    "name": "PeterTest",
+    "memberof": "src/PeterTest.jsx",
+    "static": true,
+    "longname": "src/PeterTest.jsx~PeterTest",
+    "access": "public",
+    "export": true,
+    "importPath": "peter-test/src/PeterTest.jsx",
+    "importStyle": "PeterTest",
+    "description": "This is PeterTest",
+    "lineNumber": 5,
+    "interface": false,
+    "extends": [
+      "react~PureComponent"
+    ]
+  },
+  {
+    "__docId__": 51,
+    "kind": "constructor",
+    "name": "constructor",
+    "memberof": "src/PeterTest.jsx~PeterTest",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/PeterTest.jsx~PeterTest#constructor",
+    "access": "public",
+    "description": null,
+    "lineNumber": 6,
+    "undocument": true
+  },
+  {
+    "__docId__": 52,
+    "kind": "member",
+    "name": "state",
+    "memberof": "src/PeterTest.jsx~PeterTest",
+    "static": false,
+    "longname": "src/PeterTest.jsx~PeterTest#state",
+    "access": "private",
+    "description": "This is the state of the class",
+    "lineNumber": 14,
+    "type": {
+      "nullable": null,
+      "types": [
+        "state"
+      ],
+      "spread": false,
+      "description": null
+    }
+  },
+  {
+    "__docId__": 53,
+    "kind": "method",
+    "name": "getDerivedStateFromProps",
+    "memberof": "src/PeterTest.jsx~PeterTest",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/PeterTest.jsx~PeterTest.getDerivedStateFromProps",
+    "access": "public",
+    "description": "I don't know what this does",
+    "lineNumber": 25,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "props"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "nextProps",
+        "description": ""
+      },
+      {
+        "nullable": null,
+        "types": [
+          "state"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "prevState",
+        "description": ""
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 54,
+    "kind": "method",
+    "name": "render",
+    "memberof": "src/PeterTest.jsx~PeterTest",
+    "generator": false,
+    "async": false,
+    "static": false,
+    "longname": "src/PeterTest.jsx~PeterTest#render",
+    "access": "public",
+    "description": "This is the render method",
+    "lineNumber": 40,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "The peter test repreated and in the color"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "*"
+      ],
+      "spread": false,
+      "description": "The peter test repreated and in the color"
+    },
+    "params": []
+  },
+  {
+    "__docId__": 55,
+    "kind": "file",
+    "name": "src/registerServiceWorker.js",
+    "content": "// In production, we register a service worker to serve assets from local cache.\r\n\r\n// This lets the app load faster on subsequent visits in production, and gives\r\n// it offline capabilities. However, it also means that developers (and users)\r\n// will only see deployed updates on the \"N+1\" visit to a page, since previously\r\n// cached resources are updated in the background.\r\n\r\n// To learn more about the benefits of this model, read https://goo.gl/KwvDNy.\r\n// This link also includes instructions on opting out of this behavior.\r\n\r\nconst isLocalhost = Boolean(\r\n  window.location.hostname === 'localhost' ||\r\n    // [::1] is the IPv6 localhost address.\r\n    window.location.hostname === '[::1]' ||\r\n    // 127.0.0.1/8 is considered localhost for IPv4.\r\n    window.location.hostname.match(\r\n      /^127(?:\\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/\r\n    )\r\n);\r\n\r\nexport default function register() {\r\n  if (process.env.NODE_ENV === 'production' && 'serviceWorker' in navigator) {\r\n    // The URL constructor is available in all browsers that support SW.\r\n    const publicUrl = new URL(process.env.PUBLIC_URL, window.location);\r\n    if (publicUrl.origin !== window.location.origin) {\r\n      // Our service worker won't work if PUBLIC_URL is on a different origin\r\n      // from what our page is served on. This might happen if a CDN is used to\r\n      // serve assets; see https://github.com/facebookincubator/create-react-app/issues/2374\r\n      return;\r\n    }\r\n\r\n    window.addEventListener('load', () => {\r\n      const swUrl = `${process.env.PUBLIC_URL}/service-worker.js`;\r\n\r\n      if (isLocalhost) {\r\n        // This is running on localhost. Lets check if a service worker still exists or not.\r\n        checkValidServiceWorker(swUrl);\r\n\r\n        // Add some additional logging to localhost, pointing developers to the\r\n        // service worker/PWA documentation.\r\n        navigator.serviceWorker.ready.then(() => {\r\n          console.log(\r\n            'This web app is being served cache-first by a service ' +\r\n              'worker. To learn more, visit https://goo.gl/SC7cgQ'\r\n          );\r\n        });\r\n      } else {\r\n        // Is not local host. Just register service worker\r\n        registerValidSW(swUrl);\r\n      }\r\n    });\r\n  }\r\n}\r\n\r\nfunction registerValidSW(swUrl) {\r\n  navigator.serviceWorker\r\n    .register(swUrl)\r\n    .then(registration => {\r\n      registration.onupdatefound = () => {\r\n        const installingWorker = registration.installing;\r\n        installingWorker.onstatechange = () => {\r\n          if (installingWorker.state === 'installed') {\r\n            if (navigator.serviceWorker.controller) {\r\n              // At this point, the old content will have been purged and\r\n              // the fresh content will have been added to the cache.\r\n              // It's the perfect time to display a \"New content is\r\n              // available; please refresh.\" message in your web app.\r\n              console.log('New content is available; please refresh.');\r\n            } else {\r\n              // At this point, everything has been precached.\r\n              // It's the perfect time to display a\r\n              // \"Content is cached for offline use.\" message.\r\n              console.log('Content is cached for offline use.');\r\n            }\r\n          }\r\n        };\r\n      };\r\n    })\r\n    .catch(error => {\r\n      console.error('Error during service worker registration:', error);\r\n    });\r\n}\r\n\r\nfunction checkValidServiceWorker(swUrl) {\r\n  // Check if the service worker can be found. If it can't reload the page.\r\n  fetch(swUrl)\r\n    .then(response => {\r\n      // Ensure service worker exists, and that we really are getting a JS file.\r\n      if (\r\n        response.status === 404 ||\r\n        response.headers.get('content-type').indexOf('javascript') === -1\r\n      ) {\r\n        // No service worker found. Probably a different app. Reload the page.\r\n        navigator.serviceWorker.ready.then(registration => {\r\n          registration.unregister().then(() => {\r\n            window.location.reload();\r\n          });\r\n        });\r\n      } else {\r\n        // Service worker found. Proceed as normal.\r\n        registerValidSW(swUrl);\r\n      }\r\n    })\r\n    .catch(() => {\r\n      console.log(\r\n        'No internet connection found. App is running in offline mode.'\r\n      );\r\n    });\r\n}\r\n\r\nexport function unregister() {\r\n  if ('serviceWorker' in navigator) {\r\n    navigator.serviceWorker.ready.then(registration => {\r\n      registration.unregister();\r\n    });\r\n  }\r\n}\r\n",
+    "static": true,
+    "longname": "F:/Users/kien/kiwi/dev/peter-test/react/src/registerServiceWorker.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 56,
+    "kind": "variable",
+    "name": "isLocalhost",
+    "memberof": "src/registerServiceWorker.js",
+    "static": true,
+    "longname": "src/registerServiceWorker.js~isLocalhost",
+    "access": "public",
+    "export": false,
+    "importPath": "peter-test/src/registerServiceWorker.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 11,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 57,
+    "kind": "function",
+    "name": "register",
+    "memberof": "src/registerServiceWorker.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/registerServiceWorker.js~register",
+    "access": "public",
+    "export": true,
+    "importPath": "peter-test/src/registerServiceWorker.js",
+    "importStyle": "register",
+    "description": null,
+    "lineNumber": 21,
+    "undocument": true,
+    "params": [],
+    "return": null
+  },
+  {
+    "__docId__": 58,
+    "kind": "function",
+    "name": "registerValidSW",
+    "memberof": "src/registerServiceWorker.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/registerServiceWorker.js~registerValidSW",
+    "access": "public",
+    "export": false,
+    "importPath": "peter-test/src/registerServiceWorker.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 55,
+    "undocument": true,
+    "params": [
+      {
+        "name": "swUrl",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null,
+    "ignore": true
+  },
+  {
+    "__docId__": 59,
+    "kind": "function",
+    "name": "checkValidServiceWorker",
+    "memberof": "src/registerServiceWorker.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/registerServiceWorker.js~checkValidServiceWorker",
+    "access": "public",
+    "export": false,
+    "importPath": "peter-test/src/registerServiceWorker.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 84,
+    "undocument": true,
+    "params": [
+      {
+        "name": "swUrl",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null,
+    "ignore": true
+  },
+  {
+    "__docId__": 60,
+    "kind": "function",
+    "name": "unregister",
+    "memberof": "src/registerServiceWorker.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/registerServiceWorker.js~unregister",
+    "access": "public",
+    "export": true,
+    "importPath": "peter-test/src/registerServiceWorker.js",
+    "importStyle": "{unregister}",
+    "description": null,
+    "lineNumber": 111,
+    "undocument": true,
+    "params": [],
+    "return": null
+  },
+  {
     "kind": "index",
-    "content": "# kiwi\r\n\r\n[![Codacy Badge](https://api.codacy.com/project/badge/Grade/8569c562e69145308e896348639cf8b7)](https://app.codacy.com/app/kiwi/kiwi?utm_source=github.com&utm_medium=referral&utm_content=aabadill/kiwi&utm_campaign=badger)\r\n[![Build Status](https://travis-ci.org/aabadill/kiwi.svg?branch=master)](https://travis-ci.org/aabadill/kiwi)\r\n",
-    "longname": "C:\\Users\\kien1\\Documents\\GitHub\\kiwi\\README.md",
+    "content": "# Team Kiwi's Conveyor Belt Repository\r\n\r\nWelcome to Kiwi's repository for generating a conveyor belt to build software the right way.\r\nWe have included in this repository different approaches to building our conveyor built\r\nin order to compare and contrast the strengths and weaknesses each technology has\r\nagainst the other. We compare React, Angular, Vue, and Web Components in order to determine\r\nwhich technology is most compatible with our team's skills and abilities. We also compare\r\nthese technologies to provide Peter, our client, a clearer understanding on how we reached\r\nour final decision on the technologies we decided upon.\r\n\r\n## Getting Started\r\nTo get started, clone our repository. \r\n\r\n```\r\nTODO: Provide Steps how to run our different conveyor belts.\r\n```\r\n## Documentation Generation\r\nFor document generation, we are using ESDocs.\r\n\r\nFrom ESDocs' Website:\r\n```\r\nESDoc has two goals.\r\n\r\n- To make documentation maintenance comfortable and pleasant\r\n- To create easy-to-understand documentation.\r\n  In order to achieve this two goals, ESDoc produces a practical document, \r\n  measures the coverage, integrates the test code and more.\r\n```\r\nTo find out more about ESDocs, please visit: https://esdoc.org/manual/usage.html\r\n\r\nWe use ESDocs via its basic usage, such as:\r\n```\r\n/**\r\n * this is MyClass.\r\n */\r\nexport default class MyClass {\r\n  /**\r\n   * @param {number} a - this is a value.\r\n   * @param {number} b - this is a value.\r\n   * @return {number} result of the sum value.\r\n   */\r\n  sum(a, b){\r\n    return a + b;\r\n  }\r\n}\r\n```\r\nA list of tags that are available can be found here: https://esdoc.org/manual/tags.html\r\n\r\nNote: Please ensure you have ESDocs installed. If you do not have ESDocs installed,\r\nplease install by running the following commands:\r\n```\r\nnpm install esdoc esdoc-standard-plugin\r\n```\r\n\r\nIn order to view our docs, once you have set up the repository, run the commands\r\n```\r\n./node_modules/.bin/esdoc\r\nopen ./docs/index.html\r\n```\r\nThe documentation to all our different technologies we have compared and contrasted will open\r\nin your browser. There you may browse and read in more detail the code we wrote for each\r\ntechnology.\r\n\r\n# Use of Third Party Integration Tools\r\n\r\n## Codacy\r\n[![Codacy Badge](https://api.codacy.com/project/badge/Grade/8569c562e69145308e896348639cf8b7)](https://app.codacy.com/app/kiwi/kiwi?utm_source=github.com&utm_medium=referral&utm_content=aabadill/kiwi&utm_campaign=badger)\r\n\r\nWe use a static code analysis tool called Codacy in order to \r\nkeep our code consistent and as simple as possible.\r\nWe use this in order to track the progress of our code quality\r\nas the project progresses. This tool allows us to set goals\r\nwe can determine within our team and with our client to ensure code quality. Since people have different measures of quality,\r\nwe may dial it to our very own specificcations as to what quality means for us and our client. \r\nSome of the metrics we can fine tune are:\r\n\r\n    - Code Complexity\r\n    - File Structure Complexity\r\n    - Duplication of Code and Files\r\n    - Code Test Coverage\r\n    - Pull Requests, Commits, etc.\r\n    - Security Vulnerablity Analysis\r\n\r\nOnce we have set the standards we are to follow, the dashboard this tool provides will allow our client to visualize the quality of work we are completing with a letter grade rating.\r\n\r\nInternally, we use this to track everyone's contribution and quality of work by viewing what issues are introduced by whom and how often. In this way, we are able to track bugs in our code to avoid future repetitions of the same mistakes,\r\nand thus tune and refine our pipeline if needed.\r\n\r\nTo find out more about how Codacy works, please\r\nvisit the documentation page here: https://support.codacy.com/hc/en-us\r\n\r\n## Travis CI\r\n[![Build Status](https://travis-ci.org/aabadill/kiwi.svg?branch=master)](https://travis-ci.org/aabadill/kiwi)\r\n\r\nWe use Travis CI as our continuous integration tool. It allows us to centralize our builds and deployments. while adding another layer of quality checks through testing and deployment\r\nin a controlled environment, independer of any one's developer's\r\nlocal environment. Since we may control this independent environment the way we want, it allows us to have a separate\r\nenvironment where we may run our build process and incrementally add new features to our project. Not only this,\r\nwe can control what gets into the build in an incremental manner. \r\nWe perform a series of tests that make sure that what we develop will work in the proposed environment we agree\r\nupon with our client. It also allows us to perform code reviews so we can add a human aspect to how our code should\r\nbe in terms of quality, structure, and readability. \r\nLastly, we can automate many tasks that would otherwise require\r\nmuch developer time, saving our client time and money.\r\n\r\n# Testing\r\n\r\nFor testing, we are using Enzyme and Jest.\r\n\r\nSpecifically, we are using Enzyme to test that our\r\ncomponents render as they should. In other words,\r\nwe want to ensure that what we visualize with our client\r\nshows up in the user interface. We also perform a variety\r\nof other tests that which include that our components\r\nbehave as they should. \r\nFor example, when we set a specific color for text, does the\r\ntext actually change color? Does it render to the correct color? Etc.\r\n\r\nFurthermore, we use Jest because of their focus on snapshots for testing purposes. We use snapshots to stay consistent\r\nwith how we want our components to look. These snapshots allow us to optimize the underlying implementation of a component while testing that its appearance has not changed. Jest compares a previous \"snapshot\" of what our code rendered to\r\nand tests that our update does not change the appearance of the component. In this way, we are able to separate implementation tests from the rendering tests.\r\n\r\nWe recognize that performing tests that do not need to be performed is redudant and not time efficient. So, we have\r\nset up our pipeline so that tests only run when they should\r\nand are responsive to the changes made in the code base.\r\nIn other words, we run tests according to the chain of\r\ndependencies that the change will affect.\r\n\r\n# GitHub File Structure\r\n\r\nWe have organized our repository to make it easy to navigate\r\nby anyone who may want to look at our current work by using\r\nfamiliar names that are easy to understand and remember.\r\n\r\nWe have also made our best effort to keep different technologies separate so that they may not interfere with eachother with being run.\r\n\r\nThe following file structure roughly represents how we have organized our repository:\r\n\r\n    /Kiwi\r\n    - this is the topmost directory of our project\r\n    - here you will find configuration files to most of the\r\n      tools we use throughout our repository including TravisCI\r\n      Firebase, ESDocs, etc\r\n\r\n    /_tests_\r\n    - here you will find our React tests, which include our\r\n      Enzyme and Jest tests\r\n\r\n    /dev\r\n    - folder containts components that are currently under\r\n      development\r\n\r\n    /dev/peter-test\r\n    - this folder contains our use of different frameworks\r\n      for the purpose of comparing and contrasting the strengths and weaknesses of each framework\r\n    - Included frameworks: Angular, React, Vue, and \r\n      WebComponents\r\n\r\n    /docs\r\n    - this folder contains teh documentation to the components\r\n      under development as well as components that have reached\r\n      production\r\n    - docs are able to be viewed via a browser\r\n\r\n\r\n\r\n\r\n",
+    "longname": "F:\\Users\\kien\\kiwi\\README.md",
     "name": "./README.md",
     "static": true,
     "access": "public"
   },
   {
     "kind": "packageJSON",
-    "content": "{\n  \"name\": \"peter-test\",\n  \"version\": \"0.1.0\",\n  \"private\": true,\n  \"dependencies\": {\n    \"esdoc\": \"^1.0.4\",\n    \"esdoc-jsx-plugin\": \"^1.0.0\",\n    \"esdoc-react-plugin\": \"^1.0.1\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"react\": \"^16.3.2\",\n    \"react-dom\": \"^16.3.2\",\n    \"react-scripts\": \"1.1.4\",\n    \"travis\": \"^0.1.1\"\n  },\n  \"scripts\": {\n    \"start\": \"react-scripts start\",\n    \"build\": \"react-scripts build\",\n    \"test\": \"jest\",\n    \"eject\": \"react-scripts eject\"\n  },\n  \"devDependencies\": {\n    \"babel-cli\": \"^6.26.0\",\n    \"babel-jest\": \"^22.4.3\",\n    \"babel-polyfill\": \"^6.26.0\",\n    \"babel-preset-env\": \"^1.6.1\",\n    \"babel-preset-es2015\": \"^6.24.1\",\n    \"babel-preset-react\": \"^6.24.1\",\n    \"enzyme\": \"^3.3.0\",\n    \"enzyme-adapter-react-16\": \"^1.1.1\",\n    \"jest\": \"^22.4.3\",\n    \"react-addons-test-utils\": \"^15.6.2\",\n    \"react-test-renderer\": \"^16.3.2\"\n  }\n}\n",
-    "longname": "C:\\Users\\kien1\\Documents\\GitHub\\kiwi\\package.json",
+    "content": "{\n  \"name\": \"peter-test\",\n  \"version\": \"0.1.0\",\n  \"private\": true,\n  \"dependencies\": {\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-jsx-plugin\": \"^1.0.0\",\n    \"esdoc-react-plugin\": \"^1.0.1\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"npm\": \"^6.0.0\",\n    \"react\": \"^16.3.2\",\n    \"react-dom\": \"^16.3.2\",\n    \"react-scripts\": \"1.1.4\",\n    \"travis\": \"^0.1.1\"\n  },\n  \"jest\": {\n    \"collectCoverage\": true,\n    \"coverageDirectory\": \"<rootDir>/coverage\",\n    \"coverageReporters\": [\n      \"text\",\n      \"html\"\n    ]\n  },\n  \"scripts\": {\n    \"start\": \"react-scripts start\",\n    \"build\": \"react-scripts build\",\n    \"test\": \"jest\",\n    \"eject\": \"react-scripts eject\"\n  },\n  \"devDependencies\": {\n    \"@angular/cli\": \"^1.7.4\",\n    \"babel-cli\": \"^6.26.0\",\n    \"babel-jest\": \"^22.4.3\",\n    \"babel-polyfill\": \"^6.26.0\",\n    \"babel-preset-env\": \"^1.6.1\",\n    \"babel-preset-es2015\": \"^6.24.1\",\n    \"babel-preset-react\": \"^6.24.1\",\n    \"enzyme\": \"^3.3.0\",\n    \"enzyme-adapter-react-16\": \"^1.1.1\",\n    \"jest\": \"^22.4.3\",\n    \"react-addons-test-utils\": \"^15.6.2\",\n    \"react-test-renderer\": \"^16.3.2\"\n  }\n}\n",
+    "longname": "F:\\Users\\kien\\kiwi\\package.json",
     "name": "package.json",
     "static": true,
     "access": "public"

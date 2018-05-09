@@ -1,5 +1,23 @@
 window.esdocSearchIndex = [
   [
+    "peter-test/src/petertest.jsx~petertest",
+    "class/src/PeterTest.jsx~PeterTest.html",
+    "<span>PeterTest</span> <span class=\"search-result-import-path\">peter-test/src/PeterTest.jsx</span>",
+    "class"
+  ],
+  [
+    "peter-test/src/registerserviceworker.js~register",
+    "function/index.html#static-function-register",
+    "<span>register</span> <span class=\"search-result-import-path\">peter-test/src/registerServiceWorker.js</span>",
+    "function"
+  ],
+  [
+    "peter-test/src/registerserviceworker.js~unregister",
+    "function/index.html#static-function-unregister",
+    "<span>unregister</span> <span class=\"search-result-import-path\">peter-test/src/registerServiceWorker.js</span>",
+    "function"
+  ],
+  [
     "src/.external-ecmascript.js~array",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
     "src/.external-ecmascript.js~Array",
@@ -280,5 +298,47 @@ window.esdocSearchIndex = [
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
     "src/.external-ecmascript.js~undefined",
     "external"
+  ],
+  [
+    "src/petertest.jsx",
+    "file/src/PeterTest.jsx.html",
+    "src/PeterTest.jsx",
+    "file"
+  ],
+  [
+    "src/petertest.jsx~petertest#constructor",
+    "class/src/PeterTest.jsx~PeterTest.html#instance-constructor-constructor",
+    "src/PeterTest.jsx~PeterTest#constructor",
+    "method"
+  ],
+  [
+    "src/petertest.jsx~petertest#render",
+    "class/src/PeterTest.jsx~PeterTest.html#instance-method-render",
+    "src/PeterTest.jsx~PeterTest#render",
+    "method"
+  ],
+  [
+    "src/petertest.jsx~petertest#state",
+    "class/src/PeterTest.jsx~PeterTest.html#instance-member-state",
+    "src/PeterTest.jsx~PeterTest#state",
+    "member"
+  ],
+  [
+    "src/petertest.jsx~petertest.getderivedstatefromprops",
+    "class/src/PeterTest.jsx~PeterTest.html#static-method-getDerivedStateFromProps",
+    "src/PeterTest.jsx~PeterTest.getDerivedStateFromProps",
+    "method"
+  ],
+  [
+    "src/index.js",
+    "file/src/index.js.html",
+    "src/index.js",
+    "file"
+  ],
+  [
+    "src/registerserviceworker.js",
+    "file/src/registerServiceWorker.js.html",
+    "src/registerServiceWorker.js",
+    "file"
   ]
 ]
