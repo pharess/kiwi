@@ -19,10 +19,12 @@ install:
   - npm install -g firebase-tools
 
 script:
-  # Run React
+  # Run React Tests
   - npm install
   - npm test
+  # Build and pushes to firebase
   - cd dev/peter-test/react
+  - npm install
   - npm run build
   - mv build ../../../
   - cd ../../../
