@@ -28,7 +28,8 @@ script:
   - cd ../../../
   - rm -rf public
   - mv build public
-  - firebase deploy --token "$FIREBASE_TOKEN" -P "kiwi-staging-44102"
+  # PRODUCTION SPECIFIC INSTRUCTIONS: DO NOT CHANGE THESE BELOW
+  - firebase deploy --token "$FIREBASE_TOKEN_PROD" -P "kiwi-prod"
   - npm install
   - npm test
 
