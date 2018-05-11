@@ -90,7 +90,7 @@ To find out more about how Codacy works, please
 visit the documentation page here: https://support.codacy.com/hc/en-us
 
 ## Travis CI
-[![Build Status](https://travis-ci.org/aabadill/kiwi.svg?branch=master)](https://travis-ci.org/aabadill/kiwi)
+[![Build Status](https://travis-ci.org/Kien085/kiwi.svg?branch=master)](https://travis-ci.org/Kien085/kiwi)
 
 We use Travis CI as our continuous integration tool. It allows us to centralize our builds and deployments. while adding another layer of quality checks through testing and deployment
 in a controlled environment, independer of any one's developer's
