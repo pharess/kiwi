@@ -22,7 +22,6 @@ script:
   # Run React Tests
   - cd dev/peter-test/react
   - npm install
-  # - npm test
   # Build and pushes to firebase
   - npm run build
   - mv build ../../../
@@ -30,6 +29,7 @@ script:
   - rm -rf public
   - mv build public
   - firebase deploy --token "$FIREBASE_TOKEN" -P "kiwi-staging-44102"
+  - npm test
 
 env:
   global:
