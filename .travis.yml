@@ -11,9 +11,9 @@ branches:
   except:
     - development
 
-cache:
-  directories:
-    - node_modules
+#cache:
+  #directories:
+    #- node_modules
 
 install:
   - npm install -g firebase-tools
