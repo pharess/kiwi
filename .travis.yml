@@ -32,6 +32,8 @@ script:
   - firebase deploy --token "$FIREBASE_TOKEN_PROD" -P "kiwi-prod"
   - npm install
   - npm test
+  # Runs esdoc command to document this build after Travis checks it
+  - ./node_modules/.bin/esdoc
 
 env:
   global:
