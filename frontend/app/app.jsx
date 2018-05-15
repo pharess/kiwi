@@ -44,7 +44,6 @@ ReactDOM.render(
 			<MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
 				<Master />
 			</MuiThemeProvider>
-
 		</ConnectedRouter>
 	</Provider>,
 	document.getElementById('app')
