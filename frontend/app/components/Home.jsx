@@ -34,131 +34,128 @@ import * as globalActions from 'globalActions'
 // - Create Home component class
 export class Home extends Component {
 
-  // Constructor
-  constructor(props) {
-    super(props)
+    // Constructor
+    constructor(props) {
+        super(props)
 
-    // Default state
-    this.state = {
-      sidebarOpen: () => _,
-      sidebarStatus: true,
-      sidebaOverlay: false
+        // Default state
+        this.state = {
+            sidebarOpen: () => _,
+            sidebarStatus: true,
+            sidebaOverlay: false
+        }
+
+        // Binding function to `this`
+        this.sidebar = this.sidebar.bind(this)
+        this.sidebarStatus = this.sidebarStatus.bind(this)
+        this.sidebarOverlay = this.sidebarOverlay.bind(this)
+        this.handleCloseSidebar = this.handleCloseSidebar.bind(this)
+
     }
 
-    // Binding function to `this`
-    this.sidebar = this.sidebar.bind(this)
-    this.sidebarStatus = this.sidebarStatus.bind(this)
-    this.sidebarOverlay = this.sidebarOverlay.bind(this)
-    this.handleCloseSidebar = this.handleCloseSidebar.bind(this)
+    /**
+     * handle close sidebar
+     */
+    handleCloseSidebar = () => {
+        this.state.sidebarOpen(false, 'overlay')
+    }
 
-  }
-
-  /**
-   * handle close sidebar
-   */
-  handleCloseSidebar = () => {
-    this.state.sidebarOpen(false, 'overlay')
-  }
-
-  /**
-   * Change sidebar overlay status
-   * @param  {boolean} status if is true, the sidebar is on overlay status
-   */
-  sidebarOverlay = (status) => {
-    this.setState({
-      sidebarOverlay: status
-    })
-  }
+    /**
+     * Change sidebar overlay status
+     * @param  {boolean} status if is true, the sidebar is on overlay status
+     */
+    sidebarOverlay = (status) => {
+        this.setState({
+            sidebarOverlay: status
+        })
+    }
 
 
-  /**
-   * Pass function to change sidebar status
-   * @param  {boolean} open  is a function callback to change sidebar status out of sidebar component
-   */
-  sidebar = (open) => {
+    /**
+     * Pass function to change sidebar status
+     * @param  {boolean} open  is a function callback to change sidebar status out of sidebar component
+     */
+    sidebar = (open) => {
 
-    this.setState({
-      sidebarOpen: open
-    })
-  }
-
-
-  /**
-   * Change sidebar status if is open or not
-   * @param  {boolean} status is true, if the sidebar is open
-   */
-  sidebarStatus = (status) => {
-    this.setState({
-      sidebarStatus: status
-    })
-  }
-
-  /**
-   * Render DOM component
-   * 
-   * @returns DOM
-   * 
-   * @memberof Home
-   */
-  render() {
+        this.setState({
+            sidebarOpen: open
+        })
+    }
 
 
-    return (
-      <div id="home">
-        <HomeHeader sidebar={this.state.sidebarOpen} sidebarStatus={this.state.sidebarStatus} />
-        <Sidebar overlay={this.sidebarOverlay} open={this.sidebar} status={this.sidebarStatus}>
-          <SidebarContent>
-            <Menu style={{ color: "rgb(117, 117, 117)", width: '210px' }}>
-              {this.state.sidebarOverlay
-                ? <div><MenuItem onClick={this.handleCloseSidebar} primaryText={<span style={{ color: "rgb(117, 117, 117)" }} className="sidebar__title">Green</span>} rightIcon={<SvgArrowLeft viewBox="0 3 24 24" style={{ color: "#fff", marginLeft: "15px", width: "32px", height: "32px", cursor: "pointer" }} />} /><Divider /></div>
-                : ""
-              }
+    /**
+     * Change sidebar status if is open or not
+     * @param  {boolean} status is true, if the sidebar is open
+     */
+    sidebarStatus = (status) => {
+        this.setState({
+            sidebarStatus: status
+        })
+    }
 
-              <NavLink to='/'><MenuItem primaryText="Home" style={{ color: "rgb(117, 117, 117)" }} leftIcon={<SvgHome />} /></NavLink>
-              <NavLink to={`/${this.props.uid}`}><MenuItem primaryText="Profile" style={{ color: "rgb(117, 117, 117)" }} leftIcon={<SvgAccountCircle />} /></NavLink>
-              <NavLink to='/people'><MenuItem primaryText="People" style={{ color: "rgb(117, 117, 117)" }} leftIcon={<SvgPeople />} /></NavLink>
-              <Divider />
-              <NavLink to='/settings'><MenuItem primaryText="Settings" style={{ color: "rgb(117, 117, 117)" }} leftIcon={<SvgSettings />} /></NavLink>
-              <NavLink to='#'><MenuItem primaryText="Send feedback" style={{ color: "rgb(117, 117, 117)" }} leftIcon={<SvgFeedback />} /></NavLink>
-            </Menu>
-          </SidebarContent>
+    /**
+     * Render DOM component
+     * 
+     * @returns DOM
+     * 
+     * @memberof Home
+     */
+    render() {
+        return (
+            <div id="home">
+                <HomeHeader sidebar={this.state.sidebarOpen} sidebarStatus={this.state.sidebarStatus} />
+                <Sidebar overlay={this.sidebarOverlay} open={this.sidebar} status={this.sidebarStatus}>
+                    <SidebarContent>
+                        <Menu style={{ color: "rgb(117, 117, 117)", width: '210px' }}>
+                            {this.state.sidebarOverlay
+                                ? <div><MenuItem onClick={this.handleCloseSidebar} primaryText={<span style={{ color: "rgb(117, 117, 117)" }} className="sidebar__title">Green</span>} rightIcon={<SvgArrowLeft viewBox="0 3 24 24" style={{ color: "#fff", marginLeft: "15px", width: "32px", height: "32px", cursor: "pointer" }} />} /><Divider /></div>
+                                : ""
+                            }
 
-          <SidebarMain>
-            <Switch>
-              <Route path="/people/:tab?" render={() => {
-                return (
-                  this.props.authed
-                    ? <People />
-                    : <Redirect to="/login" />
-                )
-              }} />
-              <Route path="/tag/:tag" render={({match}) => {
+                            <NavLink to='/'><MenuItem primaryText="Home" style={{ color: "rgb(117, 117, 117)" }} leftIcon={<SvgHome />} /></NavLink>
+                            <NavLink to={`/${this.props.uid}`}><MenuItem primaryText="Profile" style={{ color: "rgb(117, 117, 117)" }} leftIcon={<SvgAccountCircle />} /></NavLink>
+                            <NavLink to='/people'><MenuItem primaryText="People" style={{ color: "rgb(117, 117, 117)" }} leftIcon={<SvgPeople />} /></NavLink>
+                            <Divider />
+                            <NavLink to='/settings'><MenuItem primaryText="Settings" style={{ color: "rgb(117, 117, 117)" }} leftIcon={<SvgSettings />} /></NavLink>
+                        </Menu>
+                    </SidebarContent>
 
-                return (
-                  this.props.authed
-                    ? <div className="blog"><Blog displayWriting={false} homeTitle={`#${match.params.tag}`} posts={this.props.mergedPosts} /></div>
-                    : <Redirect to="/login" />
-                )
-              }} />
-              <Route path="/:userId/posts/:postId/:tag?" component={PostPage} />
-              <Route path="/:userId" component={Profile} />
+                    <SidebarMain>
+                        <Switch>
+                            <Route path="/people/:tab?" render={() => {
+                                return (
+                                    this.props.authed
+                                        ? <People />
+                                        : <Redirect to="/login" />
+                                )
+                            }} />
+                            <Route path="/tag/:tag" render={({ match }) => {
 
-              <Route path="/" render={() => {
+                                return (
+                                    this.props.authed
+                                        ? <div className="blog"><Blog displayWriting={false} homeTitle={`#${match.params.tag}`} posts={this.props.mergedPosts} /></div>
+                                        : <Redirect to="/login" />
+                                )
+                            }} />
+                            <Route path="/:userId/posts/:postId/:tag?" component={PostPage} />
+                            <Route path="/:userId" component={Profile} />
 
-                return (
-                  this.props.authed
-                    ? <div className="blog"><Blog homeTitle='Home' posts={this.props.mergedPosts} displayWriting={true} /></div>
-                    : <Redirect to="/login" />
-                )
-              }} />
-            </Switch>
-          </SidebarMain>
-        </Sidebar>
+                            <Route path="/" render={() => {
 
-      </div>
+                                return (
+                                    this.props.authed
+                                        ? <div className="blog"><Blog homeTitle='Home' posts={this.props.mergedPosts} displayWriting={true} /></div>
+                                        : <Redirect to="/login" />
+                                )
+                            }} />
+                        </Switch>
+                    </SidebarMain>
+                </Sidebar>
 
-    )
-  }
+            </div>
+
+        )
+    }
 }
 
 /**
@@ -168,10 +165,10 @@ export class Home extends Component {
  * @return {object}          props of component
  */
 const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
+    return {
 
 
-  }
+    }
 }
 
 /**
@@ -181,21 +178,21 @@ const mapDispatchToProps = (dispatch, ownProps) => {
  * @return {object}          props of component
  */
 const mapStateToProps = (state, ownProps) => {
-  const { uid } = state.authorize
-  let mergedPosts = {}
-  const circles = state.circle ? (state.circle.userCircles[uid] || {}) : {}
-  const followingUsers = CircleAPI.getFollowingUsers(circles)
-  const posts = state.post.userPosts ? state.post.userPosts[state.authorize.uid] : {}
-  Object.keys(followingUsers).forEach((userId)=>{
-     let newPosts = state.post.userPosts ? state.post.userPosts[userId] : {}
-     _.merge(mergedPosts,newPosts)
-  })
-  _.merge(mergedPosts,posts)
-  return {
-    authed: state.authorize.authed,
-    mainStyle: state.global.sidebarMainStyle,
-    mergedPosts
-  }
+    const { uid } = state.authorize
+    let mergedPosts = {}
+    const circles = state.circle ? (state.circle.userCircles[uid] || {}) : {}
+    const followingUsers = CircleAPI.getFollowingUsers(circles)
+    const posts = state.post.userPosts ? state.post.userPosts[state.authorize.uid] : {}
+    Object.keys(followingUsers).forEach((userId) => {
+        let newPosts = state.post.userPosts ? state.post.userPosts[userId] : {}
+        _.merge(mergedPosts, newPosts)
+    })
+    _.merge(mergedPosts, posts)
+    return {
+        authed: state.authorize.authed,
+        mainStyle: state.global.sidebarMainStyle,
+        mergedPosts
+    }
 }
 
 // - Connect component to redux store

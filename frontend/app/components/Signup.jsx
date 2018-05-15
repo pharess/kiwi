@@ -178,7 +178,6 @@ export class Signup extends Component {
     }
 }
 
-
 /**
  * Map dispatch to props
  * @param  {func} dispatch is the function to dispatch action to reducers

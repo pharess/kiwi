@@ -20,4 +20,3 @@ const MasterLoading = ({activeLoading}) => (
 );
 
 export default MasterLoading;
-
