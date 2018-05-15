@@ -1,4 +1,4 @@
-import { setup, teardown, getFile } from '../jest/test.utils'
+import { setup, teardown, getFile } from '../testUtils/test.utils'
 
 let chromeless = null
 
@@ -7,7 +7,8 @@ afterAll(async () => { await teardown(chromeless) })
 
 test('+++ home renders correctly', async () => {
   const html = await chromeless
-    .goto(global.config.baseUrl)
+    // .goto(global.config.baseUrl)
+    .goto("https://kiwi-prod.firebaseapp.com")
     .wait('div#root')
     .evaluate(() => document.querySelector('div#root').innerHTML)
   expect(html).toMatchSnapshot()
@@ -15,7 +16,8 @@ test('+++ home renders correctly', async () => {
 
 test('+++ home renders correctly (visual)', async () => {
   const screenshotPath = await chromeless
-    .goto(global.config.baseUrl).wait('div#root').screenshot()
+  // .goto(global.config.baseUrl)
+    .goto("https://kiwi-prod.firebaseapp.com").wait('div#root').screenshot()
   const screenshot = await getFile(screenshotPath)
   expect(screenshot).toMatchImageSnapshot()
 })

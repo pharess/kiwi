@@ -26,8 +26,13 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "jest --runInBand --setupFiles='/Users/Dnutz/Desktop/CSE112/kiwi/jest/setup.default.js'",
-    "test:update": "jest --updateSnapshot --runInBand --setupFiles='/Users/Dnutz/Desktop/CSE112/kiwi/jest/setup.default.js'",
+    "test": "jest PeterTest.test.js",
+    "test:localRegression": "jest index.test.js --runInBand",
+    "test:localUpdate": "jest index.test.js --updateSnapshot --runInBand",
+    "test:stagingRegression": "jest regressionStaging.test.js --runInBand",
+    "test:stagingUpdate": "jest regressionStaging.test.js --updateSnapshot --runInBand",
+    "test:productionRegression": "jest regressionProduction.test.js --runInBand",
+    "test:productionUpdate": "jest regressionProduction.test.js --updateSnapshot --runInBand",
     "test:headless": "jest --runInBand --setupFiles='/Users/Dnutz/Desktop/CSE112/kiwi/jest/setup.headless.js'",
     "eject": "react-scripts eject"
   },
