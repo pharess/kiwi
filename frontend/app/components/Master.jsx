@@ -109,6 +109,7 @@ export class Master extends Component {
                 <div className='master__loading animate-fading2' style={{ display: (global.showTopLoading ? 'flex' : 'none') }}>
                     <div className='title'>  Loading ... </div>
                 </div>
+                
                 <MasterLoading activeLoading={this.state.loading || !(this.props.loaded || this.props.guest)} handleLoading={this.handleLoading} />
 
                 {(!this.state.loading && (this.props.loaded || this.props.guest))

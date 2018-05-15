@@ -1,53 +1,23 @@
-// - Import react components
-import React, {Component} from 'react'
-import CircularProgress from 'material-ui/CircularProgress'
-import Dialog from 'material-ui/Dialog'
+import React from 'react';
+import Dialog from 'material-ui/Dialog';
 
-// - Import app components
-
-// - Create MasterLoading component class
-export default class MasterLoading extends Component {
-
-  // Constructor
-  constructor(props) {
-    super(props);
-
-
-    // Binding functions to `this`
-
-  }
-
-
-
-  // Render app DOM component
-  render() {
-    return (
-      <Dialog
+const MasterLoading = ({activeLoading}) => (
+    <Dialog
         modal={true}
-        open={this.props.activeLoading}
-        autoDetectWindowHeight={false}
-        overlayStyle={{backgroundColor: "white"}}
-        contentClassName="mLoading__content"
-        bodyStyle={{backgroundColor: ""}}
-        bodyClassName="mLoading__body"
-      >
+        open={activeLoading}
+        autoDetectWindowHeight={true}
+        contentStyle={{width: '250px'}}
+    >
+        <div style={{display: 'flex', justifyContent: 'space-around'}}>
+            <div id="wave">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+            <h1>Loading</h1>
+        </div>
+    </Dialog>
+);
 
-      <div>
-      <div className="mLoading__context">
+export default MasterLoading;
 
-            <CircularProgress color="white" size={80} thickness={7} />
-           <h1 style={{float:"right", color:"#fff"}}>Green</h1>
-
-      </div>
-  </div>
-
-
-
-      </Dialog>
-
-
-
-    );
-  }
-
-}
