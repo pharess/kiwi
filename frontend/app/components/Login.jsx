@@ -113,17 +113,6 @@ export class Login extends Component {
     };
     return (
       <form>
-
-        <h1 style={{
-          textAlign: "center",
-          padding: "20px",
-          fontSize: "30px",
-          fontWeight: 500,
-          lineHeight: "32px",
-          margin: "auto",
-          color: "rgba(138, 148, 138, 0.2)"
-        }}>Green</h1>
-
         <div className="animate-bottom">
           <Paper style={paperStyle} zDepth={1} rounded={false} >
             <div style={{ padding: "48px 40px 36px" }}>
