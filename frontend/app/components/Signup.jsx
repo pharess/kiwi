@@ -32,14 +32,14 @@ export class Signup extends Component {
             confirmInput: '',
             confirmInputError: ''
         }
-    }
+}
 
     /**
      * Handle data on input change
      * @param  {event} event is an event of inputs of element on change
      */
     handleInputChange = (event) => {
-        const target = evt.target;
+        const target = event.target;
         const name = target.name;
 
         this.setState({ [name]: target.value });
