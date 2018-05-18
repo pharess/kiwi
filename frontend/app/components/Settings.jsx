@@ -3,10 +3,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { NavLink, withRouter } from 'react-router-dom'
 import { push } from 'react-router-redux'
-import Paper from 'material-ui/Paper'
 import TextField from 'material-ui/TextField'
-import RaisedButton from 'material-ui/RaisedButton'
-import FlatButton from 'material-ui/FlatButton'
 
 // - Import actions
 import * as authorizeActions from 'authorizeActions'
@@ -116,76 +113,35 @@ export class Settings extends Component {
    */
   render() {
 
-    const paperStyle = {
-      minHeight: 370,
-      width: 450,
-      textAlign: 'center',
-      display: 'block',
-      margin: "auto"
-    };
     return (
-      <div>
-
-        <h1 style={{
-          textAlign: "center",
-          padding: "20px",
-          fontSize: "30px",
-          fontWeight: 500,
-          lineHeight: "32px",
-          margin: "auto",
-          color: "rgba(138, 148, 138, 0.2)"
-        }}>Green</h1>
-
-        <div className="animate-bottom">
-          <Paper style={paperStyle} zDepth={1} rounded={false} >
-            <div style={{ padding: "48px 40px 36px" }}>
-              <div style={{
-                paddingLeft: "40px",
-                paddingRight: "40px"
-              }}>
-
-                <h2 style={{
-                  textAlign: "left",
-                  paddingTop: "16px",
-                  fontSize: "24px",
-                  fontWeight: 400,
-                  lineHeight: "32px",
-                  margin: 0
-                }}>Change Password</h2>
-              </div>
-
-              <TextField
-                onChange={this.handleInputChange}
-                errorText={this.state.passwordInputError}
-                name="passwordInput"
-                floatingLabelStyle={{ fontSize: "15px" }}
-                floatingLabelText="New password"
-                type="password"
-              /><br />
-              <TextField
-                onChange={this.handleInputChange}
-                errorText={this.state.confirmInputError}
-                name="confirmInput"
-                floatingLabelStyle={{ fontSize: "15px" }}
-                floatingLabelText="Confirm password"
-                type="password"
-              /><br />
-              <br />
-              <br />
-              <div className="settings__button-box">
-                <div>
-                  <FlatButton label="Home" onClick={this.props.homePage} />
-                </div>
-                <div>
-                  <RaisedButton label="Change password" primary={true} onClick={this.handleForm} />
-
-                </div>
-              </div>
-
-            </div>
-          </Paper>
+      <form style={{height: '100vh', width: '100vw', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+        <div style={{backgroundColor: 'white', width: '450px', textAlign: 'center', borderRadius: '10px'}}>
+          <h1>Change Password</h1>
+          <TextField
+              onChange={this.handleInputChange}
+              errorText={this.state.passwordInputError}
+              name="passwordInput"
+              floatingLabelStyle={{ fontSize: "15px" }}
+              floatingLabelText="New password"
+              type="password"
+          />
+          <br />
+          <TextField
+              onChange={this.handleInputChange}
+              errorText={this.state.passwordInputError}
+              name="confirmInput"
+              floatingLabelStyle={{ fontSize: "15px" }}
+              floatingLabelText="Confirm password"
+              type="password"
+          />
+          <br />
+          <br />
+          <div className="settings__button-box" style={{display: 'flex', width: '100%', flexDirection: 'row'}}>
+            <div style={{display: 'flex', outline: 'none', cursor: 'pointer', alignItems: 'center', justifyContent: 'center', height: '50px', width: '49%', backgroundColor: '#9013FE', color: 'white', borderRadius: '0 0 0 10px', padding: '0 15px 0 15px'}} label="Home" onClick={this.props.homePage}>Home</div>
+            <div style={{display: 'flex', outline: 'none', cursor: 'pointer', alignItems: 'center', justifyContent: 'center', height: '50px', width: '50%', backgroundColor: '#9013FE', color: 'white', borderRadius: '0 0 10px 0', padding: '0 15px 0 15px'}} label="Change password" onClick={this.handleForm}>Change password</div>
+          </div>
         </div>
-      </div>
+      </form>
     )
   }
 }
