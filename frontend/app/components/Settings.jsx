@@ -1,12 +1,8 @@
-// - Import external components
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { NavLink, withRouter } from 'react-router-dom'
-import { push } from 'react-router-redux'
-import Paper from 'material-ui/Paper'
-import TextField from 'material-ui/TextField'
-import RaisedButton from 'material-ui/RaisedButton'
-import FlatButton from 'material-ui/FlatButton'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { NavLink, withRouter } from 'react-router-dom';
+import { push } from 'react-router-redux';
+import TextField from 'material-ui/TextField';
 
 // - Import actions
 import * as authorizeActions from 'authorizeActions'
@@ -21,173 +17,108 @@ import * as authorizeActions from 'authorizeActions'
  */
 export class Settings extends Component {
 
-  /**
-   * Component constructor
-   * @param  {object} props is an object properties of component
-   */
-  constructor(props) {
-    super(props);
+    /**
+     * Component constructor
+     * @param  {object} props is an object properties of component
+     */
+    constructor(props) {
+        super(props);
 
-    this.state = {
-      passwordInput: '',
-      passwordInputError: '',
-      confirmInput: '',
-      confirmInputError: '',
-
-
-    }
-    // Binding function to `this`
-    this.handleForm = this.handleForm.bind(this)
-
-  }
-
-  /**
-   * Handle data on input change
-   * @param  {event} evt is an event of inputs of element on change
-   */
-  handleInputChange = (evt) => {
-    const target = evt.target;
-    const value = target.type === 'checkbox' ? target.checked : target.value;
-    const name = target.name;
-    this.setState({
-      [name]: value
-    });
-
-
-    switch (name) {
-      case 'passwordInput':
-        this.setState({
-          passwordInputError: ''
-        })
-        break
-      case 'confirmInput':
-        this.setState({
-          confirmInputError: '',
-          passwordInputError: ''
-        })
-
-        break;
-      default:
-
-    }
-  }
-
-  /**
-   * Handle register form
-   */
-  handleForm = () => {
-
-    var error = false
-    if (this.state.passwordInput === '') {
-      this.setState({
-        passwordInputError: 'This field is required'
-      })
-      error = true
-
-    }
-    else if (this.state.confirmInput === '') {
-      this.setState({
-        confirmInputError: 'This field is required'
-      })
-      error = true
-
-    }
-    else if(this.state.confirmInput !== this.state.passwordInput) {
-      this.setState({
-        confirmInputError: 'Password and confirm password should be equal!'
-      })
-      error = true
-
+        this.state = {
+            passwordInput: '',
+            passwordInputError: '',
+            confirmInput: '',
+            confirmInputError: '',
+        }
     }
 
-    if (!error) {
-      this.props.login(
-        this.state.passwordInput,
-        this.state.confirmInput
-      )
+    /**
+     * Handle data on input change
+     * @param  {event} evt is an event of inputs of element on change
+     */
+    handleInputChange = (event) => {
+        const target = event.target;
+        const name = target.name;
+
+        this.setState({ [name]: target.value });
+
+        if (name === 'passwordInput') {
+            this.setState({ passwordInputError: '' });
+        }
+
+        else if (name === 'confirmInput') {
+            this.setState({
+                confirmInputError: '',
+                passwordInputError: ''
+            });
+        }
     }
 
-  }
+    handleForm = () => {
+        if (this.state.passwordInput === '') {
+            this.setState({ passwordInputError: 'This field is required' });
+        }
+
+        else if (this.state.confirmInput === '') {
+            this.setState({ confirmInputError: 'This field is required' });
+        }
+        else if (this.state.confirmInput !== this.state.passwordInput) {
+            this.setState({ confirmInputError: 'Password and confirm password should be equal!' });
+        }
+
+        else {
+            this.props.login(
+                this.state.passwordInput,
+                this.state.confirmInput
+            )
+        }
+    }
 
 
-  /**
-   * Reneder component DOM
-   * @return {react element} return the DOM which rendered by component
-   */
-  render() {
+    /**
+     * Reneder component DOM
+     * @return {react element} return the DOM which rendered by component
+     */
+    render() {
+        return (
+            <div style={{height: '100vh', width: '100vw', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                <div style={{backgroundColor: 'white', width: '450px', textAlign: 'center', borderRadius: '10px'}}>
+                    <h1>Reset Password</h1>
 
-    const paperStyle = {
-      minHeight: 370,
-      width: 450,
-      textAlign: 'center',
-      display: 'block',
-      margin: "auto"
-    };
-    return (
-      <div>
+                    <TextField
+                        onChange={this.handleInputChange}
+                        errorText={this.state.passwordInputError}
+                        name="passwordInput"
+                        floatingLabelStyle={{ fontSize: "15px" }}
+                        floatingLabelText="New password"
+                        type="password"
+                    />
+                    
+                    <br />
 
-        <h1 style={{
-          textAlign: "center",
-          padding: "20px",
-          fontSize: "30px",
-          fontWeight: 500,
-          lineHeight: "32px",
-          margin: "auto",
-          color: "rgba(138, 148, 138, 0.2)"
-        }}>Green</h1>
+                    <TextField
+                        onChange={this.handleInputChange}
+                        errorText={this.state.confirmInputError}
+                        name="confirmInput"
+                        floatingLabelStyle={{ fontSize: "15px" }}
+                        floatingLabelText="Confirm password"
+                        type="password"
+                    />
 
-        <div className="animate-bottom">
-          <Paper style={paperStyle} zDepth={1} rounded={false} >
-            <div style={{ padding: "48px 40px 36px" }}>
-              <div style={{
-                paddingLeft: "40px",
-                paddingRight: "40px"
-              }}>
+                    <br />
+                    <br />
 
-                <h2 style={{
-                  textAlign: "left",
-                  paddingTop: "16px",
-                  fontSize: "24px",
-                  fontWeight: 400,
-                  lineHeight: "32px",
-                  margin: 0
-                }}>Change Password</h2>
-              </div>
-
-              <TextField
-                onChange={this.handleInputChange}
-                errorText={this.state.passwordInputError}
-                name="passwordInput"
-                floatingLabelStyle={{ fontSize: "15px" }}
-                floatingLabelText="New password"
-                type="password"
-              /><br />
-              <TextField
-                onChange={this.handleInputChange}
-                errorText={this.state.confirmInputError}
-                name="confirmInput"
-                floatingLabelStyle={{ fontSize: "15px" }}
-                floatingLabelText="Confirm password"
-                type="password"
-              /><br />
-              <br />
-              <br />
-              <div className="settings__button-box">
-                <div>
-                  <FlatButton label="Home" onClick={this.props.homePage} />
+                    <div style={{display: 'flex', width: '100%', flexDirection: 'column'}}>
+                        <div style={{display: 'flex', outline: 'none', cursor: 'pointer', alignItems: 'center', justifyContent: 'center', height: '50px', backgroundColor: 'white', color: 'black', marginRight: '31px'}} label="Home" onClick={this.props.homePage}>
+                            <svg style={{marginRight: '10px'}} width="21" height="17" xmlns="http://www.w3.org/2000/svg"><path d="M7.723.67A.966.966 0 0 1 9.09 2.039L3.644 7.484l16.087.04a.978.978 0 0 1 .973.975.966.966 0 0 1-.968.97L3.56 9.426l5.489 5.488a.973.973 0 0 1 .004 1.375.973.973 0 0 1-1.375-.005L.583 9.19A.973.973 0 0 1 .58 7.815L7.723.67z" fill="#A2A2A2"/></svg>
+                            Return to login page
+                        </div>
+                        <div style={{display: 'flex', outline: 'none', cursor: 'pointer', alignItems: 'center', justifyContent: 'center', height: '50px', backgroundColor: '#9013FE', color: 'white', borderRadius: '0 0 10px 10px'}} label="Change password" primary={true} onClick={this.handleForm}>Reset Password</div>
+                    </div>
                 </div>
-                <div>
-                  <RaisedButton label="Change password" primary={true} onClick={this.handleForm} />
-
-                </div>
-              </div>
-
             </div>
-          </Paper>
-        </div>
-      </div>
-    )
-  }
+        )
+    }
 }
 
 /**
@@ -197,14 +128,14 @@ export class Settings extends Component {
  * @return {object}          props of component
  */
 const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    login: (password) => {
-      dispatch(authorizeActions.dbUpdatePassword(password))
-    },
-    homePage: () => {
-      dispatch(push("/"))
+    return {
+        login: (password) => {
+            dispatch(authorizeActions.dbUpdatePassword(password))
+        },
+        homePage: () => {
+            dispatch(push("/"))
+        }
     }
-  }
 }
 
 /**
@@ -214,9 +145,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
  * @return {object}          props of component
  */
 const mapStateToProps = (state, ownProps) => {
-  return {
+    return {
 
-  }
+    }
 }
 
 // - Connect component to redux store

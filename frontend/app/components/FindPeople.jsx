@@ -1,70 +1,22 @@
-// - Import react components
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
-import Paper from 'material-ui/Paper'
-
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 // - Import app components
-import UserBoxList from 'UserBoxList'
-
-
-// - Import API
-
+import UserBoxList from 'UserBoxList';
 
 // - Import actions
 import * as userActions from 'userActions'
 
-/**
-* Create component class
- */
 export class FindPeople extends Component {
-
-    static propTypes = {
-
-    }
-
-    /**
-     * Component constructor
-     * @param  {object} props is an object properties of component
-     */
-    constructor(props) {
-        super(props)
-
-        //Defaul state
-        this.state = {
-
-        }
-
-        // Binding functions to `this`
-
-    }
-
     componentWillMount() {
         this.props.loadPeople()
     }
+
     /**
      * Reneder component DOM
      * @return {react element} return the DOM which rendered by component
      */
     render() {
-
-        const styles = {
-            paper: {
-                height: 254,
-                width: 243,
-                margin: 10,
-                textAlign: 'center',
-                maxWidth: '257px'
-            },
-            followButton:{
-                position: 'absolute',
-                bottom: '8px',
-                left: 0,
-                right: 0
-            }
-        }
-
         return (
             <div>
                 {this.props.peopleInfo && Object.keys(this.props.peopleInfo).length !== 0 ?  (<div>

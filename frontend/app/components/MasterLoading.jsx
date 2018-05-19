@@ -10,9 +10,9 @@ const MasterLoading = ({activeLoading}) => (
     >
         <div style={{display: 'flex', justifyContent: 'space-around'}}>
             <div id="wave">
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
+                <span className="dot"></span>
+                <span className="dot"></span>
+                <span className="dot"></span>
             </div>
             <h1>Loading</h1>
         </div>
