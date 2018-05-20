@@ -11,24 +11,29 @@ branches:
   except:
     - development
 
-cache:
-  directories:
-    - node_modules
+# cache:
+#   directories:
+#     - node_modules
 
 install:
   - npm install -g firebase-tools
 
 script:
-  # Run React
-  - npm install
-  - npm test
+  # Run React Tests
   - cd dev/peter-test/react
+  - npm install
+  # Build and pushes to firebase
   - npm run build
   - mv build ../../../
   - cd ../../../
   - rm -rf public
   - mv build public
-  - firebase deploy --token "$FIREBASE_TOKEN" -P "kiwi-staging-44102"
+  # PRODUCTION SPECIFIC INSTRUCTIONS: DO NOT CHANGE THESE BELOW
+  - firebase deploy --token "$FIREBASE_TOKEN_PROD" -P "kiwi-prod"
+  - npm install
+  - npm test
+  # Runs esdoc command to document this build after Travis checks it
+  - ./node_modules/.bin/esdoc
 
 env:
   global:
