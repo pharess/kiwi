@@ -1,4 +1,3 @@
-// - Import react components
 import React, { Component } from 'react'
 import _ from 'lodash'
 import { Route, Switch, withRouter, Redirect, NavLink } from 'react-router-dom'
@@ -50,7 +49,6 @@ export class Home extends Component {
         this.sidebarStatus = this.sidebarStatus.bind(this)
         this.sidebarOverlay = this.sidebarOverlay.bind(this)
         this.handleCloseSidebar = this.handleCloseSidebar.bind(this)
-
     }
 
     /**
@@ -65,9 +63,7 @@ export class Home extends Component {
      * @param  {boolean} status if is true, the sidebar is on overlay status
      */
     sidebarOverlay = (status) => {
-        this.setState({
-            sidebarOverlay: status
-        })
+        this.setState({ sidebarOverlay: status });
     }
 
 
@@ -76,10 +72,7 @@ export class Home extends Component {
      * @param  {boolean} open  is a function callback to change sidebar status out of sidebar component
      */
     sidebar = (open) => {
-
-        this.setState({
-            sidebarOpen: open
-        })
+        this.setState({ sidebarOpen: open });
     }
 
 
@@ -88,9 +81,7 @@ export class Home extends Component {
      * @param  {boolean} status is true, if the sidebar is open
      */
     sidebarStatus = (status) => {
-        this.setState({
-            sidebarStatus: status
-        })
+        this.setState({ sidebarStatus: status });
     }
 
     /**
@@ -103,7 +94,7 @@ export class Home extends Component {
     render() {
         return (
             <div id="home">
-                <HomeHeader sidebar={this.state.sidebarOpen} sidebarStatus={this.state.sidebarStatus} />
+                <HomeHeader sidebar={this.state.sidebarOpen} sidebarStatus={this.state.sidebarStatus} uid={this.props.uid} />
                 <Sidebar overlay={this.sidebarOverlay} open={this.sidebar} status={this.sidebarStatus}>
                     <SidebarContent>
                         <Menu style={{ color: "rgb(117, 117, 117)", width: '210px' }}>
@@ -113,10 +104,9 @@ export class Home extends Component {
                             }
 
                             <NavLink to='/'><MenuItem primaryText="Home" style={{ color: "rgb(117, 117, 117)" }} leftIcon={<SvgHome />} /></NavLink>
-                            <NavLink to={`/${this.props.uid}`}><MenuItem primaryText="Profile" style={{ color: "rgb(117, 117, 117)" }} leftIcon={<SvgAccountCircle />} /></NavLink>
+                            {/* <NavLink to={`/${this.props.uid}`}><MenuItem primaryText="Profile" style={{ color: "rgb(117, 117, 117)" }} leftIcon={<SvgAccountCircle />} /></NavLink> */}
                             <NavLink to='/people'><MenuItem primaryText="People" style={{ color: "rgb(117, 117, 117)" }} leftIcon={<SvgPeople />} /></NavLink>
-                            <Divider />
-                            <NavLink to='/settings'><MenuItem primaryText="Settings" style={{ color: "rgb(117, 117, 117)" }} leftIcon={<SvgSettings />} /></NavLink>
+                            {/* <NavLink to='/settings'><MenuItem primaryText="Settings" style={{ color: "rgb(117, 117, 117)" }} leftIcon={<SvgSettings />} /></NavLink> */}
                         </Menu>
                     </SidebarContent>
 

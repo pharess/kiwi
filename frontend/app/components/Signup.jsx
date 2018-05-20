@@ -164,6 +164,7 @@ export class Signup extends Component {
                     />
 
                     <br />
+                    <br />
 
                     <div style={{display: 'flex', width: '100%', flexDirection: 'column'}}>
                         <div style={{display: 'flex', outline: 'none', cursor: 'pointer', alignItems: 'center', justifyContent: 'center', height: '50px', backgroundColor: 'white', color: 'black', marginRight: '31px'}} label="Return to Login screen" onClick={this.props.loginPage}>

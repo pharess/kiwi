@@ -193,7 +193,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
  * @param {object} state
  */
 const mapStateToProps = ({ authorize, global, user, post, comment, imageGallery, vote, notify, circle }) => {
-
     return {
         guest: authorize.guest,
         uid: authorize.uid,
