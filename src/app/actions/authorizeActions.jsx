@@ -18,13 +18,26 @@ import * as globalActions from 'globalActions'
  */
 export var dbLogin = (email, password) => {
   return (dispatch, getState) => {
-    dispatch(globalActions.showNotificationRequest())
 
-    return firebaseAuth().signInWithEmailAndPassword(email, password).then((result) => {
-    dispatch(globalActions.showNotificationSuccess())
-      dispatch(login(result.uid))
-      dispatch(push('/'))
-    }, (error) => dispatch(globalActions.showErrorMessage(error.code)))
+    // Encrypt password input to compare with that stored in db
+    var bcrypt = require('bcryptjs')
+    let ref = firebase.database().ref('/users');
+    ref.once('value', (snapshot) => {
+      // find info of user with proper email
+      for( let key in snapshot.val()) {
+        let info = snapshot.val()[key]['info']
+        if(email.localeCompare(info.email) === 0) {
+          password = bcrypt.compareSync(password, info.password) ? info.password : password;
+          break;
+        };
+      }
+      // Log in user if input matches credentials in db
+      return firebaseAuth().signInWithEmailAndPassword(email, password).then((result) => {
+      dispatch(globalActions.showNotificationSuccess())
+        dispatch(login(result.uid))
+        dispatch(push('/'))
+      }, (error) => dispatch(globalActions.showErrorMessage(error.code)))
+    });
   }
 }
 
