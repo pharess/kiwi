@@ -1,30 +1,30 @@
 // - Import react components
-import React, { Component } from 'react'
-import { NavLink } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
-import SvgDehaze from 'material-ui/svg-icons/image/dehaze'
-import { green700, grey400, blue500 } from 'material-ui/styles/colors'
-import { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle } from 'material-ui/Toolbar'
-import IconButton from 'material-ui/IconButton'
-import FlatButton from 'material-ui/FlatButton'
-import RaisedButton from 'material-ui/RaisedButton'
-import Popover, { PopoverAnimationVertical } from 'material-ui/Popover'
-import Menu from 'material-ui/Menu'
-import MenuItem from 'material-ui/MenuItem'
-import Paper from 'material-ui/Paper'
-import NotificationsIcon from 'material-ui/svg-icons/social/notifications'
-import EventListener, { withOptions } from 'react-event-listener'
+import React, { Component } from 'react';
+import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
+import SvgDehaze from 'material-ui/svg-icons/image/dehaze';
+import { green700, grey400, blue500 } from 'material-ui/styles/colors';
+import { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle } from 'material-ui/Toolbar';
+import IconButton from 'material-ui/IconButton';
+import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
+import Popover, { PopoverAnimationVertical } from 'material-ui/Popover';
+import Menu from 'material-ui/Menu';
+import MenuItem from 'material-ui/MenuItem';
+import Paper from 'material-ui/Paper';
+import NotificationsIcon from 'material-ui/svg-icons/social/notifications';
+import EventListener, { withOptions } from 'react-event-listener';
 
 
 // - Import components
-import UserAvatar from 'UserAvatar'
-import Notify from 'Notify'
+import UserAvatar from 'UserAvatar';
+import Notify from 'Notify';
 
 
 // - Import actions
-import * as globalActions from 'globalActions'
-import * as authorizeActions from 'authorizeActions'
+import * as globalActions from 'globalActions';
+import * as authorizeActions from 'authorizeActions';
 
 // - Create HomeHeader component class
 export class HomeHeader extends Component {
@@ -209,23 +209,15 @@ export class HomeHeader extends Component {
                     <ToolbarTitle style={{ color: "#fff", marginLeft: "15px" }} text="Oasis" />
                 </ToolbarGroup>
                 <ToolbarGroup>
-                    {/* Hello World! */}
                     <div>
                         <FlatButton label="Home" onClick={this.props.homePage} />
                     </div>
-                    {/* <menu>
-                        <NavLink to='/'><MenuItem primaryText="Home" style={{ color: "rgb(117, 117, 117)" }} leftIcon={<SvgHome />} /></NavLink>
-                    </menu> */}
                 </ToolbarGroup>
                 <ToolbarGroup>
                     <div>
                     <FlatButton label="People" onClick={this.props.people} />
                     </div>
                 </ToolbarGroup>
-
-                {/* <ToolbarGroup>
-                    <NavLink to='/people'><MenuItem primaryText="People" style={{ color: "rgb(117, 117, 117)" }} leftIcon={<SvgPeople />} /></NavLink>
-                </ToolbarGroup> */}
 
                 {/* Notification */}
                 <ToolbarGroup lastChild={true}>
@@ -278,13 +270,13 @@ export class HomeHeader extends Component {
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         logout: () => {
-            dispatch(authorizeActions.dbLogout())
+            dispatch(authorizeActions.dbLogout());
         },
         homePage: () => {
-            dispatch(push("/"))
+            dispatch(push("/"));
         },
         people: () => {
-            dispatch(push("/people"))
+            dispatch(push("/people"));
         }
     }
 }
