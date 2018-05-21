@@ -14,6 +14,8 @@ import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import Paper from 'material-ui/Paper';
 import NotificationsIcon from 'material-ui/svg-icons/social/notifications';
+import SvgHome from 'material-ui/svg-icons/action/home';
+import SvgPeople from 'material-ui/svg-icons/social/people';
 import EventListener, { withOptions } from 'react-event-listener';
 
 
@@ -208,14 +210,18 @@ export class HomeHeader extends Component {
                     </div>
                     <ToolbarTitle style={{ color: "#fff", marginLeft: "15px" }} text="Oasis" />
                 </ToolbarGroup>
-                <ToolbarGroup>
+                <ToolbarGroup style={{color: "#fff"}}>
                     <div>
-                        <FlatButton label="Home" onClick={this.props.homePage} />
+                        <FlatButton label="Home" onClick={this.props.homePage}>
+                            <SvgHome />
+                        </FlatButton>
                     </div>
                 </ToolbarGroup>
-                <ToolbarGroup>
+                <ToolbarGroup style={{color: "#fff"}}>
                     <div>
-                    <FlatButton label="People" onClick={this.props.people} />
+                        <FlatButton label="People" onClick={this.props.people}>
+                            <SvgPeople />
+                        </FlatButton>
                     </div>
                 </ToolbarGroup>
 
