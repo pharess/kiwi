@@ -20,7 +20,6 @@ install:
 
 script:
   # Run Regression Tests
-  - cd __tests__
   - npm run test:stagingRegression
   - npm run test:stagingUpdate
 
