@@ -2,10 +2,12 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { push } from 'react-router-redux'
 import SvgDehaze from 'material-ui/svg-icons/image/dehaze'
 import { green700, grey400, blue500 } from 'material-ui/styles/colors'
 import { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle } from 'material-ui/Toolbar'
 import IconButton from 'material-ui/IconButton'
+import FlatButton from 'material-ui/FlatButton'
 import RaisedButton from 'material-ui/RaisedButton'
 import Popover, { PopoverAnimationVertical } from 'material-ui/Popover'
 import Menu from 'material-ui/Menu'
@@ -167,7 +169,7 @@ export class HomeHeader extends Component {
     render() {
         var styles = {
             toolbarStyle: {
-                backgroundColor: "",
+                backgroundColor: "#5574F7",
                 transition: "all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms",
                 boxSizing: "border-box",
                 fontFamily: "Roboto, sans-serif",
@@ -187,7 +189,7 @@ export class HomeHeader extends Component {
 
         return (
 
-            <Toolbar style={styles.toolbarStyle} className="g__greenBox">
+            <Toolbar style={styles.toolbarStyle}>
                 <EventListener
                     target="window"
                     onResize={this.handleResize}
@@ -201,14 +203,29 @@ export class HomeHeader extends Component {
                     </IconButton>
 
                     {/* Header title */}
-                    <div style={{marginLeft: '15px'}}>
+                    <div style={{ marginLeft: '15px' }}>
                         <svg width="21" height="17" xmlns="http://www.w3.org/2000/svg"><path d="M5.97 11.151L1.017 8.117c-.308-.184-.292-.437.048-.57L19.547.16c.334-.132.72-.301.647.043l-3.42 16.618s.513.304.204.12l-6.272-3.034-2.797 2.417-1.94-5.173zm1.293-.878l1.145 3.64c.078.25.198.251.26-.02l.534-2.327 8.357-8.74c.384-.4.333-.457-.113-.125L7.263 10.273z" fill="#FFF" /></svg>
                     </div>
                     <ToolbarTitle style={{ color: "#fff", marginLeft: "15px" }} text="Oasis" />
                 </ToolbarGroup>
                 <ToolbarGroup>
-
+                    {/* Hello World! */}
+                    <div>
+                        <FlatButton label="Home" onClick={this.props.homePage} />
+                    </div>
+                    {/* <menu>
+                        <NavLink to='/'><MenuItem primaryText="Home" style={{ color: "rgb(117, 117, 117)" }} leftIcon={<SvgHome />} /></NavLink>
+                    </menu> */}
                 </ToolbarGroup>
+                <ToolbarGroup>
+                    <div>
+                    <FlatButton label="People" onClick={this.props.people} />
+                    </div>
+                </ToolbarGroup>
+
+                {/* <ToolbarGroup>
+                    <NavLink to='/people'><MenuItem primaryText="People" style={{ color: "rgb(117, 117, 117)" }} leftIcon={<SvgPeople />} /></NavLink>
+                </ToolbarGroup> */}
 
                 {/* Notification */}
                 <ToolbarGroup lastChild={true}>
@@ -260,7 +277,15 @@ export class HomeHeader extends Component {
 // - Map dispatch to props
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        logout: () => dispatch(authorizeActions.dbLogout())
+        logout: () => {
+            dispatch(authorizeActions.dbLogout())
+        },
+        homePage: () => {
+            dispatch(push("/"))
+        },
+        people: () => {
+            dispatch(push("/people"))
+        }
     }
 }
 

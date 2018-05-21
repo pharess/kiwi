@@ -105,8 +105,8 @@ export class Settings extends Component {
           <br />
           <br />
           <div className="settings__button-box" style={{display: 'flex', width: '100%', flexDirection: 'row'}}>
-            <div style={{display: 'flex', outline: 'none', cursor: 'pointer', alignItems: 'center', justifyContent: 'center', height: '50px', width: '49%', backgroundColor: '#9013FE', color: 'white', borderRadius: '0 0 0 10px', padding: '0 15px 0 15px'}} label="Home" onClick={this.props.homePage}>Home</div>
-            <div style={{display: 'flex', outline: 'none', cursor: 'pointer', alignItems: 'center', justifyContent: 'center', height: '50px', width: '50%', backgroundColor: '#9013FE', color: 'white', borderRadius: '0 0 10px 0', padding: '0 15px 0 15px'}} label="Change password" onClick={this.handleForm}>Change password</div>
+            <div style={{display: 'flex', outline: 'none', cursor: 'pointer', alignItems: 'center', justifyContent: 'center', height: '50px', width: '49%', backgroundColor: '#5574F7', color: 'white', borderRadius: '0 0 0 10px', padding: '0 15px 0 15px'}} label="Home" onClick={this.props.homePage}>Home</div>
+            <div style={{display: 'flex', outline: 'none', cursor: 'pointer', alignItems: 'center', justifyContent: 'center', height: '50px', width: '50%', backgroundColor: '#5574F7', color: 'white', borderRadius: '0 0 10px 0', padding: '0 15px 0 15px'}} label="Change password" onClick={this.handleForm}>Change password</div>
           </div>
         </div>
       </form>
