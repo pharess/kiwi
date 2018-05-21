@@ -210,17 +210,19 @@ export class HomeHeader extends Component {
                     </div>
                     <ToolbarTitle style={{ color: "#fff", marginLeft: "15px" }} text="Oasis" />
                 </ToolbarGroup>
-                <ToolbarGroup style={{color: "#fff"}}>
+                <ToolbarGroup>
                     <div>
-                        <FlatButton label="Home" onClick={this.props.homePage}>
-                            <SvgHome />
+                        <FlatButton onClick={this.props.homePage} style={{color: "#fff"}}>
+                            <SvgHome  style={{color: "#fff", position: "absolute", top: "4px", left: "0px"}}/>
+                            <div style={{display: "inline-block", textTransform: "uppercase", fontWeight: "500", fontSize: "14px", paddingLeft: "24px"}}>home</div>
                         </FlatButton>
                     </div>
                 </ToolbarGroup>
-                <ToolbarGroup style={{color: "#fff"}}>
+                <ToolbarGroup>
                     <div>
-                        <FlatButton label="People" onClick={this.props.people}>
-                            <SvgPeople />
+                        <FlatButton onClick={this.props.people} style={{color: "#fff"}}>
+                            <SvgPeople  style={{color: "#fff", position: "absolute", top: "4px", left: "0px"}}/>
+                            <div style={{display: "inline-block", textTransform: "uppercase", fontWeight: "500", fontSize: "14px", paddingLeft: "36px"}}>people</div>
                         </FlatButton>
                     </div>
                 </ToolbarGroup>
