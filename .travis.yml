@@ -19,19 +19,24 @@ install:
   - npm install -g firebase-tools
 
 script:
-  # Run React Tests
-  - cd dev/peter-test/react
-  - npm install
+  # Run Regression Tests
+  - cd __tests__
+  - npm run test:stagingRegression
+  - npm run test:stagingUpdate
+
+  # TODO Handle how to push app to firebase
   # Build and pushes to firebase
-  - npm run build
-  - mv build ../../../
-  - cd ../../../
-  - rm -rf public
-  - mv build public
+  #- npm run build
+  #- mv build ../../../
+  #- cd ../../../
+  #- rm -rf public
+  #- mv build public
   # PRODUCTION SPECIFIC INSTRUCTIONS: DO NOT CHANGE THESE BELOW
-  - firebase deploy --token "$FIREBASE_TOKEN_PROD" -P "kiwi-prod"
-  - npm install
-  - npm test
+  #- firebase deploy --token "$FIREBASE_TOKEN_PROD" -P "kiwi-prod"
+  #- npm install
+  #- npm test
+
+  - cd ../
   # Runs esdoc command to document this build after Travis checks it
   - ./node_modules/.bin/esdoc
 
