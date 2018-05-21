@@ -21,8 +21,8 @@ install:
 script:
   # Run Regression Tests
   - cd __tests__
-  - npm test:stagingRegression
-  - npm test:stagingUpdate
+  - npm run test:stagingRegression
+  - npm run test:stagingUpdate
 
   # TODO Handle how to push app to firebase
   # Build and pushes to firebase
