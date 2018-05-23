@@ -32,7 +32,7 @@ export class NotifyItem extends Component {
      * @return {react element} return the DOM which rendered by component
      */
     render() {
-        const { description, fullName, avatar, isSeen, id, goTo,closeNotify, notifierUserId, url, deleteNotiy } = this.props
+        const { description, fullName, avatar, isSeen, id, goTo,closeNotify, notifierUserId, url, deleteNotiy } = this.props;
 
         return (
             <div className='item' style={isSeen ? { opacity: 0.6 } : {}} key={id}>

@@ -109,9 +109,9 @@ export class UserBox extends Component {
         if (circles) {
             return Object.keys(circles).map((key, index) => {
                 if (key.trim() !== '-Followers') {
-                    const isBelong = userBelongCircles.indexOf(key) > -1
+                    const isBelong = userBelongCircles.indexOf(key) > -1;
 
-                    return <Checkbox
+                    return (<Checkbox
                         key={key}
                         style={{ padding: '10px' }}
                         label={circles[key].name}
@@ -123,7 +123,7 @@ export class UserBox extends Component {
                         }}
                         onCheck={(evt, checked) => this.handleFollowUser(checked, key)}
                         checked={isBelong}
-                    />
+                    />);
                 }
             });
         }

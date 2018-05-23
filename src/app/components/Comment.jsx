@@ -33,8 +33,8 @@ export class Comment extends Component {
     constructor(props) {
         super(props);
 
-        this.textareaRef = i => { this.inputText = i };
-        this.divCommentRef = i => { this.divComment = i };
+        this.textareaRef = (i) => { this.inputText = i };
+        this.divCommentRef = (i) => { this.divComment = i };
 
         this.state = {
             // Comment text
@@ -241,16 +241,17 @@ const mapDispatchToProps = (dispatch, ownProps) => {
  * @return {object}          props of component
  */
 const mapStateToProps = (state, ownProps) => {
-    const { uid } = state.authorize
-    const avatar = state.user.info && state.user.info[ownProps.comment.userId] ? state.user.info[ownProps.comment.userId].avatar || '' : ''
-    const fullName = state.user.info && state.user.info[ownProps.comment.userId] ? state.user.info[ownProps.comment.userId].fullName || '' : ''
+    const { uid } = state.authorize;
+    const avatar = state.user.info && state.user.info[ownProps.comment.userId] ? state.user.info[ownProps.comment.userId].avatar || '' : '';
+    const fullName = state.user.info && state.user.info[ownProps.comment.userId] ? state.user.info[ownProps.comment.userId].fullName || '' : '';
+
     return {
         uid: uid,
         isCommentOwner: (uid === ownProps.comment.userId),
         info: state.user.info,
         avatar,
         fullName
-    }
+    };
 }
 
 // - Connect component to redux store

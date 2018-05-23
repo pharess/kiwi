@@ -55,10 +55,10 @@ export class ImageGallery extends Component {
         const { resizedImage, fileName } = event.detail;
 
         FileAPI.uploadImage(resizedImage, fileName, (percent, status) => {
-            this.props.progressChange(percent, status)
+            this.props.progressChange(percent, status);
         }).then((result) => {
             /* Add image to image gallery */
-            this.props.saveImageGallery(result.downloadURL, result.metadata.fullPath)
+            this.props.saveImageGallery(result.downloadURL, result.metadata.fullPath);
         });
     }
 
