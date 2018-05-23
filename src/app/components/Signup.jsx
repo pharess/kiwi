@@ -1,4 +1,3 @@
-// - Import react components
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
@@ -12,7 +11,6 @@ import * as globalActions from 'globalActions';
 // - Import app API
 import StringAPI from 'StringAPI';
 
-// - Create Signup componet class
 export class Signup extends Component {
 
     /**
@@ -31,8 +29,8 @@ export class Signup extends Component {
             passwordInputError: '',
             confirmInput: '',
             confirmInputError: ''
-        }
-}
+        };
+    }
 
     /**
      * Handle data on input change
@@ -75,7 +73,7 @@ export class Signup extends Component {
         const { fullNameInput, emailInput, passwordInput, confirmInput } = this.state;
 
         // Validate full name
-        let fullNameCheck = fullNameInput.trim().toLowerCase()
+        const fullNameCheck = fullNameInput.trim().toLowerCase();
 
         if (fullNameCheck.length < 2) {
             this.setState({ fullNameInputError: 'Please enter a valid name.' });

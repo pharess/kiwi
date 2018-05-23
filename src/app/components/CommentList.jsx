@@ -1,107 +1,49 @@
-// - Import react components
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types'
-import { List, ListItem } from 'material-ui/List'
-
-
-
+import { List } from 'material-ui/List';
 
 // - Import app components
-import Comment from 'Comment'
-import * as PostAPI from 'PostAPI'
+import Comment from 'Comment';
+import * as PostAPI from 'PostAPI';
 
-// - Import actions
-
-
-
-
-/**
- * Create component class
- */
 export class CommentList extends Component {
 
-   static propTypes = {
     /**
-     * If it's true the post owner is the logged in user which this post be long to the comment
+     * Get comments' DOM
+     * @return {DOM} list of comments' DOM
      */
-    isPostOwner: PropTypes.bool,
-    /**
-     * If it's true the comment is disable to write
-     */
-    disableComments: PropTypes.bool,
-   }
+    commentList = () => {
+        const comments = this.props.comments;
 
-  /**
-   * Component constructor
-   * @param  {object} props is an object properties of component
-   */
-  constructor(props) {
-    super(props)
+        if (comments) {
+            let parsedComments = [];
 
-    /**
-     * Default state
-     */
-    this.state = {
+            Object.keys(comments).forEach((commentId) => {
+                parsedComments.push({
+                    id: commentId,
+                    ...comments[commentId]
+                });
+            });
 
+            const sortedComments = PostAPI.sortObjectsDate(parsedComments);
+
+            return sortedComments.map((comment, index, array) => {
+                return <Comment key={comment.id} comment={comment} isPostOwner={this.props.isPostOwner} disableComments={this.props.disableComments} />
+            });
+        }
     }
 
-    // Binding functions to `this`
-
-  }
-
-
-
-  /**
-   * Get comments' DOM
-   * @return {DOM} list of comments' DOM
-   */
-  commentList = () => {
-    var comments = this.props.comments
-    if (comments) {
-
-
-      var parsedComments = [];
-      Object.keys(comments).forEach((commentId) => {
-        parsedComments.push({
-          id: commentId,
-          ...comments[commentId]
-        });
-      });
-      let sortedComments = PostAPI.sortObjectsDate(parsedComments)
-      
-      return sortedComments.map((comment, index, array) => {
-
-        return <Comment key={comment.id} comment={comment} isPostOwner={this.props.isPostOwner} disableComments={this.props.disableComments}/>
-
-      })
-
+    /**
+     * Reneder component DOM
+     * @return {react element} return the DOM which rendered by component
+     */
+    render() {
+        return (
+            <List style={{width: "100%", maxHeight: '450px', overflowY: 'auto'}}>
+                {this.commentList()}
+            </List>
+        );
     }
-  }
-
-  /**
-   * Reneder component DOM
-   * @return {react element} return the DOM which rendered by component
-   */
-  render() {
-
-    const styles = {
-      list: {
-        width: "100%",
-        maxHeight: 450,
-        overflowY: 'auto'
-      }
-    }
-
-    return (
-
-
-      <List style={styles.list}>
-
-        {this.commentList()}
-      </List>
-    )
-  }
 }
 
 /**
@@ -111,10 +53,10 @@ export class CommentList extends Component {
  * @return {object}          props of component
  */
 const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
+    return {
 
 
-  }
+    }
 }
 
 /**
@@ -124,9 +66,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
  * @return {object}          props of component
  */
 const mapStateToProps = (state) => {
-  return {
+    return {
 
-  }
+    }
 }
 
 // - Connect component to redux store

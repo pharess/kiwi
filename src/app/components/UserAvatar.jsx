@@ -11,7 +11,7 @@ export class UserAvatar extends Component {
      * @return {react element} return the DOM which rendered by component
      */
     render() {
-        let { fileName, fullName, style, size, onTouchTap } = this.props
+        const { fileName, fullName, style, size, onTouchTap } = this.props
 
         return (
             <div style={{ display: 'inherit' }}>

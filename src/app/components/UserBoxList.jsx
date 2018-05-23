@@ -2,17 +2,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 // - Import app components
-import UserBox from 'UserBox'
+import UserBox from 'UserBox';
 
 export class UserBoxList extends Component {
     userList = () => {
-        let { users, uid } = this.props
+        const { users, uid } = this.props;
 
         if (users) {
             return Object.keys(users).map((key, index) => {
                 if (uid !== key)
                     return <UserBox key={key} userId={key} user={users[key]} />
-            })
+            });
         }
     }
 
@@ -25,7 +25,7 @@ export class UserBoxList extends Component {
             <div className='grid grid__1of4 grid__space-around'>
                 {this.userList()}
             </div>
-        )
+        );
     }
 }
 

@@ -1,104 +1,74 @@
-// - Import react components
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
-import {push} from 'react-router-redux'
-import Paper from 'material-ui/Paper'
-import FlatButton from 'material-ui/FlatButton'
-import RaisedButton from 'material-ui/RaisedButton';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
+import Paper from 'material-ui/Paper';
+import FlatButton from 'material-ui/FlatButton';
 import Popover, { PopoverAnimationVertical } from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
-import MenuItem from 'material-ui/MenuItem'
-import Checkbox from 'material-ui/Checkbox'
-import TextField from 'material-ui/TextField'
+import Checkbox from 'material-ui/Checkbox';
+import TextField from 'material-ui/TextField';
 
 // - Import app components
-import UserAvatar from 'UserAvatar'
-
+import UserAvatar from 'UserAvatar';
 
 // - Import API
-import CircleAPI from 'CircleAPI'
-
+import CircleAPI from 'CircleAPI';
 
 // - Import actions
-import * as circleActions from 'circleActions'
+import * as circleActions from 'circleActions';
 
-/**
-* Create component class
- */
 export class UserBox extends Component {
-
-    static propTypes = {
-        /**
-         * User identifier
-         */
-        userId: PropTypes.string,
-        /**
-         * User information
-         */
-        user:PropTypes.object
-
-    }
 
     /**
      * Component constructor
      * @param  {object} props is an object properties of component
      */
     constructor(props) {
-        super(props)
+        super(props);
 
-        //Defaul state
         this.state = {
-            /**
-             * It will be true if user follow popover is open
-             */
+            // It will be true if user follow popover is open
             open: false,
-            /**
-             * The value of circle input
-             */
+
+            // The value of circle input
             circleName: '',
-            /**
-             * It will be true if the text field for adding group is empty
-             */
+
+            // It will be true if the text field for adding group is empty
             disabledAddCircle: true
-        }
-
-        // Binding functions to `this`
-        this.handleChangeName = this.handleChangeName.bind(this)
-        this.handleCreateCricle = this.handleCreateCricle.bind(this)
-        this.handleFollowUser = this.handleFollowUser.bind(this)
-
+        };
     }
 
-    handleFollowUser = (checked,cid) => {
-        const {userId,user} = this.props
-        const {avatar,fullName} = user
+    handleFollowUser = (checked, cid) => {
+        const { userId, user } = this.props;
+        const { avatar, fullName } = user;
+
         if (checked) {
-            this.props.addFollowingUser(cid,{avatar,userId,fullName})
+            this.props.addFollowingUser(cid, { avatar, userId, fullName });
         } else {
-            this.props.deleteFollowingUser(cid,userId)
+            this.props.deleteFollowingUser(cid, userId);
         }
     }
 
     /**
      * Handle create circle
      * 
-     * 
      * @memberof UserBox
      */
     handleCreateCricle = () => {
-        const {circleName} = this.state
-        if(circleName && circleName.trim() !== '' ){
-        this.props.createCircle(this.state.circleName)
-        this.setState({
-            circleName: '',
-            disabledAddCircle: true
-        })}
+        const { circleName } = this.state;
+
+        if (circleName && circleName.trim() !== '') {
+            this.props.createCircle(circleName);
+
+            this.setState({
+                circleName: '',
+                disabledAddCircle: true
+            });
+        }
     }
 
     /**
      * Handle change group name input to the state
-     * 
      * 
      * @memberof UserBox
      */
@@ -106,13 +76,11 @@ export class UserBox extends Component {
         this.setState({
             circleName: evt.target.value,
             disabledAddCircle: (evt.target.value === undefined || evt.target.value.trim() === '')
-
-        })
+        });
     }
 
     /**
      * Handle touch tab on follow popover
-     * 
      * 
      * @memberof UserBox
      */
@@ -123,44 +91,41 @@ export class UserBox extends Component {
         this.setState({
             open: true,
             anchorEl: evt.currentTarget,
-        })
+        });
     }
 
     /**
      * Handle close follow popover
      * 
-     * 
      * @memberof UserBox
      */
     handleRequestClose = () => {
-        this.setState({
-            open: false,
-        })
+        this.setState({ open: false });
     }
 
     circleList = () => {
-        let { circles, userId, userBelongCircles } = this.props
+        const { circles, _, userBelongCircles } = this.props;
 
         if (circles) {
-        
             return Object.keys(circles).map((key, index) => {
-                if(key.trim() !== '-Followers'){
-               let isBelong = userBelongCircles.indexOf(key) > -1 
-          
-                return <Checkbox
-                    key={key}
-                    style={{ padding: '10px' }}
-                    label={circles[key].name}
-                    labelStyle={{
-                        overflow: 'hidden',
-                        textOverflow: 'ellipsis',
-                        whiteSpace: 'nowrap',
-                        width: '100%'
-                    }}
-                    onCheck={(evt,checked) => this.handleFollowUser(checked,key)}
-                    checked={isBelong}
-                />}
-            })
+                if (key.trim() !== '-Followers') {
+                    const isBelong = userBelongCircles.indexOf(key) > -1
+
+                    return <Checkbox
+                        key={key}
+                        style={{ padding: '10px' }}
+                        label={circles[key].name}
+                        labelStyle={{
+                            overflow: 'hidden',
+                            textOverflow: 'ellipsis',
+                            whiteSpace: 'nowrap',
+                            width: '100%'
+                        }}
+                        onCheck={(evt, checked) => this.handleFollowUser(checked, key)}
+                        checked={isBelong}
+                    />
+                }
+            });
         }
     }
 
@@ -169,7 +134,6 @@ export class UserBox extends Component {
      * @return {react element} return the DOM which rendered by component
      */
     render() {
-
         const styles = {
             paper: {
                 height: 254,
@@ -184,7 +148,7 @@ export class UserBox extends Component {
                 left: 0,
                 right: 0
             }
-        }
+        };
 
         return (
             <Paper style={styles.paper} zDepth={1} className='grid-cell'>
@@ -198,25 +162,25 @@ export class UserBox extends Component {
                     padding: '30px'
 
                 }}>
-                    <div onClick={() => this.props.goTo(`/${this.props.userId}`)} style={{cursor:'pointer'}}>
+                    <div onClick={() => this.props.goTo(`/${this.props.userId}`)} style={{ cursor: 'pointer' }}>
                         <UserAvatar
                             fullName={this.props.fullName}
                             fileName={this.props.avatar}
                             size={90}
                         />
                     </div>
-                    <div onClick={() => this.props.goTo(`/${this.props.userId}`)} className='people__name' style={{cursor:'pointer'}}>
+                    <div onClick={() => this.props.goTo(`/${this.props.userId}`)} className='people__name' style={{ cursor: 'pointer' }}>
                         <div>
                             {this.props.user.fullName}
-                            </div>
+                        </div>
                     </div>
                     <div style={styles.followButton}>
-                        <FlatButton 
-                        label={(this.props.belongCirclesCount && this.props.belongCirclesCount < 1) ? 'Follow' 
-                        : (this.props.belongCirclesCount > 1 ? `${this.props.belongCirclesCount} Circles` : ((this.props.firstBelongCircle) ? this.props.firstBelongCircle.name : 'Follow'))} 
-                        primary={true} 
-                        onTouchTap={this.handleTouchTap}
-                         />
+                        <FlatButton
+                            label={(this.props.belongCirclesCount && this.props.belongCirclesCount < 1) ? 'Follow'
+                                : (this.props.belongCirclesCount > 1 ? `${this.props.belongCirclesCount} Circles` : ((this.props.firstBelongCircle) ? this.props.firstBelongCircle.name : 'Follow'))}
+                            primary={true}
+                            onTouchTap={this.handleTouchTap}
+                        />
                     </div>
                 </div>
                 <Popover
@@ -249,7 +213,7 @@ export class UserBox extends Component {
                     </Menu>
                 </Popover>
             </Paper>
-        )
+        );
     }
 }
 
@@ -263,9 +227,9 @@ export class UserBox extends Component {
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         createCircle: (name) => dispatch(circleActions.dbAddCircle(name)),
-        addFollowingUser: (cid,user) => dispatch(circleActions.dbAddFollowingUser(cid,user)),
-        deleteFollowingUser: (cid,followingId) => dispatch(circleActions.dbDeleteFollowingUser(cid,followingId)),
-        goTo: (url)=> dispatch(push(url))
+        addFollowingUser: (cid, user) => dispatch(circleActions.dbAddFollowingUser(cid, user)),
+        deleteFollowingUser: (cid, followingId) => dispatch(circleActions.dbDeleteFollowingUser(cid, followingId)),
+        goTo: (url) => dispatch(push(url))
 
     }
 }
@@ -278,8 +242,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
  */
 const mapStateToProps = (state, ownProps) => {
     const { uid } = state.authorize
-    const circles =  state.circle ? (state.circle.userCircles[uid]|| {}) : {}
-    const userBelongCircles = CircleAPI.getUserBelongCircles(circles,ownProps.userId)
+    const circles = state.circle ? (state.circle.userCircles[uid] || {}) : {}
+    const userBelongCircles = CircleAPI.getUserBelongCircles(circles, ownProps.userId)
 
     return {
         circles: circles,

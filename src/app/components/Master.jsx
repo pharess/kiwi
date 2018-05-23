@@ -1,9 +1,7 @@
-// - Import react components
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch, NavLink, withRouter, Redirect } from 'react-router-dom';
 import { firebaseAuth, firebaseRef } from 'app/firebase/';
-import { push } from 'react-router-redux';
 import Snackbar from 'material-ui/Snackbar';
 import LinearProgress from 'material-ui/LinearProgress';
 
@@ -29,8 +27,6 @@ import * as globalActions from 'globalActions';
 import * as circleActions from 'circleActions';
 import * as notifyActions from 'notifyActions';
 
-
-// - Create Master component class
 export class Master extends Component {
 
     static isPrivate = true;
@@ -38,20 +34,17 @@ export class Master extends Component {
     // Constructor
     constructor(props) {
         super(props);
+
         this.state = {
             loading: true,
             authed: false,
             dataLoaded: false
         };
-
-        // Binding functions to `this`
-        this.handleLoading = this.handleLoading.bind(this);
-        this.handleMessage = this.handleMessage.bind(this);
     }
 
     // Handle click on message
     handleMessage = (evt) => {
-        this.props.closeMessage()
+        this.props.closeMessage();
     }
 
     // Handle loading
@@ -59,32 +52,32 @@ export class Master extends Component {
         this.setState({
             loading: status,
             authed: false
-        })
+        });
     }
 
     componentWillMount() {
         firebaseAuth().onAuthStateChanged((user) => {
             if (user) {
-                this.props.login(user)
-                this.setState({
-                    loading: false
-                })
+                this.props.login(user);
+                this.setState({ loading: false });
 
                 if (!this.props.global.defaultLoadDataStatus) {
-                    this.props.clearData()
-                    this.props.loadData()
-                    this.props.defaultDataEnable()
+                    this.props.clearData();
+                    this.props.loadData();
+                    this.props.defaultDataEnable();
                 }
-            } else {
-                this.props.logout()
-                this.setState({
-                    loading: false
-                })
+            } 
+            
+            else {
+                this.props.logout();
+                this.setState({ loading: false });
+
                 if (this.props.global.defaultLoadDataStatus) {
-                    this.props.defaultDataDisable()
-                    this.props.clearData()
+                    this.props.defaultDataDisable();
+                    this.props.clearData();
                 }
-                this.props.loadDataGuest()
+
+                this.props.loadDataGuest();
             }
         })
     }
@@ -97,12 +90,10 @@ export class Master extends Component {
      * @memberof Master
      */
     render() {
-
-        const { progress, global } = this.props
+        const { progress, global } = this.props;
 
         return (
             <div id="master">
-
                 <div className='master__progress' style={{ display: (progress.visible ? 'block' : 'none') }}>
                     <LinearProgress mode="determinate" value={progress.percent} />
                 </div>
@@ -136,8 +127,6 @@ export class Master extends Component {
                     style={{ left: '1%', transform: 'none' }}
                 />
             </div>
-
-
         )
     }
 }
@@ -185,7 +174,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             dispatch(globalActions.loadDataGuest())
         }
     }
-
 }
 
 /**

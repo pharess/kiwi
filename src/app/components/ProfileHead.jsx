@@ -1,124 +1,63 @@
-// - Import react components
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
-import { grey400, darkBlack, lightBlack } from 'material-ui/styles/colors'
-import IconButton from 'material-ui/IconButton'
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert'
-import IconMenu from 'material-ui/IconMenu'
-import MenuItem from 'material-ui/MenuItem'
-import FlatButton from 'material-ui/FlatButton'
-import RaisedButton from 'material-ui/RaisedButton'
-import EventListener, { withOptions } from 'react-event-listener'
-import { Parallax, Background } from 'react-parallax'
-
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { grey400 } from 'material-ui/styles/colors';
+import IconButton from 'material-ui/IconButton';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import IconMenu from 'material-ui/IconMenu';
+import MenuItem from 'material-ui/MenuItem';
+import RaisedButton from 'material-ui/RaisedButton';
+import EventListener, { withOptions } from 'react-event-listener';
+import { Parallax, Background } from 'react-parallax';
 
 // - Import app components
-import ImgCover from 'ImgCover'
-import EditProfile from 'EditProfile'
-import UserAvatar from 'UserAvatar'
-
-
-// - Import API
-
+import ImgCover from 'ImgCover';
+import EditProfile from 'EditProfile';
+import UserAvatar from 'UserAvatar';
 
 // - Import actions
-import * as globalActions from 'globalActions'
-import * as userActions from 'userActions'
+import * as globalActions from 'globalActions';
+import * as userActions from 'userActions';
 
-/**
-* Create component class
- */
 export class ProfileHead extends Component {
-
-    static propTypes = {
-
-        /**
-         * User avatar address
-         */
-        avatar: PropTypes.string,
-        /**
-         * User avatar address
-         */
-        banner: PropTypes.string,
-        /**
-         * User full name
-         */
-        fullName: PropTypes.string.isRequired,
-        /**
-         * The number of followers
-         */
-        followerCount: PropTypes.number,
-        /**
-         * User identifier
-         */
-        userId: PropTypes.string,
-        /**
-         * If the user profile identifier of param is equal to the user authed identifier 
-         */
-        isAuthedUser: PropTypes.bool
-
-
-
-    }
 
     /**
      * Component constructor
      * @param  {object} props is an object properties of component
      */
     constructor(props) {
-        super(props)
+        super(props);
 
-        /**
-         * Defaul state
-         */
         this.state = {
-            /**
-             * If it's true , the window is in small size
-             */
-            isSmall: false,
-
-
-        }
-
-        // Binding functions to `this`
-
+            // If it's true , the window is in small size
+            isSmall: false
+        };
     }
+
     /**
       * Handle resize event for window to change sidebar status
       * @param  {event} evt is the event is passed by winodw resize event
       */
     handleResize = (evt) => {
-
-        // Set initial state
-        var width = window.innerWidth
+        const width = window.innerWidth;
 
         if (width > 900) {
-            this.setState({
-                isSmall: false
-            })
-
+            this.setState({ isSmall: false });
         }
+
         else {
-            this.setState({
-                isSmall: true
-            })
+            this.setState({ isSmall: true });
         }
     }
-
-
 
     componentDidMount = () => {
-        this.handleResize()
+        this.handleResize();
     }
-
 
     /**
      * Reneder component DOM
      * @return {react element} return the DOM which rendered by component
      */
     render() {
-
         const styles = {
             avatar: {
                 border: '2px solid rgb(255, 255, 255)'
@@ -127,43 +66,27 @@ export class ProfileHead extends Component {
                 fill: 'rgb(255, 255, 255)',
                 height: '24px',
                 width: '24px',
-
             },
             iconButtonSmall: {
                 fill: 'rgb(0, 0, 0)',
                 height: '24px',
                 width: '24px',
             },
-
             editButton: {
-
                 marginLeft: '20px'
-
             },
             editButtonSmall: {
-
                 marginLeft: '20px',
                 color: 'white',
                 fill: 'blue'
-
-            },
-            aboutButton: {
-                color: 'white'
-            },
-            aboutButtonSmall: {
-                color: 'black'
             }
-        }
-
+        };
 
         const iconButtonElement = (
-            <IconButton style={this.state.isSmall ? styles.iconButtonSmall : styles.iconButton} iconStyle={this.state.isSmall ? styles.iconButtonSmall : styles.iconButton}
-                touch={true}
-            >
+            <IconButton style={this.state.isSmall ? styles.iconButtonSmall : styles.iconButton} iconStyle={this.state.isSmall ? styles.iconButtonSmall : styles.iconButton} touch={true}>
                 <MoreVertIcon color={grey400} viewBox='10 0 24 24' />
             </IconButton>
-        )
-
+        );
 
         const RightIconMenu = () => (
             <IconMenu iconButtonElement={iconButtonElement}>
@@ -171,13 +94,9 @@ export class ProfileHead extends Component {
                 <MenuItem style={{ fontSize: "14px" }}>Edit</MenuItem>
                 <MenuItem style={{ fontSize: "14px" }}>Delete</MenuItem>
             </IconMenu>
-        )
-
-
-        const {isAuthedUser} = this.props
+        );
 
         return (
-
             <div>
                 <Parallax strength={500} className="profile__parallax" bgStyle={{ position: 'relative' }}>
                     <Background>
@@ -200,14 +119,14 @@ export class ProfileHead extends Component {
                             </div>
                             {/*<div className='followers'>
                                 {this.props.followerCount} Followers
-                </div>*/}
+                            </div>*/}
                         </div>
                     </div>
                     <div className='right'>
-                        {isAuthedUser ? (<div style={this.state.isSmall ? styles.editButtonSmall : styles.editButton}><RaisedButton label="EDIT PROFILE" onClick={this.props.openEditor} /></div>) : ''}
+                        {this.props.isAuthedUser ? (<div style={this.state.isSmall ? styles.editButtonSmall : styles.editButton}><RaisedButton label="EDIT PROFILE" onClick={this.props.openEditor} /></div>) : ''}
                     </div>
                 </div>
-                {isAuthedUser ? (<EditProfile
+                {this.props.isAuthedUser ? (<EditProfile
                     onRequestClose={this.handleCloseEditor}
                     avatar={this.props.avatar}
                     banner={this.props.banner}
@@ -217,7 +136,6 @@ export class ProfileHead extends Component {
         )
     }
 }
-
 
 /**
  * Map dispatch to props

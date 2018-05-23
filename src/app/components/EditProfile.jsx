@@ -1,200 +1,122 @@
-
-
-// - Import react components
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import PropTypes from 'prop-types'
-import { grey400, darkBlack, lightBlack } from 'material-ui/styles/colors'
-import IconButton from 'material-ui/IconButton'
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert'
-import SvgCamera from 'material-ui/svg-icons/image/photo-camera'
-import IconMenu from 'material-ui/IconMenu'
-import MenuItem from 'material-ui/MenuItem'
-import FlatButton from 'material-ui/FlatButton'
-import RaisedButton from 'material-ui/RaisedButton'
-import EventListener, { withOptions } from 'react-event-listener'
-import Dialog from 'material-ui/Dialog'
-import Divider from 'material-ui/Divider'
-import Paper from 'material-ui/Paper'
-import TextField from 'material-ui/TextField'
-
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { grey400 } from 'material-ui/styles/colors';
+import IconButton from 'material-ui/IconButton';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import SvgCamera from 'material-ui/svg-icons/image/photo-camera';
+import IconMenu from 'material-ui/IconMenu';
+import MenuItem from 'material-ui/MenuItem';
+import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
+import EventListener, { withOptions } from 'react-event-listener';
+import Dialog from 'material-ui/Dialog';
+import Paper from 'material-ui/Paper';
+import TextField from 'material-ui/TextField';
 
 // - Import app components
-import ImgCover from 'ImgCover'
-import DialogTitle from 'DialogTitle'
-import ImageGallery from 'ImageGallery'
-import FileAPI from 'FileAPI'
-import UserAvatar from 'UserAvatar'
-
-
-
-
-// - Import API
-
+import ImgCover from 'ImgCover';
+import DialogTitle from 'DialogTitle';
+import ImageGallery from 'ImageGallery';
+import FileAPI from 'FileAPI';
+import UserAvatar from 'UserAvatar';
 
 // - Import actions
-import * as userActions from 'userActions'
-import * as globalActions from 'globalActions'
-import * as imageGalleryActions from 'imageGalleryActions'
+import * as userActions from 'userActions';
+import * as globalActions from 'globalActions';
+import * as imageGalleryActions from 'imageGalleryActions';
 
-/**
-* Create component class
- */
 export class EditProfile extends Component {
-
-    static propTypes = {
-
-        /**
-         * User avatar address
-         */
-        avatar: PropTypes.string,
-        /**
-         * User avatar address
-         */
-        banner: PropTypes.string,
-        /**
-         * User full name
-         */
-        fullName: PropTypes.string.isRequired
-
-
-
-    }
 
     /**
      * Component constructor
      * @param  {object} props is an object properties of component
      */
     constructor(props) {
-        super(props)
-        //Defaul state
+        super(props);
+
         this.state = {
-            /**
-             * If it's true the winow is in small size
-             */
+            // If it's true the winow is in small size
             isSmall: false,
-            /**
-             * User tag line input value
-             */
+
+            // User tag line input value
             tagLineInput: props.info.tagLine || '',
-            /**
-             * User full name input value
-             */
+            
+            // User full name input value
             fullNameInput: props.info.fullName || '',
-            /**
-             * Error message of full name input
-             */
+            
+            // Error message of full name input
             fullNameInputError: '',
-            /**
-             * User banner address
-             */
+            
+            // User banner address
             banner: this.props.banner || 'https://firebasestorage.googleapis.com/v0/b/open-social-33d92.appspot.com/o/images%2F751145a1-9488-46fd-a97e-04018665a6d3.JPG?alt=media&token=1a1d5e21-5101-450e-9054-ea4a20e06c57',
-            /**
-             * User avatar address
-             */
+            
+            // User avatar address
             avatar: this.props.avatar || '',
-            /**
-             * It's true if the image galley for banner is open
-             */
+            
+            // It's true if the image galley for banner is open
             openBanner: false,
-            /**
-             * It's true if the image gallery for avatar is open
-             */
+
+            // It's true if the image gallery for avatar is open
             openAvatar: false
-
-        }
-
-        // Binding functions to `this`
-        this.handleChangeDate = this.handleChangeDate.bind(this)
-        this.handleUpdate = this.handleUpdate.bind(this)
-        this.handleRequestSetAvatar = this.handleRequestSetAvatar.bind(this)
-        this.handleRequestSetBanner = this.handleRequestSetBanner.bind(this)
-
+        };
     }
 
-    /**
-    * Close image gallery of banner
-    */
+    // Close image gallery of banner
     handleCloseBannerGallery = () => {
-        this.setState({
-            openBanner: false
-        })
+        this.setState({ openBanner: false });
     }
 
-    /**
-    * Open image gallery of banner
-    */
+    // Open image gallery of banner
     handleOpenBannerGallery = () => {
-        this.setState({
-            openBanner: true
-        })
+        this.setState({ openBanner: true });
     }
 
-    /**
-     * Close image gallery of avatar
-     */
+    // Close image gallery of avatar
     handleCloseAvatarGallery = () => {
-        this.setState({
-            openAvatar: false
-        })
+        this.setState({ openAvatar: false });
     }
 
-    /**
-     * Open image gallery of avatar
-     */
+    // Open image gallery of avatar
     handleOpenAvatarGallery = () => {
-        this.setState({
-            openAvatar: true
-        })
+        this.setState({ openAvatar: true });
     }
 
-
-    /**
-    * Set banner image url
-    */
+    // Set banner image url
     handleRequestSetBanner = (url) => {
-        console.log('==========Banner==================');
-        console.log(url);
-        console.log('====================================');
-        this.setState({
-            banner: url
-        })
+        this.setState({ banner: url });
     }
 
-    /**
-    * Set avatar image url
-    */
+    // Set avatar image url
     handleRequestSetAvatar = (fileName) => {
-        this.setState({
-            avatar: fileName
-        })
+        this.setState({ avatar: fileName });
+    }
+
+    // Handle change date
+    handleChangeDate = (evt, date) => {
+        this.setState({ birthdayInput: date });
     }
 
     /**
      * Update profile on the server
      * 
-     * 
      * @memberof EditProfile
      */
     handleUpdate = () => {
-            const {fullNameInput, tagLineInput, avatar, banner} = this.state
+        const {fullNameInput, tagLineInput, avatar, banner} = this.state;
         
         if (this.state.fullNameInput.trim() === '') {
-            this.setState({
-                fullNameInputError: 'This field is required'
-            })
+            this.setState({ fullNameInputError: 'This field is required' });
         }
+
         else {
-            this.setState({
-                fullNameInputError: ''
-            })
+            this.setState({ fullNameInputError: '' });
 
             this.props.update({
                 fullName: fullNameInput,
                 tagLine: tagLineInput,
                 avatar: avatar,
                 banner: banner
-            })
+            });
         }
     }
 
@@ -203,20 +125,10 @@ export class EditProfile extends Component {
      * @param  {event} evt is an event of inputs of element on change
      */
     handleInputChange = (evt) => {
-        const target = evt.target
-        const value = target.type === 'checkbox' ? target.checked : target.value
-        const name = target.name
-        this.setState({
-            [name]: value
-        })
-    }
-    /**
-     * Handle change date
-     */
-    handleChangeDate = (evt, date) => {
-        this.setState({
-            birthdayInput: date,
-        })
+        const target = evt.target;
+        const value = target.type === 'checkbox' ? target.checked : target.value;
+
+        this.setState({ [target.name]: value });
     }
 
     /**
@@ -224,26 +136,20 @@ export class EditProfile extends Component {
       * @param  {event} evt is the event is passed by winodw resize event
       */
     handleResize = (evt) => {
-
-        // Set initial state
-        var width = window.innerWidth
+        const width = window.innerWidth;
 
         if (width > 900) {
-            this.setState({
-                isSmall: false
-            })
-
+            this.setState({ isSmall: false });
         }
+
         else {
-            this.setState({
-                isSmall: true
-            })
+            this.setState({ isSmall: true });
         }
     }
 
 
     componentDidMount = () => {
-        this.handleResize()
+        this.handleResize();
     }
 
 
@@ -291,18 +197,13 @@ export class EditProfile extends Component {
                 maxWidth: '530px',
                 borderRadius: "4px"
             }
-
-        }
-
+        };
 
         const iconButtonElement = (
-            <IconButton style={this.state.isSmall ? styles.iconButtonSmall : styles.iconButton} iconStyle={this.state.isSmall ? styles.iconButtonSmall : styles.iconButton}
-                touch={true}
-            >
+            <IconButton style={this.state.isSmall ? styles.iconButtonSmall : styles.iconButton} iconStyle={this.state.isSmall ? styles.iconButtonSmall : styles.iconButton} touch={true}>
                 <MoreVertIcon color={grey400} viewBox='10 0 24 24' />
             </IconButton>
-        )
-
+        );
 
         const RightIconMenu = () => (
             <IconMenu iconButtonElement={iconButtonElement}>
@@ -310,12 +211,9 @@ export class EditProfile extends Component {
                 <MenuItem style={{ fontSize: "14px" }}>Edit</MenuItem>
                 <MenuItem style={{ fontSize: "14px" }}>Delete</MenuItem>
             </IconMenu>
-        )
-
-
+        );
 
         return (
-
             <div>
                 {/* Edit profile dialog */}
                 <Dialog
@@ -336,6 +234,7 @@ export class EditProfile extends Component {
                             <SvgCamera style={{ fill: 'rgba(255, 255, 255, 0.88)', transform: 'translate(6px, 6px)' }} />
                         </div>
                     </div>
+
                     <div className='profile__edit'>
                         <EventListener
                             target="window"
@@ -346,7 +245,6 @@ export class EditProfile extends Component {
                                 {/* Avatar */}
                                 <div className='g__circle-black' onClick={this.handleOpenAvatarGallery} style={{ position: 'absolute', left: '50%', display: 'inline-block', top: '52px', margin: '-18px' }}>
                                     <SvgCamera style={{ fill: 'rgba(255, 255, 255, 0.88)', transform: 'translate(6px, 6px)' }} />
-
                                 </div>
                                 <UserAvatar fullName={(this.props.info ? this.props.info.fullName : '')} fileName={this.state.avatar} size={90} style={styles.avatar} />
                             </div>
@@ -354,11 +252,8 @@ export class EditProfile extends Component {
                                 <div className='fullName'>
                                     {this.props.fullName}
                                 </div>
-
-
                             </div>
                         </div>
-
                     </div>
 
                     {/* Edit user information box*/}
@@ -389,8 +284,6 @@ export class EditProfile extends Component {
                         </div>
                     </Paper>
                     <div style={{ height: '16px' }}></div>
-
-
                 </Dialog>
 
                 {/* Image gallery for banner*/}
@@ -416,11 +309,9 @@ export class EditProfile extends Component {
                     onRequestClose={this.handleCloseAvatarGallery}
                     overlayStyle={{ background: "rgba(0,0,0,0.12)" }}
                     autoDetectWindowHeight={false}
-
                 >
                     <ImageGallery set={this.handleRequestSetAvatar} close={this.handleCloseAvatarGallery} />
                 </Dialog>
-
             </div>
         )
     }

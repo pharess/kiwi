@@ -5,11 +5,11 @@ import { connect } from 'react-redux';
 import UserBoxList from 'UserBoxList';
 
 // - Import actions
-import * as userActions from 'userActions'
+import * as userActions from 'userActions';
 
 export class FindPeople extends Component {
     componentWillMount() {
-        this.props.loadPeople()
+        this.props.loadPeople();
     }
 
     /**
@@ -19,15 +19,19 @@ export class FindPeople extends Component {
     render() {
         return (
             <div>
-                {this.props.peopleInfo && Object.keys(this.props.peopleInfo).length !== 0 ?  (<div>
-                <div className='profile__title'>
-                    Suggestions for you
-                </div>
-                <UserBoxList users={this.props.peopleInfo}/>
-                <div style={{ height: '24px' }}></div>
-                </div>) : (<div className='g__title-center'>
-                Nothing to show! :(
-               </div>)}
+                {this.props.peopleInfo && Object.keys(this.props.peopleInfo).length !== 0 ?  
+                    (<div>
+                        <div className='profile__title'>
+                            Suggestions for you
+                        </div>
+                        <UserBoxList users={this.props.peopleInfo}/>
+                        <div style={{ height: '24px' }}></div>
+                    </div>) :
+                    
+                    (<div className='g__title-center'>
+                        Nothing to show! :(
+                    </div>)
+                }
             </div>
         )
     }

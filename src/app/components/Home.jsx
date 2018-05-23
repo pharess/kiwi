@@ -1,61 +1,42 @@
-import React, { Component } from 'react'
-import _ from 'lodash'
-import { Route, Switch, withRouter, Redirect, NavLink } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { push } from 'react-router-redux'
-import Menu from 'material-ui/Menu'
-import MenuItem from 'material-ui/MenuItem'
-import Divider from 'material-ui/Divider'
-import SvgArrowLeft from 'material-ui/svg-icons/hardware/keyboard-arrow-left'
-import SvgHome from 'material-ui/svg-icons/action/home'
-import SvgFeedback from 'material-ui/svg-icons/action/feedback'
-import SvgSettings from 'material-ui/svg-icons/action/settings'
-import SvgAccountCircle from 'material-ui/svg-icons/action/account-circle'
-import SvgPeople from 'material-ui/svg-icons/social/people'
+import React, { Component } from 'react';
+import _ from 'lodash';
+import { Route, Switch, withRouter, Redirect, NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import Menu from 'material-ui/Menu';
+import MenuItem from 'material-ui/MenuItem';
+import Divider from 'material-ui/Divider';
+import SvgArrowLeft from 'material-ui/svg-icons/hardware/keyboard-arrow-left';
 
 // - Import app components
-import Sidebar from 'Sidebar'
-import Blog from 'Blog'
-import HomeHeader from 'HomeHeader'
-import SidebarContent from 'SidebarContent'
-import SidebarMain from 'SidebarMain'
-import Profile from 'Profile'
-import PostPage from 'PostPage'
-import People from 'People'
+import Sidebar from 'Sidebar';
+import Blog from 'Blog';
+import HomeHeader from 'HomeHeader';
+import SidebarContent from 'SidebarContent';
+import SidebarMain from 'SidebarMain';
+import Profile from 'Profile';
+import PostPage from 'PostPage';
+import People from 'People';
 
 // - Import API
-import CircleAPI from 'CircleAPI'
+import CircleAPI from 'CircleAPI';
 
 // - Import actions
-import * as globalActions from 'globalActions'
+import * as globalActions from 'globalActions';
 
-
-// - Create Home component class
 export class Home extends Component {
-
-    // Constructor
     constructor(props) {
-        super(props)
+        super(props);
 
-        // Default state
         this.state = {
             sidebarOpen: () => _,
             sidebarStatus: true,
             sidebaOverlay: false
-        }
-
-        // Binding function to `this`
-        this.sidebar = this.sidebar.bind(this)
-        this.sidebarStatus = this.sidebarStatus.bind(this)
-        this.sidebarOverlay = this.sidebarOverlay.bind(this)
-        this.handleCloseSidebar = this.handleCloseSidebar.bind(this)
+        };
     }
 
-    /**
-     * handle close sidebar
-     */
+    // handle close sidebar
     handleCloseSidebar = () => {
-        this.state.sidebarOpen(false, 'overlay')
+        this.state.sidebarOpen(false, 'overlay');
     }
 
     /**
@@ -102,11 +83,6 @@ export class Home extends Component {
                                 ? <div><MenuItem onClick={this.handleCloseSidebar} primaryText={<span style={{ color: "rgb(117, 117, 117)" }} className="sidebar__title">Green</span>} rightIcon={<SvgArrowLeft viewBox="0 3 24 24" style={{ color: "#fff", marginLeft: "15px", width: "32px", height: "32px", cursor: "pointer" }} />} /><Divider /></div>
                                 : ""
                             }
-
-                            <NavLink to='/'><MenuItem primaryText="Home" style={{ color: "rgb(117, 117, 117)" }} leftIcon={<SvgHome />} /></NavLink>
-                            {/* <NavLink to={`/${this.props.uid}`}><MenuItem primaryText="Profile" style={{ color: "rgb(117, 117, 117)" }} leftIcon={<SvgAccountCircle />} /></NavLink> */}
-                            <NavLink to='/people'><MenuItem primaryText="People" style={{ color: "rgb(117, 117, 117)" }} leftIcon={<SvgPeople />} /></NavLink>
-                            {/* <NavLink to='/settings'><MenuItem primaryText="Settings" style={{ color: "rgb(117, 117, 117)" }} leftIcon={<SvgSettings />} /></NavLink> */}
                         </Menu>
                     </SidebarContent>
 
@@ -141,9 +117,7 @@ export class Home extends Component {
                         </Switch>
                     </SidebarMain>
                 </Sidebar>
-
             </div>
-
         )
     }
 }

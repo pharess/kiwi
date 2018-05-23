@@ -1,106 +1,75 @@
-// - Import react components
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { NavLink } from 'react-router-dom'
-import { push } from 'react-router-redux'
-import moment from 'moment'
-import { createAction as action } from 'redux-actions'
-import Linkify from 'react-linkify'
-
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
+import { push } from 'react-router-redux';
+import moment from 'moment';
+import { createAction as action } from 'redux-actions';
+import Linkify from 'react-linkify';
 
 // - Material UI
-import { Card, CardActions, CardHeader, CardMedia, CardTitle, CardText } from 'material-ui/Card'
-import FloatingActionButton from 'material-ui/FloatingActionButton'
-import SvgShare from 'material-ui/svg-icons/social/share'
-import SvgLink from 'material-ui/svg-icons/content/link'
-import SvgComment from 'material-ui/svg-icons/Communication/comment'
-import SvgFavorite from 'material-ui/svg-icons/action/favorite'
-import SvgFavoriteBorder from 'material-ui/svg-icons/action/favorite-border'
-import Checkbox from 'material-ui/Checkbox'
-import FlatButton from 'material-ui/FlatButton'
-import Divider from 'material-ui/Divider'
-import { grey200, grey400, grey600, white } from 'material-ui/styles/colors'
-import Paper from 'material-ui/Paper'
-import Menu from 'material-ui/Menu'
-import MenuItem from 'material-ui/MenuItem'
-import TextField from 'material-ui/TextField'
-import Dialog from 'material-ui/Dialog'
-import IconButton from 'material-ui/IconButton'
-import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert'
-import IconMenu from 'material-ui/IconMenu'
-import reactStringReplace from 'react-string-replace'
-
+import { CardActions, CardHeader, CardMedia, CardText } from 'material-ui/Card';
+import SvgShare from 'material-ui/svg-icons/social/share';
+import SvgLink from 'material-ui/svg-icons/content/link';
+import SvgComment from 'material-ui/svg-icons/Communication/comment';
+import SvgFavorite from 'material-ui/svg-icons/action/favorite';
+import SvgFavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
+import Checkbox from 'material-ui/Checkbox';
+import Paper from 'material-ui/Paper';
+import Menu from 'material-ui/Menu';
+import MenuItem from 'material-ui/MenuItem';
+import TextField from 'material-ui/TextField';
+import Dialog from 'material-ui/Dialog';
+import IconMenu from 'material-ui/IconMenu';
+import reactStringReplace from 'react-string-replace';
 
 // - Import app components
-import CommentGroup from 'CommentGroup'
-import PostWrite from 'PostWrite'
-import Img from 'Img'
-import IconButtonElement from 'IconButtonElement'
-import UserAvatar from 'UserAvatar'
+import CommentGroup from 'CommentGroup';
+import PostWrite from 'PostWrite';
+import Img from 'Img';
+import IconButtonElement from 'IconButtonElement';
+import UserAvatar from 'UserAvatar';
 
 // - Import actions
-import * as voteActions from 'voteActions'
-import * as postActions from 'postActions'
-import * as globalActions from 'globalActions'
+import * as voteActions from 'voteActions';
+import * as postActions from 'postActions';
+import * as globalActions from 'globalActions';
 
-// - Create component class
 export class Post extends Component {
     /**
      * Component constructor
      * @param  {object} props is an object properties of component
      */
     constructor(props) {
-        super(props)
-        this.state = {
-            /**
-             * Post text
-             */
-            text: this.props.body,
-            /**
-             * It's true if whole the text post is visible
-             */
-            readMoreState: false,
-            /**
-             * Handle open comment from parent component
-             */
-            openComments: false,
-            /**
-             * If it's true, share dialog will be open
-             */
-            shareOpen: false,
-            /**
-             * If it's true comment will be disabled on post
-             */
-            disableComments: this.props.disableComments,
-            /**
-             * If it's true share will be disabled on post
-             */
-            disableSharing: this.props.disableSharing,
-            /**
-             * Title of share post 
-             */
-            shareTitle: 'Share On',
-            /**
-             * If it's true, post link will be visible in share post dialog
-             */
-            openCopyLink: false,
-            /**
-            * If it's true, post write will be open
-            */
-            openPostWrite: false
-        }
+        super(props);
 
-        // Binding functions to this
-        this.handleReadMore = this.handleReadMore.bind(this)
-        this.getOpenCommentGroup = this.getOpenCommentGroup.bind(this)
-        this.handleVote = this.handleVote.bind(this)
-        this.handleOpenShare = this.handleOpenShare.bind(this)
-        this.handleCloseShare = this.handleCloseShare.bind(this)
-        this.handleCopyLink = this.handleCopyLink.bind(this)
-        this.handleDelete = this.handleDelete.bind(this)
-        this.handleOpenPostWrite = this.handleOpenPostWrite.bind(this)
-        this.handleClosePostWrite = this.handleClosePostWrite.bind(this)
-        this.handleOpenComments = this.handleOpenComments.bind(this)
+        this.state = {
+            // Post text
+            text: this.props.body,
+
+            // It's true if whole the text post is visible
+            readMoreState: false,
+
+            // Handle open comment from parent component
+            openComments: false,
+
+            // If it's true, share dialog will be open
+            shareOpen: false,
+
+            // If it's true comment will be disabled on post
+            disableComments: this.props.disableComments,
+
+            // If it's true share will be disabled on post
+            disableSharing: this.props.disableSharing,
+
+            // Title of share post
+            shareTitle: 'Share On',
+
+            // If it's true, post link will be visible in share post dialog
+            openCopyLink: false,
+
+            // If it's true, post write will be open
+            openPostWrite: false
+        };
     }
 
 
@@ -109,48 +78,38 @@ export class Post extends Component {
      * @param  {event} evt passed by clicking on comment slide show
      */
     handleOpenComments = (evt) => {
-        this.setState({
-            openComments: !this.state.openComments
-        })
+        this.setState({ openComments: !this.state.openComments });
     }
 
     /**
      * Open post write
      * 
-     * 
      * @memberof Blog
      */
     handleOpenPostWrite = () => {
-        this.setState({
-            openPostWrite: true
-        })
+        this.setState({ openPostWrite: true });
     }
 
     /**
      * Close post write
      * 
-     * 
      * @memberof Blog
      */
     handleClosePostWrite = () => {
-        this.setState({
-            openPostWrite: false
-        })
+        this.setState({ openPostWrite: false });
     }
 
     /**
      * Delete a post
      * 
-     * 
      * @memberof Post
      */
     handleDelete = () => {
-        this.props.delete(this.props.id)
+        this.props.delete(this.props.id);
     }
 
     /**
      * Show copy link 
-     * 
      * 
      * @memberof Post
      */
@@ -158,24 +117,20 @@ export class Post extends Component {
         this.setState({
             openCopyLink: true,
             shareTitle: 'Copy Link'
-        })
+        });
     }
 
     /**
      * Open share post
      * 
-     * 
      * @memberof Post
      */
     handleOpenShare = () => {
-        this.setState({
-            shareOpen: true
-        })
+        this.setState({ shareOpen: true });
     }
 
     /**
      * Close share post
-     * 
      * 
      * @memberof Post
      */
@@ -184,21 +139,21 @@ export class Post extends Component {
             shareOpen: false,
             shareTitle: 'Share On',
             openCopyLink: false
-        })
+        });
     }
 
     /**
      * Handle vote on a post
      * 
-     * 
      * @memberof Post
      */
     handleVote = () => {
         if (this.props.userVoteStatus) {
-            this.props.unvote()
+            this.props.unvote();
         }
+
         else {
-            this.props.vote()
+            this.props.vote();
         }
     }
 
@@ -207,9 +162,7 @@ export class Post extends Component {
      * @param  {function} open the function to open comment list
      */
     getOpenCommentGroup = (open) => {
-        this.setState({
-            openCommentGroup: open
-        })
+        this.setState({ openCommentGroup: open });
     }
 
     /**
@@ -217,29 +170,19 @@ export class Post extends Component {
      * @param  {event} evt  is the event passed by click on read more
      */
     handleReadMore(evt) {
-        this.setState({
-            readMoreState: !this.state.readMoreState
-
-        });
+        this.setState({ readMoreState: !this.state.readMoreState });
     }
-    componentDidMount() {
-
-    }
-
-
 
     /**
      * Reneder component DOM
      * @return {react element} return the DOM which rendered by component
      */
     render() {
-
         /**
-           * DOM styles
-           * 
-           * 
-           * @memberof Post
-           */
+         * DOM styles
+         *
+         * @memberof Post
+         */
         const styles = {
             counter: {
                 lineHeight: '36px',
@@ -258,17 +201,9 @@ export class Post extends Component {
             rightIconMenu: {
                 position: 'absolute',
                 right: 18,
-                top: 8,
-            },
-            iconButton: {
-                width: 24,
-                height: 24
-
+                top: 8
             }
-
-        }
-
-
+        };
 
         const RightIconMenu = () => (
             <IconMenu iconButtonElement={IconButtonElement} style={{ display: "block", position: "absolute", top: "0px", right: "4px", transform: 'rotate(90deg)'}}>
@@ -277,12 +212,12 @@ export class Post extends Component {
                 <MenuItem primaryText={this.props.disableComments ? "Enable comments" : "Disable comments"} onClick={() => this.props.toggleDisableComments(!this.props.disableComments)} />
                 <MenuItem primaryText={this.props.disableSharing ? "Enable sharing" : "Disable sharing"} onClick={() => this.props.toggleSharingComments(!this.props.disableSharing)} />
             </IconMenu>
-        )
+        );
 
-        const { ownerUserId, setHomeTitle, goTo, ownerDisplayName, creationDate, avatar, fullName, isPostOwner, image, body } = this.props
-        // Define variables
+        const { ownerUserId, setHomeTitle, goTo, ownerDisplayName, creationDate, avatar, fullName, isPostOwner, image, body } = this.props;
+
         return (
-            <div style={{backgroundColor: 'white', border: '1px solid #dddfe2', borderRadius: '5px'}}>
+            <div style={{backgroundColor: '#fff', border: '1px solid #dddfe2', borderRadius: '5px'}}>
                 <CardHeader
                     title={<NavLink to={`/${ownerUserId}`}>{ownerDisplayName}</NavLink>}
                     subtitle={moment.unix(creationDate).fromNow()}
@@ -304,9 +239,7 @@ export class Post extends Component {
                                 }}
                             >
                                 #{match}
-
                             </NavLink>
-
                         ))}
                     </Linkify>
                 </CardText>
@@ -331,14 +264,10 @@ export class Post extends Component {
                         </div>
                         <div style={{ display: 'flex' }}>
                             {!this.props.disableComments ? (<div style={{ display: 'inherit' }}>
-                                {/* <FloatingActionButton  style={{ margin: "0 8px" }} backgroundColor={white} iconStyle={{ color: grey600, fill: grey600, height: "36px", width: "36px" }} secondary={false}> */}
-                                    <SvgComment onClick={this.handleOpenComments} viewBox="0 -9 24 34" style={{ height: "30px", width: "30px" }} />
-                                {/* </FloatingActionButton> */}
+                                <SvgComment onClick={this.handleOpenComments} viewBox="0 -9 24 34" style={{ height: "30px", width: "30px" }} />
                                 <div style={styles.counter}>{this.props.commentCount > 0 ? this.props.commentCount : ''} </div></div>) : ''}
                             {!this.props.disableSharing ? 
-                                // <FloatingActionButton style={{ margin: "0 8px" }} backgroundColor={white} iconStyle={{ color: grey600, fill: grey600, height: "36px", width: "36px" }} secondary={false}>
-                                    <SvgShare onClick={this.handleOpenShare} viewBox="0 -9 24 34" style={{ height: "30px", width: "30px" }} /> : ''}
-                                {/* </FloatingActionButton>) : ''} */}
+                                <SvgShare onClick={this.handleOpenShare} viewBox="0 -9 24 34" style={{ height: "30px", width: "30px" }} /> : ''}
                         </div>
                     </div>
                 </CardActions>
@@ -376,10 +305,8 @@ export class Post extends Component {
                     disableComments={this.props.disableComments}
                     disableSharing={this.props.disableSharing}
                 />
-
             </div>
-
-        )
+        );
     }
 }
 

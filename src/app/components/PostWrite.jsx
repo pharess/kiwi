@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { List, ListItem } from 'material-ui/List';
+import { ListItem } from 'material-ui/List';
 import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';;
-import RaisedButton from 'material-ui/RaisedButton';
-import { grey400, grey800, darkBlack, lightBlack } from 'material-ui/styles/colors';
+import FlatButton from 'material-ui/FlatButton';
+import { grey400, grey800 } from 'material-ui/styles/colors';
 import IconButton from 'material-ui/IconButton';
 import TextField from 'material-ui/TextField';
 import MenuItem from 'material-ui/MenuItem';
@@ -14,17 +13,17 @@ import IconMenu from 'material-ui/IconMenu';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 
 // - Import app components
-import ImageGallery from 'ImageGallery'
-import Img from 'Img'
-import UserAvatar from 'UserAvatar'
+import ImageGallery from 'ImageGallery';
+import Img from 'Img';
+import UserAvatar from 'UserAvatar';
 
 // - Import API
-import * as AuthAPI from 'AuthAPI'
-import * as PostAPI from 'PostAPI'
+import * as AuthAPI from 'AuthAPI';
+import * as PostAPI from 'PostAPI';
 
 // - Import actions
-import * as imageGalleryActions from 'imageGalleryActions'
-import * as postActions from 'postActions'
+import * as imageGalleryActions from 'imageGalleryActions';
+import * as postActions from 'postActions';
 
 export class PostWrite extends Component {
     /**
@@ -32,9 +31,8 @@ export class PostWrite extends Component {
      * @param  {object} props is an object properties of component
      */
     constructor(props) {
-        super(props)
+        super(props);
 
-        // Default state
         this.state = {
             // Post text. 
             postText: this.props.edit ? this.props.text : '',
@@ -56,14 +54,11 @@ export class PostWrite extends Component {
 
             // If it's true share will be disabled on post.
             disableSharing: this.props.edit ? this.props.disableSharing : false
-        }
-
-        this.handlePost = this.handlePost.bind(this)
+        };
     }
 
     /**
      * Toggle comments of the post to disable/enable 
-     * 
      * 
      * @memberof PostWrite
      */
@@ -77,7 +72,6 @@ export class PostWrite extends Component {
     /**
      * Toggle sharing of the post to disable/enable
      * 
-     * 
      * @memberof PostWrite
      */
     handleToggleSharing = () => {
@@ -89,7 +83,6 @@ export class PostWrite extends Component {
 
     /**
      * Romove the image of post
-     * 
      * 
      * @memberof PostWrite
      */
@@ -111,7 +104,7 @@ export class PostWrite extends Component {
             imageFullPath,
             disableComments,
             disableSharing,
-            postText } = this.state
+            postText } = this.state;
 
         const {
             id,
@@ -120,9 +113,9 @@ export class PostWrite extends Component {
             edit,
             onRequestClose,
             post,
-            update } = this.props
+            update } = this.props;
 
-        var tags = PostAPI.getContentTags(postText)
+        const tags = PostAPI.getContentTags(postText);
 
         // In edit status we should fire update if not we should fire post function
         if (!edit) {
@@ -136,8 +129,9 @@ export class PostWrite extends Component {
                     name: name,
                     disableComments: disableComments,
                     disableSharing: disableSharing
-                }, onRequestClose)
+                }, onRequestClose);
             }
+
             else {
                 post({
                     body: postText,
@@ -146,7 +140,7 @@ export class PostWrite extends Component {
                     name: name,
                     disableComments: disableComments,
                     disableSharing: disableSharing
-                }, onRequestClose)
+                }, onRequestClose);
             }
         }
 
@@ -160,13 +154,11 @@ export class PostWrite extends Component {
                 imageFullPath: imageFullPath,
                 disableComments: disableComments,
                 disableSharing: disableSharing
-            }, onRequestClose)
+            }, onRequestClose);
         }
     }
 
-    /**
-     * Set post image url
-     */
+    // Set post image url
     onRequestSetImage = (url, fullPath) => {
         this.setState({
             image: url,
@@ -185,27 +177,23 @@ export class PostWrite extends Component {
             this.setState({
                 postText: data,
                 disabledPost: true
-            })
+            });
         }
 
         else {
             this.setState({
                 postText: data,
                 disabledPost: false
-            })
+            });
         }
     }
 
-    /**
-     * Close image gallery
-     */
+    // Close image gallery
     handleCloseGallery = () => {
         this.setState({ galleryOpen: false });
     }
 
-    /**
-     * Open image gallery
-     */
+    // Open image gallery
     handleOpenGallery = () => {
         this.setState({ galleryOpen: true });
     }
@@ -213,32 +201,24 @@ export class PostWrite extends Component {
     componentWillReceiveProps(nextProps) {
         if (!nextProps.open) {
             this.setState({
-                /**
-                 * Post text
-                 */
+                // Post text
                 postText: this.props.edit ? this.props.text : '',
-                /**
-                 * The image of the post
-                 */
-                image: this.props.edit ? this.props.image : '',
-                /**
-                 * If it's true gallery will be open
-                 */
-                galleryOpen: false,
-                /**
-                 * If it's true post button will be disabled
-                 */
-                disabledPost: true,
-                /**
-                 * If it's true comment will be disabled on post 
-                 */
-                disableComments: this.props.edit ? this.props.disableComments : false,
-                /**
-                 * If it's true share will be disabled on post 
-                 */
-                disableSharing: this.props.edit ? this.props.disableSharing : false,
 
-            })
+                // The image of the post
+                image: this.props.edit ? this.props.image : '',
+
+                // If it's true gallery will be open
+                galleryOpen: false,
+
+                // If it's true post button will be disabled
+                disabledPost: true,
+
+                // If it's true comment will be disabled on post 
+                disableComments: this.props.edit ? this.props.disableComments : false,
+
+                // If it's true share will be disabled on post 
+                disableSharing: this.props.edit ? this.props.disableSharing : false
+            });
         }
     }
 
@@ -254,17 +234,18 @@ export class PostWrite extends Component {
             >
                 <MoreVertIcon color={grey400} />
             </IconButton>
-        )
+        );
 
         const rightIconMenu = (
             <IconMenu iconButtonElement={iconButtonElement} style={{transform: 'rotate(90deg)'}} >
                 <MenuItem onClick={this.handleToggleComments} style={{ fontSize: "14px" }}>{!this.state.disableComments ? 'Disable comments' : 'Enable comments'} </MenuItem>
                 <MenuItem onClick={this.handleToggleSharing} style={{ fontSize: "14px" }}>{!this.state.disableSharing ? 'Disable sharing' : 'Enable sharing'}</MenuItem>
             </IconMenu>
-        )
-        var postAvatar = <UserAvatar fullName={this.props.name} fileName={this.props.avatar} style={{ top: "8px" }} size={40} />
+        );
 
-        var author = (
+        const postAvatar = (<UserAvatar fullName={this.props.name} fileName={this.props.avatar} style={{ top: "8px" }} size={40} />);
+
+        const author = (
             <div>
                 <span style={{
                     fontSize: "14px",
@@ -277,7 +258,7 @@ export class PostWrite extends Component {
                     lineHeight: "25px"
                 }}>{this.props.name}</span>
             </div>
-        )
+        );
 
         const writeActions = [
             <FlatButton
@@ -294,7 +275,7 @@ export class PostWrite extends Component {
                 onTouchTap={this.handlePost}
                 disabled={this.state.disabledPost}
             />
-        ]
+        ];
 
         const galleryActions = [
             <FlatButton
@@ -304,7 +285,7 @@ export class PostWrite extends Component {
                 onTouchTap={this.handleCloseGallery}
                 style={{ color: grey800 }}
             />
-        ]
+        ];
 
         const styles = {
             dialog: {
@@ -312,7 +293,7 @@ export class PostWrite extends Component {
                 maxWidth: '530px',
                 borderRadius: "4px"
             }
-        }
+        };
 
         return (
             <div style={this.props.style}>
@@ -396,7 +377,6 @@ export class PostWrite extends Component {
                 >
                     <ImageGallery set={this.onRequestSetImage} close={this.handleCloseGallery} />
                 </Dialog>
-
             </div>
         )
     }

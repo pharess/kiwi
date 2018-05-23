@@ -1,7 +1,4 @@
-// - Import react component
-import { storageRef } from 'app/firebase/'
-
-//- Import actions
+import { storageRef } from 'app/firebase/';
 
 // - Get file Extension
 const getExtension = (fileName) => {

@@ -24,7 +24,7 @@ export class Blog extends Component {
      * @param  {object} props is an object properties of component
      */
     constructor(props) {
-        super(props)
+        super(props);
 
         this.state = {
             // It's true if we want to have two column of posts.
@@ -41,7 +41,7 @@ export class Blog extends Component {
 
             // The title of home header.
             homeTitle: ''
-        }
+        };
 
         // Binding functions to `this`
         this.postLoad = this.postLoad.bind(this);
@@ -76,14 +76,11 @@ export class Blog extends Component {
         let { tag } = match.params;
 
         if (posts === undefined || !Object.keys(posts).length > 0) {
-
             return (
-
                 <h1>
                     'Nothing has shared.'
                 </h1>
-
-            )
+            );
         }
 
         else {
@@ -102,16 +99,19 @@ export class Blog extends Component {
                 }
             })
 
-            const sortedPosts = PostAPI.sortObjectsDate(parsedPosts)
+            const sortedPosts = PostAPI.sortObjectsDate(parsedPosts);
+
             if (sortedPosts.length > 6) {
-                postBack.divided = true
+                postBack.divided = true;
 
-            } else {
-                postBack.divided = false
+            } 
+            
+            else {
+                postBack.divided = false;
             }
-            sortedPosts.forEach((post, index) => {
 
-                var newPost = (
+            sortedPosts.forEach((post, index) => {
+                let newPost = (
                     <div key={post.id}>
 
                         {index > 1 || (!postBack.divided && index > 0) ? <div style={{ height: "16px" }}></div> : ''}
@@ -138,13 +138,15 @@ export class Blog extends Component {
                 )
 
                 if ((index % 2) === 1 && postBack.divided) {
-                    postBack.oddPostList.push(newPost)
+                    postBack.oddPostList.push(newPost);
                 }
+
                 else {
-                    postBack.evenPostList.push(newPost)
+                    postBack.evenPostList.push(newPost);
                 }
             })
-            return postBack
+
+            return postBack;
         }
     }
 
@@ -158,9 +160,9 @@ export class Blog extends Component {
      */
     render() {
 
-        let postList = this.postLoad()
+        let postList = this.postLoad();
 
-        const { tag, displayWriting, } = this.props
+        const { tag, displayWriting, } = this.props;
 
         return (
             <div >

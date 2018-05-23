@@ -7,14 +7,6 @@ import TextField from 'material-ui/TextField';
 // - Import actions
 import * as authorizeActions from 'authorizeActions'
 
-
-/**
- * Create component class
- * 
- * @export
- * @class Settings
- * @extends {Component}
- */
 export class Settings extends Component {
 
     /**
@@ -29,7 +21,7 @@ export class Settings extends Component {
             passwordInputError: '',
             confirmInput: '',
             confirmInputError: '',
-        }
+        };
     }
 
     /**
@@ -70,48 +62,47 @@ export class Settings extends Component {
             this.props.login(
                 this.state.passwordInput,
                 this.state.confirmInput
-            )
+            );
         }
     }
 
 
-  /**
-   * Reneder component DOM
-   * @return {react element} return the DOM which rendered by component
-   */
-  render() {
-
-    return (
-      <form style={{height: '100vh', width: '100vw', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-        <div style={{backgroundColor: 'white', width: '450px', textAlign: 'center', borderRadius: '10px'}}>
-          <h1>Change Password</h1>
-          <TextField
-              onChange={this.handleInputChange}
-              errorText={this.state.passwordInputError}
-              name="passwordInput"
-              floatingLabelStyle={{ fontSize: "15px" }}
-              floatingLabelText="New password"
-              type="password"
-          />
-          <br />
-          <TextField
-              onChange={this.handleInputChange}
-              errorText={this.state.passwordInputError}
-              name="confirmInput"
-              floatingLabelStyle={{ fontSize: "15px" }}
-              floatingLabelText="Confirm password"
-              type="password"
-          />
-          <br />
-          <br />
-          <div className="settings__button-box" style={{display: 'flex', width: '100%', flexDirection: 'row'}}>
-            <div style={{display: 'flex', outline: 'none', cursor: 'pointer', alignItems: 'center', justifyContent: 'center', height: '50px', width: '49%', backgroundColor: '#5574F7', color: 'white', borderRadius: '0 0 0 10px', padding: '0 15px 0 15px'}} label="Home" onClick={this.props.homePage}>Home</div>
-            <div style={{display: 'flex', outline: 'none', cursor: 'pointer', alignItems: 'center', justifyContent: 'center', height: '50px', width: '50%', backgroundColor: '#5574F7', color: 'white', borderRadius: '0 0 10px 0', padding: '0 15px 0 15px'}} label="Change password" onClick={this.handleForm}>Change password</div>
-          </div>
-        </div>
-      </form>
-    )
-  }
+    /**
+     * Reneder component DOM
+     * @return {react element} return the DOM which rendered by component
+     */
+    render() {
+        return (
+            <form style={{ height: '100vh', width: '100vw', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <div style={{ backgroundColor: 'white', width: '450px', textAlign: 'center', borderRadius: '10px' }}>
+                    <h1>Change Password</h1>
+                    <TextField
+                        onChange={this.handleInputChange}
+                        errorText={this.state.passwordInputError}
+                        name="passwordInput"
+                        floatingLabelStyle={{ fontSize: "15px" }}
+                        floatingLabelText="New password"
+                        type="password"
+                    />
+                    <br />
+                    <TextField
+                        onChange={this.handleInputChange}
+                        errorText={this.state.passwordInputError}
+                        name="confirmInput"
+                        floatingLabelStyle={{ fontSize: "15px" }}
+                        floatingLabelText="Confirm password"
+                        type="password"
+                    />
+                    <br />
+                    <br />
+                    <div className="settings__button-box" style={{ display: 'flex', width: '100%', flexDirection: 'row' }}>
+                        <div style={{ display: 'flex', outline: 'none', cursor: 'pointer', alignItems: 'center', justifyContent: 'center', height: '50px', width: '49%', backgroundColor: '#5574F7', color: 'white', borderRadius: '0 0 0 10px', padding: '0 15px 0 15px' }} label="Home" onClick={this.props.homePage}>Home</div>
+                        <div style={{ display: 'flex', outline: 'none', cursor: 'pointer', alignItems: 'center', justifyContent: 'center', height: '50px', width: '50%', backgroundColor: '#5574F7', color: 'white', borderRadius: '0 0 10px 0', padding: '0 15px 0 15px' }} label="Change password" onClick={this.handleForm}>Change password</div>
+                    </div>
+                </div>
+            </form>
+        )
+    }
 }
 
 /**

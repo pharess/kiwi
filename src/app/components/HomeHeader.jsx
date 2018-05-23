@@ -1,34 +1,28 @@
-// - Import react components
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import SvgDehaze from 'material-ui/svg-icons/image/dehaze';
-import { green700, grey400, blue500 } from 'material-ui/styles/colors';
-import { Toolbar, ToolbarGroup, ToolbarSeparator, ToolbarTitle } from 'material-ui/Toolbar';
+import { blue500 } from 'material-ui/styles/colors';
+import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
 import IconButton from 'material-ui/IconButton';
 import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
 import Popover, { PopoverAnimationVertical } from 'material-ui/Popover';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
-import Paper from 'material-ui/Paper';
 import NotificationsIcon from 'material-ui/svg-icons/social/notifications';
 import SvgHome from 'material-ui/svg-icons/action/home';
 import SvgPeople from 'material-ui/svg-icons/social/people';
 import EventListener, { withOptions } from 'react-event-listener';
 
-
 // - Import components
 import UserAvatar from 'UserAvatar';
 import Notify from 'Notify';
-
 
 // - Import actions
 import * as globalActions from 'globalActions';
 import * as authorizeActions from 'authorizeActions';
 
-// - Create HomeHeader component class
 export class HomeHeader extends Component {
 
     /**
@@ -36,59 +30,43 @@ export class HomeHeader extends Component {
      * @param  {object} props is an object properties of component
      */
     constructor(props) {
-        super(props)
+        super(props);
 
-        // Default state
         this.state = {
-            /**
-             * User avatar popover is open if true
-             */
+            // User avatar popover is open if true
             openAvatarMenu: false,
-            /**
-             * Show header title or not (true/false)
-             */
+
+            // Show header title or not (true/false)
             showTitle: true,
-            /**
-             * If true notification menu will be open
-             */
+            
+            // If true notification menu will be open
             openNotifyMenu: false
-        }
-
-        // Binding functions to `this`
-        this.onToggleSidebar = this.onToggleSidebar.bind(this)
-        this.handleCloseNotify = this.handleCloseNotify.bind(this)
-
+        };
     }
-
-
 
     /**
      * Handle close notification menu 
      * 
-     * 
      * @memberof HomeHeader
      */
     handleCloseNotify = () => {
-        this.setState({
-            openNotifyMenu: false
-        })
+        this.setState({ openNotifyMenu: false });
     }
 
 
     // On click toggle sidebar
     onToggleSidebar = () => {
         if (this.props.sidebarStatus) {
-            this.props.sidebar(false)
-
-        } else {
-            this.props.sidebar(true)
-
+            this.props.sidebar(false);
+        } 
+        
+        else {
+            this.props.sidebar(true);
         }
     }
 
     /**
      * Handle notification touch 
-     * 
      * 
      * @memberof HomeHeader
      */
@@ -98,13 +76,12 @@ export class HomeHeader extends Component {
 
         this.setState({
             openNotifyMenu: true,
-            anchorEl: event.currentTarget,
+            anchorEl: event.currentTarget
         });
     }
 
     /**
      * Handle touch on user avatar for popover
-     * 
      * 
      * @memberof HomeHeader
      */
@@ -114,13 +91,12 @@ export class HomeHeader extends Component {
 
         this.setState({
             openAvatarMenu: true,
-            anchorEl: event.currentTarget,
+            anchorEl: event.currentTarget
         });
     }
 
     /**
      * Handle logout user
-     * 
      * 
      * @memberof HomeHeader
      */
@@ -130,7 +106,6 @@ export class HomeHeader extends Component {
 
     /**
      * Handle close popover
-     * 
      * 
      * @memberof HomeHeader
      */
@@ -144,32 +119,23 @@ export class HomeHeader extends Component {
      * @param  {event} evt is the event is passed by winodw resize event
      */
     handleResize = (evt) => {
-
-        // Set initial state
-        var width = window.innerWidth
+        const width = window.innerWidth;
 
         if (width >= 600 && !this.state.showTitle) {
-            this.setState({
-                showTitle: true
-            })
-
+            this.setState({ showTitle: true });
         }
-        else if (width < 600 && this.state.showTitle) {
 
-            this.setState({
-                showTitle: false
-            })
+        else if (width < 600 && this.state.showTitle) {
+            this.setState({ showTitle: false });
         }
     }
 
     componentDidMount = () => {
-        this.handleResize()
+        this.handleResize();
     }
 
-
-    // Render app DOM component
     render() {
-        var styles = {
+        const styles = {
             toolbarStyle: {
                 backgroundColor: "#5574F7",
                 transition: "all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms",
@@ -185,18 +151,16 @@ export class HomeHeader extends Component {
                 margin: 5,
                 cursor: 'pointer'
             }
-
-
-        }
+        };
 
         return (
-
             <Toolbar style={styles.toolbarStyle}>
                 <EventListener
                     target="window"
                     onResize={this.handleResize}
                     onKeyUp={this.handleKeyUp}
                 />
+
                 {/* Left side */}
                 <ToolbarGroup firstChild={true}>
 
@@ -241,7 +205,6 @@ export class HomeHeader extends Component {
                             </IconButton>)}
                         <Notify open={this.state.openNotifyMenu} anchorEl={this.state.anchorEl} onRequestClose={this.handleCloseNotify} />
 
-
                         {/* User avatar*/}
                         <UserAvatar
                             onTouchTap={this.handleAvatarTouchTap}
@@ -265,11 +228,7 @@ export class HomeHeader extends Component {
                         </Popover>
                     </div>
                 </ToolbarGroup>
-
             </Toolbar>
-
-
-
         )
     }
 }
