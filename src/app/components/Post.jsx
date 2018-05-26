@@ -186,9 +186,8 @@ export class Post extends Component {
         const styles = {
             counter: {
                 lineHeight: '36px',
-                color: '#777',
-                fontSize: '12px',
-                marginRight: '6px'
+                color: '#757575',
+                fontSize: '12px'
             },
             postBody: {
                 wordWrap: "break-word"
@@ -217,7 +216,7 @@ export class Post extends Component {
         const { ownerUserId, setHomeTitle, goTo, ownerDisplayName, creationDate, avatar, fullName, isPostOwner, image, body } = this.props;
 
         return (
-            <div style={{backgroundColor: '#fff', border: '1px solid #dddfe2', borderRadius: '5px'}}>
+            <div style={{backgroundColor: '#fff', border: '1px solid #dddfe2', borderRadius: '7px'}}>
                 <CardHeader
                     title={<NavLink to={`/${ownerUserId}`}>{ownerDisplayName}</NavLink>}
                     subtitle={moment.unix(creationDate).fromNow()}
@@ -225,24 +224,27 @@ export class Post extends Component {
                 >
                     {isPostOwner ? (<div style={styles.rightIconMenu}><RightIconMenu /></div>) : ''}
                 </CardHeader>
-                <CardText style={styles.postBody}>
-                    <Linkify properties={{ target: '_blank', style: { color: 'blue' } }}>
-                        {reactStringReplace(body, /#(\w+)/g, (match, i) => (
-                            <NavLink
-                                style={{ color: 'green' }}
-                                key={match + i}
-                                to={`/tag/${match}`}
-                                onClick={evt => {
-                                    evt.preventDefault()
-                                    goTo(`/tag/${match}`)
-                                    setHomeTitle(`#${match}`)
-                                }}
-                            >
-                                #{match}
-                            </NavLink>
-                        ))}
-                    </Linkify>
-                </CardText>
+
+                {body ? 
+                    <CardText style={styles.postBody}>
+                        <Linkify properties={{ target: '_blank', style: { color: 'blue' } }}>
+                            {reactStringReplace(body, /#(\w+)/g, (match, i) => (
+                                <NavLink
+                                    style={{ color: 'green' }}
+                                    key={match + i}
+                                    to={`/tag/${match}`}
+                                    onClick={evt => {
+                                        evt.preventDefault()
+                                        goTo(`/tag/${match}`)
+                                        setHomeTitle(`#${match}`)
+                                    }}
+                                >
+                                    #{match}
+                                </NavLink>
+                            ))}
+                        </Linkify>
+                    </CardText> : ''
+                }
 
                 {image ? (
                     <CardMedia>
@@ -263,11 +265,21 @@ export class Post extends Component {
                             <div style={styles.counter}> {this.props.voteCount > 0 ? this.props.voteCount : ''} </div>
                         </div>
                         <div style={{ display: 'flex' }}>
-                            {!this.props.disableComments ? (<div style={{ display: 'inherit' }}>
-                                <SvgComment onClick={this.handleOpenComments} viewBox="0 -9 24 34" style={{ height: "30px", width: "30px" }} />
-                                <div style={styles.counter}>{this.props.commentCount > 0 ? this.props.commentCount : ''} </div></div>) : ''}
+                            {!this.props.disableComments ? (<div style={{ display: 'flex', alignItems: 'center' }}>
+                                    <div style={styles.counter}>{this.props.commentCount > 0 ? this.props.commentCount : ''} </div>
+                                    <span className='g__circle' style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                                        <svg onClick={this.handleOpenComments} style={{marginTop: '2px'}} width="20" height="21" xmlns="http://www.w3.org/2000/svg"><path d="M11.87 16l-7.435 4.415A.288.288 0 0 1 4 20.168V16h-.493c-1.22 0-1.661-.127-2.107-.365A2.486 2.486 0 0 1 .365 14.6C.127 14.154 0 13.712 0 12.493V3.507C0 2.287.127 1.846.365 1.4A2.486 2.486 0 0 1 1.4.365C1.846.127 2.288 0 3.507 0h12.986c1.22 0 1.661.127 2.107.365.446.239.796.589 1.035 1.035.238.446.365.888.365 2.107v8.986c0 1.22-.127 1.661-.365 2.107a2.486 2.486 0 0 1-1.035 1.035c-.446.238-.888.365-2.107.365h-4.624zM3.753 2c-.61 0-.831.063-1.054.183-.223.119-.398.294-.517.517-.12.223-.183.444-.183 1.054v8.492c0 .61.063.831.183 1.054.119.223.294.398.517.517.223.12.444.183 1.054.183h12.492c.61 0 .831-.063 1.054-.183.223-.119.398-.294.517-.517.12-.223.183-.444.183-1.054V3.754c0-.61-.063-.831-.183-1.054a1.243 1.243 0 0 0-.517-.517c-.223-.12-.444-.183-1.054-.183H3.754zm6.97 12H6v3.104L10.724 14z" fill={(this.props.commentCount > 0) ? '#4E7FF7' : '#757575'}/>
+                                            <rect x="4" y="4" width="12" height="2" fill={(this.props.commentCount > 0) ? '#4E7FF7' : '#fff'}></rect>
+                                            <rect x="4" y="7" width="12" height="2" fill={(this.props.commentCount > 0) ? '#4E7FF7' : '#fff'}></rect>
+                                            <rect x="4" y="10" width="12" height="2" fill={(this.props.commentCount > 0) ? '#4E7FF7' : '#fff'}></rect>
+                                        </svg>
+                                    </span>
+                                </div>) : ''}
                             {!this.props.disableSharing ? 
-                                <SvgShare onClick={this.handleOpenShare} viewBox="0 -9 24 34" style={{ height: "30px", width: "30px" }} /> : ''}
+                                <div className='g__circle' style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                                    <SvgShare onClick={this.handleOpenShare} viewBox="0 -9 24 34" style={{ height: "30px", width: "30px", fill: '#757575', border: '#757575', marginBottom: '6px', marginRight: '1px' }} />
+                                </div>
+                             : ''}
                         </div>
                     </div>
                 </CardActions>

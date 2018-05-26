@@ -159,9 +159,7 @@ export class Comment extends Component {
             }
         }
 
-        /**
-         * Comment object from props
-         */
+        // Comment object from props
         const { comment } = this.props;
 
         const iconButtonElement = (
@@ -180,10 +178,7 @@ export class Comment extends Component {
 
         const Author = () => (
             <div style={{ marginTop: "-11px" }}>
-                <span style={styles.author}>{comment.userDisplayName}</span><span style={{
-                    fontWeight: 100,
-                    fontSize: "10px"
-                }}>{moment.unix(comment.creationDate).fromNow()}</span>
+                <span style={styles.author}>{comment.userDisplayName}</span><span style={{fontSize: "10px"}}>{moment.unix(comment.creationDate).fromNow()}</span>
             </div>
         );
 

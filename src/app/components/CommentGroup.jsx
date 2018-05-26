@@ -26,16 +26,9 @@ export class CommentGroup extends Component {
             commentText: "",
             postDisable: true
         };
-
-        // Binding functions to `this`
-        this.commentList = this.commentList.bind(this);
-        this.handlePostComment = this.handlePostComment.bind(this);
-        this.clearCommentWrite = this.clearCommentWrite.bind(this);
     }
 
-    /**
-     * Clear comment text field
-     */
+    // Clear comment text field
     clearCommentWrite = () => {
         this.setState({
             commentText: '',
@@ -43,9 +36,7 @@ export class CommentGroup extends Component {
         });
     }
 
-    /**
-     * Post comment
-     */
+    // Post comment
     handlePostComment = () => {
         this.props.send(this.state.commentText, this.props.postId, this.clearCommentWrite);
     }
@@ -78,10 +69,10 @@ export class CommentGroup extends Component {
      * @return {DOM} list of comments' DOM
      */
     commentList = () => {
-        var comments = this.props.comments;
+        let comments = this.props.comments;
 
         if (comments) {
-            var parsedComments = [];
+            let parsedComments = [];
 
             Object.keys(comments).slice(0, 3).forEach((commentId) => {
                 parsedComments.push({

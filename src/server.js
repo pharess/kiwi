@@ -18,19 +18,17 @@ app.use(function (req, res, next) {
 });
 
 app.use(function (req, res, next) {
-    var userAgent = req.get('User-Agent');
+    const userAgent = req.get('User-Agent');
     console.log(userAgent);
     next();
 });
 
 app.use(express.static('public'));
 
-
 // Always return the main index.html, so react-router render the route in the client
 app.get('*', (req, res) => {
     res.sendFile(path.resolve('public', 'index.html'));
 });
-
 
 app.listen(PORT, function () {
     console.log('Express server is up on port ' + PORT);
