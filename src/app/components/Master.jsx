@@ -31,7 +31,6 @@ export class Master extends Component {
 
     static isPrivate = true;
 
-    // Constructor
     constructor(props) {
         super(props);
 
@@ -97,6 +96,7 @@ export class Master extends Component {
                 <div className='master__progress' style={{ display: (progress.visible ? 'block' : 'none') }}>
                     <LinearProgress mode="determinate" value={progress.percent} />
                 </div>
+                
                 <div className='master__loading animate-fading2' style={{ display: (global.showTopLoading ? 'flex' : 'none') }}>
                     <div className='title'>  Loading ... </div>
                 </div>

@@ -29,10 +29,10 @@ export class Sidebar extends Component {
 
             overlay: false,
 
-            mainStyle: { marginLeft: "210px" },
+            mainStyle: { marginLeft: "0px" },
 
             // Is sidebar open or not
-            open: true,
+            open: false,
 
             // If sidebar is closed by resizing or not
             auto: false,

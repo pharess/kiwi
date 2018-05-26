@@ -164,24 +164,30 @@ export class HomeHeader extends Component {
                 {/* Left side */}
                 <ToolbarGroup firstChild={true}>
 
-                    <IconButton iconStyle={{ color: "#fff" }} onClick={this.onToggleSidebar} >
+                    {/* <IconButton iconStyle={{ color: "#fff" }} onClick={this.onToggleSidebar} >
                         <SvgDehaze style={{ color: "#fff", marginLeft: "15px", cursor: "pointer" }} />
-                    </IconButton>
+                    </IconButton> */}
 
-                    {/* Header title */}
-                    <div style={{ marginLeft: '15px' }}>
+                    <div style={{ marginLeft: '30px' }}>
+                        <FlatButton onClick={this.props.homePage} style={{color: "#fff"}}>
+                            <SvgHome  style={{color: "#fff", position: "absolute", top: "4px", left: "0px"}}/>
+                            <div style={{display: "inline-block", textTransform: "uppercase", fontWeight: "500", fontSize: "14px", paddingLeft: "24px"}}>home</div>
+                        </FlatButton>
+                    </div>
+
+                    {/* <div style={{ marginLeft: '15px' }}>
                         <svg width="21" height="17" xmlns="http://www.w3.org/2000/svg"><path d="M5.97 11.151L1.017 8.117c-.308-.184-.292-.437.048-.57L19.547.16c.334-.132.72-.301.647.043l-3.42 16.618s.513.304.204.12l-6.272-3.034-2.797 2.417-1.94-5.173zm1.293-.878l1.145 3.64c.078.25.198.251.26-.02l.534-2.327 8.357-8.74c.384-.4.333-.457-.113-.125L7.263 10.273z" fill="#FFF" /></svg>
                     </div>
-                    <ToolbarTitle style={{ color: "#fff", marginLeft: "15px" }} text="Oasis" />
+                    <ToolbarTitle style={{ color: "#fff", marginLeft: "15px" }} text="Oasis" /> */}
                 </ToolbarGroup>
-                <ToolbarGroup>
+                {/* <ToolbarGroup>
                     <div>
                         <FlatButton onClick={this.props.homePage} style={{color: "#fff"}}>
                             <SvgHome  style={{color: "#fff", position: "absolute", top: "4px", left: "0px"}}/>
                             <div style={{display: "inline-block", textTransform: "uppercase", fontWeight: "500", fontSize: "14px", paddingLeft: "24px"}}>home</div>
                         </FlatButton>
                     </div>
-                </ToolbarGroup>
+                </ToolbarGroup> */}
                 <ToolbarGroup>
                     <div>
                         <FlatButton onClick={this.props.people} style={{color: "#fff"}}>
@@ -191,7 +197,6 @@ export class HomeHeader extends Component {
                     </div>
                 </ToolbarGroup>
 
-                {/* Notification */}
                 <ToolbarGroup lastChild={true}>
                     <div className="homeHeader__right">
                         {this.props.notifyCount > 0 ? (<IconButton tooltip="Notifications" onTouchTap={this.handleNotifyTouchTap}>

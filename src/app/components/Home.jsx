@@ -77,14 +77,14 @@ export class Home extends Component {
             <div id="home">
                 <HomeHeader sidebar={this.state.sidebarOpen} sidebarStatus={this.state.sidebarStatus} uid={this.props.uid} />
                 <Sidebar overlay={this.sidebarOverlay} open={this.sidebar} status={this.sidebarStatus}>
-                    <SidebarContent>
+                    {/* <SidebarContent>
                         <Menu style={{ color: "rgb(117, 117, 117)", width: '210px' }}>
                             {this.state.sidebarOverlay
                                 ? <div><MenuItem onClick={this.handleCloseSidebar} primaryText={<span style={{ color: "rgb(117, 117, 117)" }} className="sidebar__title">Green</span>} rightIcon={<SvgArrowLeft viewBox="0 3 24 24" style={{ color: "#fff", marginLeft: "15px", width: "32px", height: "32px", cursor: "pointer" }} />} /><Divider /></div>
                                 : ""
                             }
                         </Menu>
-                    </SidebarContent>
+                    </SidebarContent> */}
 
                     <SidebarMain>
                         <Switch>
