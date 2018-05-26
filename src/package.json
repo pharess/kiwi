@@ -39,6 +39,7 @@
     "react-avatar-editor": "^10.3.0",
     "react-dom": "^16.0.0",
     "react-event-listener": "^0.5.1",
+    "react-firebaseui": "^3.0.4",
     "react-linkify": "^0.2.1",
     "react-parallax": "^1.4.4",
     "react-redux": "^5.0.6",

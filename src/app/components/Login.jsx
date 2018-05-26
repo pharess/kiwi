@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 import { NavLink, withRouter } from 'react-router-dom';
 import { push } from 'react-router-redux';
 import TextField from 'material-ui/TextField';
+import {firebaseAuth} from 'app/firebase/';
+// import firebase from 'firebase';
+// import FirebaseAuth from 'react-firebaseui/FirebaseAuth';
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 
 // - Import actions
 import * as authorizeActions from 'authorizeActions';
@@ -22,6 +26,15 @@ export class Login extends Component {
             passwordInput: '',
             passwordInputError: ''
         };
+
+        this.uiConfig = {
+            // signInFlow: 'popup',
+            signInOptions: [
+                // firebaseAuth.FacebookAuthProvider.PROVIDER_ID,
+                firebaseAuth.EmailAuthProvider.PROVIDER_ID,
+            ],
+            signInSuccessUrl: '/Home'
+          };
     }
 
     /**
@@ -64,6 +77,7 @@ export class Login extends Component {
      */
     render() {
         return (
+            <div>
             <form style={{height: '100vh', width: '100vw', display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
                 <div style={{backgroundColor: 'white', width: '450px', textAlign: 'center', borderRadius: '10px'}}>
                     <h1>Sign in</h1>
@@ -100,6 +114,11 @@ export class Login extends Component {
                     </div>
                 </div>
             </form>
+            
+            <div>
+                <StyledFirebaseAuth uiConfig={this.uiConfig} firebaseAuth={firebaseAuth()}/>
+            </div>
+            </div>
         )
     }
 }

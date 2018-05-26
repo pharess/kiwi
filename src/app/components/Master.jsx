@@ -9,6 +9,8 @@ import LinearProgress from 'material-ui/LinearProgress';
 import Home from 'Home';
 import Signup from 'Signup';
 import Login from 'Login';
+import Login3 from 'Login3';
+import Login2 from 'Login2';
 import Settings from 'Settings';
 
 import MasterLoading from 'MasterLoading';
@@ -106,6 +108,8 @@ export class Master extends Component {
                 {(!this.state.loading && (this.props.loaded || this.props.guest))
                     ? (<Switch>
                         <Route path="/signup" component={Signup} />
+                        <Route path="/login3" component={Login3} />
+                        <Route path="/login2" component={Login2} />
                         <Route path="/settings" component={Settings} />
                         <Route path="/login" render={() => {
                             console.log('this.props.authed: ', this.props.authed, "this.props: ", this.props)
