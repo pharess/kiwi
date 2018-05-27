@@ -27,11 +27,12 @@ export var dbLogin = (email, password) => {
             for (key in snapshot.val()) {
                 let info = snapshot.val()[key]['info'];
                 if (email.localeCompare(info.email) === 0) {
+                    console.log(info.password);
+                    if(info.password) {
+                        password = bcrypt.compareSync(password, info.password) ? info.password : password;
+                    }
                     break;
                 };
-            }
-            if(snapshot.val()[key]['password']) {
-                password = bcrypt.compareSync(password, info.password) ? info.password : password;
             }
             // Log in user if input matches credentials in db
             return firebaseAuth().signInWithEmailAndPassword(email, password).then((result) => {
