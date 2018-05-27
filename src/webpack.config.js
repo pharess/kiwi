@@ -15,8 +15,17 @@ module.exports = {
     entry: [
         './app/app.jsx'
     ],
+    mode: process.env.NODE_ENV,
     externals: {
         jquery: 'jQuery'
+    },
+    devServer: {
+        hot: true,
+        contentBase: './public',
+        inline: true,
+        historyApiFallback: true,
+        progress: true,
+        publicPath: '/'
     },
     plugins: (process.env.NODE_ENV === 'production') ? [
         new webpack.optimize.UglifyJsPlugin({
@@ -49,11 +58,13 @@ module.exports = {
                 MESSAGING_SENDER_ID: JSON.stringify(process.env.MESSAGING_SENDER_ID),
                 HOST_URL: JSON.stringify(process.env.HOST_URL)
             }
-        })
+        }),
+        new webpack.NamedModulesPlugin(),
+        new webpack.HotModuleReplacementPlugin()
     ],
     output: {
         path: path.resolve(__dirname, './public'),
-        filename: 'bundle.js',
+        filename: 'bundle.js'
 
     },
     resolve: {
