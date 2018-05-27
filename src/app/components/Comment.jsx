@@ -169,7 +169,7 @@ export class Comment extends Component {
         );
 
         const RightIconMenu = () => (
-            <IconMenu iconButtonElement={iconButtonElement} style={{ display: "block", position: "absolute", top: "0px", right: "4px" }}>
+            <IconMenu iconButtonElement={iconButtonElement} style={{ display: "block", position: "absolute", top: "0px", right: "4px", transform: 'rotate(90deg)' }}>
                 <MenuItem style={{ fontSize: "14px" }}>Reply</MenuItem>
                 {this.props.isCommentOwner ? (<MenuItem style={{ fontSize: "14px" }} onClick={this.handleEditComment}>Edit</MenuItem>) : ''}
                 {(this.props.isCommentOwner || this.props.isPostOwner) ? (<MenuItem style={{ fontSize: "14px" }} onClick={(evt) => this.handleDelete(evt, comment.id, comment.postId)}>Delete</MenuItem>) : ''}
@@ -178,7 +178,7 @@ export class Comment extends Component {
 
         const Author = () => (
             <div style={{ marginTop: "-11px" }}>
-                <span style={styles.author}>{comment.userDisplayName}</span><span style={{fontSize: "10px"}}>{moment.unix(comment.creationDate).fromNow()}</span>
+                <span style={styles.author}>{comment.userDisplayName}</span><span style={{fontSize: "10px", color: '#757575'}}>{moment.unix(comment.creationDate).fromNow()}</span>
             </div>
         );
 
@@ -195,7 +195,7 @@ export class Comment extends Component {
                         <NavLink to={`/${userId}`}><UserAvatar fullName={this.props.fullName} fileName={this.props.avatar} style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", position: "absolute", top: "8px", left: "16px" }} size={36} /></NavLink>
                         <NavLink to={`/${userId}`}> <Author /></NavLink>
                         {(!this.props.isCommentOwner && !this.props.isPostOwner && this.props.disableComments) ? '' : (<RightIconMenu />)}
-                        <div style={{ outline: "none", marginLeft: "16px", flex: "auto", flexGrow: 1 }}>
+                        <div style={{ outline: "none", flex: "auto", flexGrow: 1 }}>
                             <textarea ref={this.textareaRef} className="animate2-top10" style={{ fontWeight: 100, fontSize: "14px", border: "none", width: "100%", outline: "none", resize: "none", display: (this.props.comment.editorStatus ? 'block' : 'none') }} onChange={this.handleOnChange} value={this.state.text}></textarea>
                             <Linkify properties={{ target: '_blank', style: { color: 'blue' } }}>
                                 <div ref={this.divCommentRef} className="animate2-top10" style={{ fontWeight: 100, fontSize: "14px", height: "100%", border: "none", width: "100%", outline: "none", resize: "none", display: (!this.props.comment.editorStatus ? 'block' : 'none') }}>{this.state.text}</div>

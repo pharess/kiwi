@@ -96,27 +96,14 @@ export class CommentGroup extends Component {
                 const commentAvatar = userInfo && userInfo[comment.userId] ? userInfo[comment.userId].avatar || '' : '';
                 const commentFullName = userInfo && userInfo[comment.userId] ? userInfo[comment.userId].fullName || '' : '';
 
-                return (<ListItem key={index} style={{ height: "60px", position: "", zIndex: "" }} innerDivStyle={{ padding: "6px 16px 16px 72px" }}
+                return (<ListItem key={index} style={{ position: "", zIndex: "" }} innerDivStyle={{ padding: "6px 16px 16px 72px" }}
                     leftAvatar={<UserAvatar fullName={commentFullName} fileName={commentAvatar} style={{ top: "8px" }} size={36} />}
-                    secondaryText={<div style={{ height: "" }}>
-                        <span style={{
-                            fontSize: "13px",
-                            paddingRight: "10px",
-                            fontWeight: 400,
-                            color: "rgba(0,0,0,0.87)",
-                            textOverflow: "ellipsis",
-                            overflow: "hidden"
-                        }}>
-                            {comment.userDisplayName}:
+                    secondaryText={<div>
+                        <span style={{ fontSize: "13px", color: "rgba(0,0,0,0.87)", textOverflow: "ellipsis", overflow: "hidden", display: 'block' }}>
+                            {comment.userDisplayName}
                         </span>
 
-                        <span style={{
-                            fontSize: "13px",
-                            lineHeight: "20px",
-                            color: "rgba(0,0,0,0.87)",
-                            fontWeight: 300,
-                            whiteSpace: "pre-wrap"
-                        }}>
+                        <span style={{ fontSize: "13px", color: "rgba(0,0,0,0.87)", fontWeight: 300, whiteSpace: "pre-wrap", display: 'block' }}>
                             {comment.text}
                         </span>
                     </div>}
@@ -135,20 +122,20 @@ export class CommentGroup extends Component {
             <div>
                 <div style={this.props.comments && Object.keys(this.props.comments).length > 0 ? { display: "block" } : { display: "none" }}>
                     <Divider />
-                    <Paper zDepth={0} className="animate-top" style={!this.props.open ? { display: "block" } : { display: "none" }}>
-
-                        <div style={{ position: "relative", height: "60px" }} >
-                            <FlatButton label=" " style={{ height: "60px", zIndex: 5 }} fullWidth={true} onClick={this.props.onToggleRequest} />
+                    <div style={!this.props.open ? { display: "block" } : { display: "none" }}>
+                    {/* <Paper zDepth={0} className="animate-top" style={!this.props.open ? { display: "block" } : { display: "none" }}> */}
+                        <div style={{ position: "relative", height: "60px", borderRadius: '0 0 7px 7px' }} >
+                            {/* <FlatButton label=" " style={{ height: "60px", zIndex: 5, borderRadius: '0 0 7px 7px' }} fullWidth={true} onClick={this.props.onToggleRequest} /> */}
 
                             <div className="comment__list-show">
                                 {this.commentList()}
                             </div>
                         </div>
-                    </Paper>
+                    </div>
+                    {/* </Paper> */}
                     {(this.props.comments && Object.keys(this.props.comments).length > 0)
                         ? (<Paper zDepth={0} style={this.props.open ? { display: "block", padding: "0px 0px" } : { display: "none", padding: "12px 16px" }}>
                             <CommentList comments={this.props.comments} isPostOwner={this.props.isPostOwner} disableComments={this.props.disableComments} />
-
                         </Paper>) : ''}
                 </div>
 
