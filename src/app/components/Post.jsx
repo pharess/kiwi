@@ -8,9 +8,8 @@ import Linkify from 'react-linkify';
 
 // - Material UI
 import { CardActions, CardHeader, CardMedia, CardText } from 'material-ui/Card';
-import SvgShare from 'material-ui/svg-icons/social/share';
+import Snackbar from 'material-ui/Snackbar';
 import SvgLink from 'material-ui/svg-icons/content/link';
-import SvgComment from 'material-ui/svg-icons/Communication/comment';
 import SvgFavorite from 'material-ui/svg-icons/action/favorite';
 import SvgFavoriteBorder from 'material-ui/svg-icons/action/favorite-border';
 import Checkbox from 'material-ui/Checkbox';
@@ -18,7 +17,6 @@ import Paper from 'material-ui/Paper';
 import Menu from 'material-ui/Menu';
 import MenuItem from 'material-ui/MenuItem';
 import TextField from 'material-ui/TextField';
-import Dialog from 'material-ui/Dialog';
 import IconMenu from 'material-ui/IconMenu';
 import reactStringReplace from 'react-string-replace';
 
@@ -125,8 +123,29 @@ export class Post extends Component {
      * 
      * @memberof Post
      */
-    handleOpenShare = () => {
+    handleOpenShare = (event) => {
         this.setState({ shareOpen: true });
+
+        const text = `${location.origin}/${this.props.ownerUserId}/posts/${this.props.id}`;
+
+        if (window.clipboardData && window.clipboardData.setData) {
+            // IE specific code path to prevent textarea being shown while dialog is visible.
+            return clipboardData.setData("Text", text);
+        } else if (document.queryCommandSupported && document.queryCommandSupported("copy")) {
+            var textarea = document.createElement("textarea");
+            textarea.textContent = text;
+            textarea.style.position = "fixed";  // Prevent scrolling to bottom of page in MS Edge.
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                return document.execCommand("copy");  // Security exception may be thrown by some browsers.
+            } catch (ex) {
+                console.warn("Copy to clipboard failed.", ex);
+                return false;
+            } finally {
+                document.body.removeChild(textarea);
+            }
+        }
     }
 
     /**
@@ -205,7 +224,7 @@ export class Post extends Component {
         };
 
         const RightIconMenu = () => (
-            <IconMenu iconButtonElement={IconButtonElement} style={{ display: "block", position: "absolute", top: "0px", right: "4px", transform: 'rotate(90deg)'}}>
+            <IconMenu iconButtonElement={IconButtonElement} style={{ display: "block", position: "absolute", top: "0px", right: "4px", transform: 'rotate(90deg)' }}>
                 <MenuItem primaryText="Edit" onClick={this.handleOpenPostWrite} />
                 <MenuItem primaryText="Delete" onClick={this.handleDelete} />
                 <MenuItem primaryText={this.props.disableComments ? "Enable comments" : "Disable comments"} onClick={() => this.props.toggleDisableComments(!this.props.disableComments)} />
@@ -216,7 +235,7 @@ export class Post extends Component {
         const { ownerUserId, setHomeTitle, goTo, ownerDisplayName, creationDate, avatar, fullName, isPostOwner, image, body } = this.props;
 
         return (
-            <div style={{backgroundColor: '#fff', border: '1px solid #dddfe2', borderRadius: '7px'}}>
+            <div style={{ backgroundColor: '#fff', border: '1px solid #dddfe2', borderRadius: '7px' }}>
                 <CardHeader
                     title={<NavLink to={`/${ownerUserId}`}>{ownerDisplayName}</NavLink>}
                     subtitle={moment.unix(creationDate).fromNow()}
@@ -225,7 +244,7 @@ export class Post extends Component {
                     {isPostOwner ? (<div style={styles.rightIconMenu}><RightIconMenu /></div>) : ''}
                 </CardHeader>
 
-                {body ? 
+                {body ?
                     <CardText style={styles.postBody}>
                         <Linkify properties={{ target: '_blank', style: { color: 'blue' } }}>
                             {reactStringReplace(body, /#(\w+)/g, (match, i) => (
@@ -266,46 +285,36 @@ export class Post extends Component {
                         </div>
                         <div style={{ display: 'flex' }}>
                             {!this.props.disableComments ? (<div style={{ display: 'flex', alignItems: 'center' }}>
-                                    <div style={styles.counter}>{this.props.commentCount > 0 ? this.props.commentCount : ''} </div>
-                                    <span className='g__circle' style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-                                        <svg onClick={this.handleOpenComments} style={{marginTop: '2px'}} width="20" height="21" xmlns="http://www.w3.org/2000/svg"><path d="M11.87 16l-7.435 4.415A.288.288 0 0 1 4 20.168V16h-.493c-1.22 0-1.661-.127-2.107-.365A2.486 2.486 0 0 1 .365 14.6C.127 14.154 0 13.712 0 12.493V3.507C0 2.287.127 1.846.365 1.4A2.486 2.486 0 0 1 1.4.365C1.846.127 2.288 0 3.507 0h12.986c1.22 0 1.661.127 2.107.365.446.239.796.589 1.035 1.035.238.446.365.888.365 2.107v8.986c0 1.22-.127 1.661-.365 2.107a2.486 2.486 0 0 1-1.035 1.035c-.446.238-.888.365-2.107.365h-4.624zM3.753 2c-.61 0-.831.063-1.054.183-.223.119-.398.294-.517.517-.12.223-.183.444-.183 1.054v8.492c0 .61.063.831.183 1.054.119.223.294.398.517.517.223.12.444.183 1.054.183h12.492c.61 0 .831-.063 1.054-.183.223-.119.398-.294.517-.517.12-.223.183-.444.183-1.054V3.754c0-.61-.063-.831-.183-1.054a1.243 1.243 0 0 0-.517-.517c-.223-.12-.444-.183-1.054-.183H3.754zm6.97 12H6v3.104L10.724 14z" fill={(this.props.commentCount > 0) ? '#4E7FF7' : '#757575'}/>
-                                            <rect x="4" y="4" width="12" height="2" fill={(this.props.commentCount > 0) ? '#4E7FF7' : '#fff'}></rect>
-                                            <rect x="4" y="7" width="12" height="2" fill={(this.props.commentCount > 0) ? '#4E7FF7' : '#fff'}></rect>
-                                            <rect x="4" y="10" width="12" height="2" fill={(this.props.commentCount > 0) ? '#4E7FF7' : '#fff'}></rect>
-                                        </svg>
-                                    </span>
-                                </div>) : ''}
-                            {!this.props.disableSharing ? 
-                                <div className='g__circle' style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
-                                    <SvgShare onClick={this.handleOpenShare} viewBox="0 -9 24 34" style={{ height: "30px", width: "30px", fill: '#757575', border: '#757575', marginBottom: '6px', marginRight: '1px' }} />
+                                <div style={styles.counter}>
+                                    {this.props.commentCount > 1 ? this.props.commentCount + " comments" : 
+                                        this.props.commentCount === 1 ? 
+                                            this.props.commentCount + " comment" : ''}
                                 </div>
-                             : ''}
+                                <span className='g__circle' style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0' }}>
+                                    <svg onClick={this.handleOpenComments} style={{ marginTop: '2px' }} width="20" height="21" xmlns="http://www.w3.org/2000/svg"><path d="M11.87 16l-7.435 4.415A.288.288 0 0 1 4 20.168V16h-.493c-1.22 0-1.661-.127-2.107-.365A2.486 2.486 0 0 1 .365 14.6C.127 14.154 0 13.712 0 12.493V3.507C0 2.287.127 1.846.365 1.4A2.486 2.486 0 0 1 1.4.365C1.846.127 2.288 0 3.507 0h12.986c1.22 0 1.661.127 2.107.365.446.239.796.589 1.035 1.035.238.446.365.888.365 2.107v8.986c0 1.22-.127 1.661-.365 2.107a2.486 2.486 0 0 1-1.035 1.035c-.446.238-.888.365-2.107.365h-4.624zM3.753 2c-.61 0-.831.063-1.054.183-.223.119-.398.294-.517.517-.12.223-.183.444-.183 1.054v8.492c0 .61.063.831.183 1.054.119.223.294.398.517.517.223.12.444.183 1.054.183h12.492c.61 0 .831-.063 1.054-.183.223-.119.398-.294.517-.517.12-.223.183-.444.183-1.054V3.754c0-.61-.063-.831-.183-1.054a1.243 1.243 0 0 0-.517-.517c-.223-.12-.444-.183-1.054-.183H3.754zm6.97 12H6v3.104L10.724 14z" fill={(this.props.commentCount > 0) ? '#4E7FF7' : '#757575'} />
+                                        <rect x="4" y="4" width="12" height="2" fill={(this.props.commentCount > 0) ? '#4E7FF7' : '#fff'}></rect>
+                                        <rect x="4" y="7" width="12" height="2" fill={(this.props.commentCount > 0) ? '#4E7FF7' : '#fff'}></rect>
+                                        <rect x="4" y="10" width="12" height="2" fill={(this.props.commentCount > 0) ? '#4E7FF7' : '#fff'}></rect>
+                                    </svg>
+                                </span>
+                            </div>) : ''}
+                            {!this.props.disableSharing ?
+                                <div className='g__circle' style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                    <svg onClick={this.handleOpenShare} style={{marginBottom: '1px'}} width="20" height="16" xmlns="http://www.w3.org/2000/svg"><path d="M19.7 6.2l-6.6-6c-.5-.5-1.1 0-1.1.8v3C7.3 4 3.3 6.9 1.4 10.8.7 12.1.3 13.5 0 14.9c-.2 1 1.3 1.5 1.9.6C4.1 12 7.8 9.7 12 9.7V13c0 .8.6 1.3 1.1.8l6.6-6c.4-.4.4-1.2 0-1.6z" fill="#757575"/></svg>
+                                </div>
+                                : ''}
                         </div>
                     </div>
                 </CardActions>
 
                 <CommentGroup open={this.state.openComments} ownerPostUserId={this.props.ownerUserId} onToggleRequest={this.handleOpenComments} isPostOwner={this.props.isPostOwner} disableComments={this.props.disableComments} postId={this.props.id} />
 
-                {/* Copy link dialog*/}
-                <Dialog
-                    title="Share On"
-                    modal={false}
+                <Snackbar
                     open={this.state.shareOpen}
-                    onRequestClose={this.handleCloseShare}
-                    overlayStyle={{ background: "rgba(0,0,0,0.12)" }}
-                    contentStyle={styles.dialog}
-                    autoDetectWindowHeight={false}
-                    actionsContainerStyle={{ borderTop: "1px solid rgb(224, 224, 224)" }}
-                >
-                    {!this.state.openCopyLink
-                        ? (<Paper >
-                            <Menu>
-                                <MenuItem primaryText="Copy Link" leftIcon={<SvgLink />} onClick={this.handleCopyLink} />
-                            </Menu>
-                        </Paper>)
-                        : <TextField fullWidth={true} id="text-field-default" defaultValue={`${location.origin}/${this.props.ownerUserId}/posts/${this.props.id}`} />
-                    }
-                </Dialog>
+                    message={"Link to Post copied!"}
+                    autoHideDuration={1000}
+                    style={{ left: '1%', transform: 'none' }}
+                />
 
                 <PostWrite
                     open={this.state.openPostWrite}
